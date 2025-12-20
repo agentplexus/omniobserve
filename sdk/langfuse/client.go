@@ -35,10 +35,10 @@ const Version = "0.1.0"
 
 // Default endpoints
 const (
-	DefaultEndpoint   = "https://cloud.langfuse.com"
-	USEndpoint        = "https://us.cloud.langfuse.com"
-	HIPAAEndpoint     = "https://hipaa.cloud.langfuse.com"
-	LocalEndpoint     = "http://localhost:3000"
+	DefaultEndpoint = "https://cloud.langfuse.com"
+	USEndpoint      = "https://us.cloud.langfuse.com"
+	HIPAAEndpoint   = "https://hipaa.cloud.langfuse.com"
+	LocalEndpoint   = "http://localhost:3000"
 )
 
 // Client is the main Langfuse client.

@@ -29,8 +29,8 @@ type Usage struct {
 // Phoenix uses OpenTelemetry semantic conventions for LLM observability.
 type SpanAttributes struct {
 	// LLM attributes
-	LLMModelName       string `json:"llm.model_name,omitempty"`
-	LLMProvider        string `json:"llm.provider,omitempty"`
+	LLMModelName            string `json:"llm.model_name,omitempty"`
+	LLMProvider             string `json:"llm.provider,omitempty"`
 	LLMTokenCountPrompt     int    `json:"llm.token_count.prompt,omitempty"`
 	LLMTokenCountCompletion int    `json:"llm.token_count.completion,omitempty"`
 	LLMTokenCountTotal      int    `json:"llm.token_count.total,omitempty"`
@@ -74,18 +74,18 @@ type TraceInfo struct {
 
 // SpanInfo provides read-only information about a span.
 type SpanInfo struct {
-	ID           string         `json:"id"`
-	TraceID      string         `json:"traceId"`
-	ParentID     string         `json:"parentId,omitempty"`
-	Name         string         `json:"name"`
-	Kind         SpanKind       `json:"spanKind"`
-	StartTime    time.Time      `json:"startTime"`
-	EndTime      *time.Time     `json:"endTime,omitempty"`
-	Latency      float64        `json:"latencyMs,omitempty"`
-	Status       string         `json:"status,omitempty"`
-	Attributes   SpanAttributes `json:"attributes,omitempty"`
-	Events       []SpanEvent    `json:"events,omitempty"`
-	StatusMessage string        `json:"statusMessage,omitempty"`
+	ID            string         `json:"id"`
+	TraceID       string         `json:"traceId"`
+	ParentID      string         `json:"parentId,omitempty"`
+	Name          string         `json:"name"`
+	Kind          SpanKind       `json:"spanKind"`
+	StartTime     time.Time      `json:"startTime"`
+	EndTime       *time.Time     `json:"endTime,omitempty"`
+	Latency       float64        `json:"latencyMs,omitempty"`
+	Status        string         `json:"status,omitempty"`
+	Attributes    SpanAttributes `json:"attributes,omitempty"`
+	Events        []SpanEvent    `json:"events,omitempty"`
+	StatusMessage string         `json:"statusMessage,omitempty"`
 }
 
 // SpanEvent represents an event within a span.
@@ -97,15 +97,15 @@ type SpanEvent struct {
 
 // Annotation represents a human or automated annotation on a span.
 type Annotation struct {
-	ID          string    `json:"id"`
-	SpanID      string    `json:"spanId"`
-	Name        string    `json:"name"`
-	AnnotatorKind string  `json:"annotatorKind"` // HUMAN, LLM
-	Score       *float64  `json:"score,omitempty"`
-	Label       string    `json:"label,omitempty"`
-	Explanation string    `json:"explanation,omitempty"`
-	Metadata    map[string]any `json:"metadata,omitempty"`
-	CreatedAt   time.Time `json:"createdAt"`
+	ID            string         `json:"id"`
+	SpanID        string         `json:"spanId"`
+	Name          string         `json:"name"`
+	AnnotatorKind string         `json:"annotatorKind"` // HUMAN, LLM
+	Score         *float64       `json:"score,omitempty"`
+	Label         string         `json:"label,omitempty"`
+	Explanation   string         `json:"explanation,omitempty"`
+	Metadata      map[string]any `json:"metadata,omitempty"`
+	CreatedAt     time.Time      `json:"createdAt"`
 }
 
 // Evaluation represents an evaluation result.
@@ -131,16 +131,16 @@ type Document struct {
 
 // Message represents a chat message.
 type Message struct {
-	Role       string         `json:"role"`
-	Content    string         `json:"content"`
-	Name       string         `json:"name,omitempty"`
-	ToolCalls  []ToolCall     `json:"toolCalls,omitempty"`
-	ToolCallID string         `json:"toolCallId,omitempty"`
+	Role       string     `json:"role"`
+	Content    string     `json:"content"`
+	Name       string     `json:"name,omitempty"`
+	ToolCalls  []ToolCall `json:"toolCalls,omitempty"`
+	ToolCallID string     `json:"toolCallId,omitempty"`
 }
 
 // ToolCall represents a tool call.
 type ToolCall struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
 	Arguments string `json:"arguments"`
 }

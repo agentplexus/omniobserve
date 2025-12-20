@@ -24,11 +24,11 @@ type EvalResult struct {
 
 // MetricScore represents a single metric evaluation result.
 type MetricScore struct {
-	Name     string   `json:"name"`
-	Score    float64  `json:"score"`
-	Reason   string   `json:"reason,omitempty"`
-	Metadata any      `json:"metadata,omitempty"`
-	Error    string   `json:"error,omitempty"`
+	Name     string  `json:"name"`
+	Score    float64 `json:"score"`
+	Reason   string  `json:"reason,omitempty"`
+	Metadata any     `json:"metadata,omitempty"`
+	Error    string  `json:"error,omitempty"`
 }
 
 // Metric defines an evaluation metric.
@@ -140,15 +140,15 @@ type Experiment struct {
 
 // ExperimentItem represents a single evaluation result in an experiment.
 type ExperimentItem struct {
-	ID           string        `json:"id,omitempty"`
-	ExperimentID string        `json:"experiment_id"`
-	DatasetItemID string       `json:"dataset_item_id,omitempty"`
-	Input        any           `json:"input,omitempty"`
-	Output       any           `json:"output,omitempty"`
-	Expected     any           `json:"expected,omitempty"`
-	Scores       []MetricScore `json:"scores,omitempty"`
-	Metadata     map[string]any `json:"metadata,omitempty"`
-	TraceID      string        `json:"trace_id,omitempty"`
+	ID            string         `json:"id,omitempty"`
+	ExperimentID  string         `json:"experiment_id"`
+	DatasetItemID string         `json:"dataset_item_id,omitempty"`
+	Input         any            `json:"input,omitempty"`
+	Output        any            `json:"output,omitempty"`
+	Expected      any            `json:"expected,omitempty"`
+	Scores        []MetricScore  `json:"scores,omitempty"`
+	Metadata      map[string]any `json:"metadata,omitempty"`
+	TraceID       string         `json:"trace_id,omitempty"`
 }
 
 // Project represents a project or workspace.

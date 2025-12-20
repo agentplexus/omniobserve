@@ -132,33 +132,33 @@ type FeedbackScore struct {
 
 // TraceInfo provides read-only information about a trace.
 type TraceInfo struct {
-	ID        string         `json:"id"`
-	Name      string         `json:"name"`
-	ProjectID string         `json:"project_id,omitempty"`
-	StartTime time.Time      `json:"start_time"`
-	EndTime   *time.Time     `json:"end_time,omitempty"`
-	Input     any            `json:"input,omitempty"`
-	Output    any            `json:"output,omitempty"`
-	Metadata  map[string]any `json:"metadata,omitempty"`
-	Tags      []string       `json:"tags,omitempty"`
+	ID        string          `json:"id"`
+	Name      string          `json:"name"`
+	ProjectID string          `json:"project_id,omitempty"`
+	StartTime time.Time       `json:"start_time"`
+	EndTime   *time.Time      `json:"end_time,omitempty"`
+	Input     any             `json:"input,omitempty"`
+	Output    any             `json:"output,omitempty"`
+	Metadata  map[string]any  `json:"metadata,omitempty"`
+	Tags      []string        `json:"tags,omitempty"`
 	Feedback  []FeedbackScore `json:"feedback,omitempty"`
 }
 
 // SpanInfo provides read-only information about a span.
 type SpanInfo struct {
-	ID           string         `json:"id"`
-	TraceID      string         `json:"trace_id"`
-	ParentSpanID string         `json:"parent_span_id,omitempty"`
-	Name         string         `json:"name"`
-	Type         SpanType       `json:"type"`
-	StartTime    time.Time      `json:"start_time"`
-	EndTime      *time.Time     `json:"end_time,omitempty"`
-	Input        any            `json:"input,omitempty"`
-	Output       any            `json:"output,omitempty"`
-	Metadata     map[string]any `json:"metadata,omitempty"`
-	Model        string         `json:"model,omitempty"`
-	Provider     string         `json:"provider,omitempty"`
-	Usage        *TokenUsage    `json:"usage,omitempty"`
-	Tags         []string       `json:"tags,omitempty"`
+	ID           string          `json:"id"`
+	TraceID      string          `json:"trace_id"`
+	ParentSpanID string          `json:"parent_span_id,omitempty"`
+	Name         string          `json:"name"`
+	Type         SpanType        `json:"type"`
+	StartTime    time.Time       `json:"start_time"`
+	EndTime      *time.Time      `json:"end_time,omitempty"`
+	Input        any             `json:"input,omitempty"`
+	Output       any             `json:"output,omitempty"`
+	Metadata     map[string]any  `json:"metadata,omitempty"`
+	Model        string          `json:"model,omitempty"`
+	Provider     string          `json:"provider,omitempty"`
+	Usage        *TokenUsage     `json:"usage,omitempty"`
+	Tags         []string        `json:"tags,omitempty"`
 	Feedback     []FeedbackScore `json:"feedback,omitempty"`
 }

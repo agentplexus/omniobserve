@@ -79,26 +79,26 @@ type ArtifactStore interface {
 
 // Experiment represents an ML experiment.
 type Experiment struct {
-	ID          string         `json:"id"`
-	Name        string         `json:"name"`
-	Description string         `json:"description,omitempty"`
+	ID          string            `json:"id"`
+	Name        string            `json:"name"`
+	Description string            `json:"description,omitempty"`
 	Tags        map[string]string `json:"tags,omitempty"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
+	CreatedAt   time.Time         `json:"created_at"`
+	UpdatedAt   time.Time         `json:"updated_at"`
 }
 
 // Run represents a single run within an experiment.
 type Run struct {
-	ID             string            `json:"id"`
-	ExperimentID   string            `json:"experiment_id"`
-	Name           string            `json:"name,omitempty"`
-	Status         RunStatus         `json:"status"`
-	StartTime      time.Time         `json:"start_time"`
-	EndTime        *time.Time        `json:"end_time,omitempty"`
-	Params         map[string]string `json:"params,omitempty"`
-	Metrics        map[string]float64 `json:"metrics,omitempty"`
-	Tags           map[string]string `json:"tags,omitempty"`
-	ArtifactURI    string            `json:"artifact_uri,omitempty"`
+	ID           string             `json:"id"`
+	ExperimentID string             `json:"experiment_id"`
+	Name         string             `json:"name,omitempty"`
+	Status       RunStatus          `json:"status"`
+	StartTime    time.Time          `json:"start_time"`
+	EndTime      *time.Time         `json:"end_time,omitempty"`
+	Params       map[string]string  `json:"params,omitempty"`
+	Metrics      map[string]float64 `json:"metrics,omitempty"`
+	Tags         map[string]string  `json:"tags,omitempty"`
+	ArtifactURI  string             `json:"artifact_uri,omitempty"`
 }
 
 // RunStatus represents the status of a run.
@@ -114,26 +114,26 @@ const (
 
 // Model represents a registered model.
 type Model struct {
-	ID          string         `json:"id"`
-	Name        string         `json:"name"`
-	Version     string         `json:"version"`
-	Stage       ModelStage     `json:"stage"`
-	Description string         `json:"description,omitempty"`
-	RunID       string         `json:"run_id,omitempty"`
-	Source      string         `json:"source,omitempty"`
+	ID          string            `json:"id"`
+	Name        string            `json:"name"`
+	Version     string            `json:"version"`
+	Stage       ModelStage        `json:"stage"`
+	Description string            `json:"description,omitempty"`
+	RunID       string            `json:"run_id,omitempty"`
+	Source      string            `json:"source,omitempty"`
 	Tags        map[string]string `json:"tags,omitempty"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
+	CreatedAt   time.Time         `json:"created_at"`
+	UpdatedAt   time.Time         `json:"updated_at"`
 }
 
 // ModelStage represents the deployment stage of a model.
 type ModelStage string
 
 const (
-	ModelStageNone        ModelStage = "None"
-	ModelStageStaging     ModelStage = "Staging"
-	ModelStageProduction  ModelStage = "Production"
-	ModelStageArchived    ModelStage = "Archived"
+	ModelStageNone       ModelStage = "None"
+	ModelStageStaging    ModelStage = "Staging"
+	ModelStageProduction ModelStage = "Production"
+	ModelStageArchived   ModelStage = "Archived"
 )
 
 // Artifact represents a stored artifact.

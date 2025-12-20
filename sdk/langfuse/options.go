@@ -185,12 +185,12 @@ func WithVersion(version string) SpanOption {
 // generationConfig holds generation configuration.
 type generationConfig struct {
 	spanConfig
-	model            string
-	modelParameters  map[string]any
-	promptName       string
-	promptVersion    int
-	usage            *Usage
-	completionStart  *time.Time
+	model           string
+	modelParameters map[string]any
+	promptName      string
+	promptVersion   int
+	usage           *Usage
+	completionStart *time.Time
 }
 
 // GenerationOption configures generation creation.

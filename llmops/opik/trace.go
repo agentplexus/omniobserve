@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/grokify/go-comet-ml-opik"
+	opik "github.com/grokify/go-comet-ml-opik"
 	"github.com/grokify/observai/llmops"
 )
 

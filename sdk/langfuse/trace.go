@@ -259,9 +259,9 @@ func (t *Trace) Score(ctx context.Context, name string, value float64, opts ...S
 
 // scoreConfig holds score configuration.
 type scoreConfig struct {
-	comment   string
-	source    string
-	dataType  string
+	comment  string
+	source   string
+	dataType string
 }
 
 // ScoreOption configures score creation.

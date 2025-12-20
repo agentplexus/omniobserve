@@ -7,14 +7,14 @@ A unified Go library for LLM and ML observability. ObservAI provides a vendor-ag
 
 ## Features
 
-- **Unified Interface**: Single API for tracing, evaluation, prompts, and datasets across all providers
-- **Provider Agnostic**: Switch between Opik, Langfuse, and Phoenix without changing your code
-- **Full Tracing**: Trace LLM calls with spans, token usage, and cost tracking
-- **Evaluation Support**: Run metrics and add feedback scores to traces
-- **Dataset Management**: Create and manage evaluation datasets
-- **Prompt Versioning**: Store and version prompt templates (provider-dependent)
-- **Context Propagation**: Automatic trace/span context propagation via `context.Context`
-- **Functional Options**: Clean, extensible configuration using the options pattern
+- 🔗 **Unified Interface**: Single API for tracing, evaluation, prompts, and datasets across all providers
+- 🔄 **Provider Agnostic**: Switch between Opik, Langfuse, and Phoenix without changing your code
+- 🔍 **Full Tracing**: Trace LLM calls with spans, token usage, and cost tracking
+- 📊 **Evaluation Support**: Run metrics and add feedback scores to traces
+- 📦 **Dataset Management**: Create and manage evaluation datasets
+- 📝 **Prompt Versioning**: Store and version prompt templates (provider-dependent)
+- 🔀 **Context Propagation**: Automatic trace/span context propagation via `context.Context`
+- ⚙️ **Functional Options**: Clean, extensible configuration using the options pattern
 
 ## Installation
 

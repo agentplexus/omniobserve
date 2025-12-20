@@ -28,13 +28,13 @@ var (
 	ErrExperimentNotFound = errors.New("llmops: experiment not found")
 
 	// Validation errors
-	ErrInvalidInput     = errors.New("llmops: invalid input")
-	ErrInvalidSpanType  = errors.New("llmops: invalid span type")
-	ErrInvalidMetric    = errors.New("llmops: invalid metric")
+	ErrInvalidInput    = errors.New("llmops: invalid input")
+	ErrInvalidSpanType = errors.New("llmops: invalid span type")
+	ErrInvalidMetric   = errors.New("llmops: invalid metric")
 
 	// Provider errors
-	ErrProviderNotFound   = errors.New("llmops: provider not found")
-	ErrNotImplemented     = errors.New("llmops: not implemented")
+	ErrProviderNotFound       = errors.New("llmops: provider not found")
+	ErrNotImplemented         = errors.New("llmops: not implemented")
 	ErrCapabilityNotSupported = errors.New("llmops: capability not supported")
 )
 
