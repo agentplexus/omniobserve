@@ -228,6 +228,13 @@ func WithModelSource(source string) ModelOption {
 	}
 }
 
+// WithModelTags sets the model tags.
+func WithModelTags(tags map[string]string) ModelOption {
+	return func(c *modelConfig) {
+		c.tags = tags
+	}
+}
+
 // ListOption configures list operations.
 type ListOption func(*listConfig)
 
@@ -249,5 +256,19 @@ func WithLimit(limit int) ListOption {
 func WithOffset(offset int) ListOption {
 	return func(c *listConfig) {
 		c.offset = offset
+	}
+}
+
+// WithOrderBy sets the ordering field.
+func WithOrderBy(orderBy string) ListOption {
+	return func(c *listConfig) {
+		c.orderBy = orderBy
+	}
+}
+
+// WithFilter sets the filter criteria.
+func WithFilter(filter map[string]any) ListOption {
+	return func(c *listConfig) {
+		c.filter = filter
 	}
 }

@@ -8,22 +8,14 @@ import (
 	sdk "github.com/grokify/observai/sdk/langfuse"
 )
 
-// traceAdapter adapts sdk.Trace to llmops.Trace.
-type traceAdapter struct {
-	trace *sdk.Trace
+// spanCreator is an interface for types that can create child spans and generations.
+type spanCreator interface {
+	Span(ctx context.Context, name string, opts ...sdk.SpanOption) (context.Context, *sdk.Span, error)
+	Generation(ctx context.Context, name string, opts ...sdk.GenerationOption) (context.Context, *sdk.Generation, error)
 }
 
-func (t *traceAdapter) ID() string {
-	return t.trace.ID()
-}
-
-func (t *traceAdapter) Name() string {
-	return t.trace.Name()
-}
-
-func (t *traceAdapter) StartSpan(ctx context.Context, name string, opts ...llmops.SpanOption) (context.Context, llmops.Span, error) {
-	cfg := llmops.ApplySpanOptions(opts...)
-
+// createChildSpan is a helper that creates a child span or generation based on span type.
+func createChildSpan(ctx context.Context, creator spanCreator, name string, cfg *llmops.SpanOptions) (context.Context, llmops.Span, error) {
 	// Check if this should be a generation (LLM span)
 	if cfg.Type == llmops.SpanTypeLLM {
 		genOpts := []sdk.GenerationOption{}
@@ -44,7 +36,7 @@ func (t *traceAdapter) StartSpan(ctx context.Context, name string, opts ...llmop
 			))
 		}
 
-		newCtx, gen, err := t.trace.Generation(ctx, name, genOpts...)
+		newCtx, gen, err := creator.Generation(ctx, name, genOpts...)
 		if err != nil {
 			return ctx, nil, err
 		}
@@ -60,11 +52,29 @@ func (t *traceAdapter) StartSpan(ctx context.Context, name string, opts ...llmop
 		sdkOpts = append(sdkOpts, sdk.WithSpanMetadata(cfg.Metadata))
 	}
 
-	newCtx, span, err := t.trace.Span(ctx, name, sdkOpts...)
+	newCtx, span, err := creator.Span(ctx, name, sdkOpts...)
 	if err != nil {
 		return ctx, nil, err
 	}
 	return newCtx, &spanAdapter{span: span}, nil
+}
+
+// traceAdapter adapts sdk.Trace to llmops.Trace.
+type traceAdapter struct {
+	trace *sdk.Trace
+}
+
+func (t *traceAdapter) ID() string {
+	return t.trace.ID()
+}
+
+func (t *traceAdapter) Name() string {
+	return t.trace.Name()
+}
+
+func (t *traceAdapter) StartSpan(ctx context.Context, name string, opts ...llmops.SpanOption) (context.Context, llmops.Span, error) {
+	cfg := llmops.ApplySpanOptions(opts...)
+	return createChildSpan(ctx, t.trace, name, cfg)
 }
 
 func (t *traceAdapter) SetInput(input any) error {
@@ -143,47 +153,7 @@ func (s *spanAdapter) Type() llmops.SpanType {
 
 func (s *spanAdapter) StartSpan(ctx context.Context, name string, opts ...llmops.SpanOption) (context.Context, llmops.Span, error) {
 	cfg := llmops.ApplySpanOptions(opts...)
-
-	// Check if this should be a generation
-	if cfg.Type == llmops.SpanTypeLLM {
-		genOpts := []sdk.GenerationOption{}
-		if cfg.Input != nil {
-			genOpts = append(genOpts, sdk.WithGenerationInput(cfg.Input))
-		}
-		if cfg.Metadata != nil {
-			genOpts = append(genOpts, sdk.WithGenerationMetadata(cfg.Metadata))
-		}
-		if cfg.Model != "" {
-			genOpts = append(genOpts, sdk.WithModel(cfg.Model))
-		}
-		if cfg.Usage != nil {
-			genOpts = append(genOpts, sdk.WithUsage(
-				cfg.Usage.PromptTokens,
-				cfg.Usage.CompletionTokens,
-				cfg.Usage.TotalTokens,
-			))
-		}
-
-		newCtx, gen, err := s.span.Generation(ctx, name, genOpts...)
-		if err != nil {
-			return ctx, nil, err
-		}
-		return newCtx, &generationAdapter{gen: gen}, nil
-	}
-
-	sdkOpts := []sdk.SpanOption{}
-	if cfg.Input != nil {
-		sdkOpts = append(sdkOpts, sdk.WithSpanInput(cfg.Input))
-	}
-	if cfg.Metadata != nil {
-		sdkOpts = append(sdkOpts, sdk.WithSpanMetadata(cfg.Metadata))
-	}
-
-	newCtx, span, err := s.span.Span(ctx, name, sdkOpts...)
-	if err != nil {
-		return ctx, nil, err
-	}
-	return newCtx, &spanAdapter{span: span}, nil
+	return createChildSpan(ctx, s.span, name, cfg)
 }
 
 func (s *spanAdapter) SetInput(input any) error {

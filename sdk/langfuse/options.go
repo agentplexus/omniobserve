@@ -235,6 +235,13 @@ func WithUsage(promptTokens, completionTokens, totalTokens int) GenerationOption
 	}
 }
 
+// WithCompletionStart sets the completion start time.
+func WithCompletionStart(t time.Time) GenerationOption {
+	return func(c *generationConfig) {
+		c.completionStart = &t
+	}
+}
+
 // WithGenerationInput sets generation input.
 func WithGenerationInput(input any) GenerationOption {
 	return func(c *generationConfig) {

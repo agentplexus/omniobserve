@@ -196,6 +196,13 @@ func WithProjectDescription(desc string) ProjectOption {
 	}
 }
 
+// WithProjectMetadata sets project metadata.
+func WithProjectMetadata(metadata map[string]any) ProjectOption {
+	return func(c *projectConfig) {
+		c.metadata = metadata
+	}
+}
+
 // DatasetOption configures dataset creation.
 type DatasetOption func(*datasetConfig)
 
@@ -238,5 +245,12 @@ func WithAnnotationLabel(label string) AnnotationOption {
 func WithAnnotationExplanation(explanation string) AnnotationOption {
 	return func(c *annotationConfig) {
 		c.explanation = explanation
+	}
+}
+
+// WithAnnotationMetadata sets annotation metadata.
+func WithAnnotationMetadata(metadata map[string]any) AnnotationOption {
+	return func(c *annotationConfig) {
+		c.metadata = metadata
 	}
 }

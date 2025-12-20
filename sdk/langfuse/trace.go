@@ -280,3 +280,10 @@ func WithScoreSource(source string) ScoreOption {
 		c.source = source
 	}
 }
+
+// WithScoreDataType sets the score data type.
+func WithScoreDataType(dataType string) ScoreOption {
+	return func(c *scoreConfig) {
+		c.dataType = dataType
+	}
+}

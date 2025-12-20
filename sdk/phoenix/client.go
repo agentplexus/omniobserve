@@ -46,10 +46,9 @@ type Client struct {
 	headers    map[string]string
 
 	// For non-OTEL mode (direct REST API)
-	mu      sync.Mutex
-	spans   []*Span
-	traces  []*Trace
-	useOTEL bool
+	mu     sync.Mutex
+	spans  []*Span
+	traces []*Trace
 
 	disabled bool
 	debug    bool
@@ -93,7 +92,7 @@ func (c *Client) Close() error {
 }
 
 // flush sends any pending spans to Phoenix.
-func (c *Client) flush(ctx context.Context) error {
+func (c *Client) flush(_ context.Context) error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
