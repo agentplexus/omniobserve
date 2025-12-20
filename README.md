@@ -1,7 +1,10 @@
 # ObservAI
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/grokify/observai.svg)](https://pkg.go.dev/github.com/grokify/observai)
-[![Go Report Card](https://goreportcard.com/badge/github.com/grokify/observai)](https://goreportcard.com/report/github.com/grokify/observai)
+[![Build Status][build-status-svg]][build-status-url]
+[![Lint Status][lint-status-svg]][lint-status-url]
+[![Go Report Card][goreport-svg]][goreport-url]
+[![Docs][docs-godoc-svg]][docs-godoc-url]
+[![License][license-svg]][license-url]
 
 A unified Go library for LLM and ML observability. ObservAI provides a vendor-agnostic abstraction layer that enables you to instrument your AI applications once and seamlessly switch between different observability backends without code changes.
 
@@ -370,3 +373,16 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 ## License
 
 See [LICENSE](LICENSE) for details.
+
+ [build-status-svg]: https://github.com/grokify/observai/actions/workflows/ci.yaml/badge.svg?branch=main
+ [build-status-url]: https://github.com/grokify/observai/actions/workflows/ci.yaml
+ [lint-status-svg]: https://github.com/grokify/observai/actions/workflows/lint.yaml/badge.svg?branch=main
+ [lint-status-url]: https://github.com/grokify/observai/actions/workflows/lint.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/observai
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/observai
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/observai
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/observai
+ [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
+ [license-url]: https://github.com/grokify/observai/blob/master/LICENSE
+ [used-by-svg]: https://sourcegraph.com/github.com/grokify/observai/-/badge.svg
+ [used-by-url]: https://sourcegraph.com/github.com/grokify/observai?badge
