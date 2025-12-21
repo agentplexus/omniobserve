@@ -130,6 +130,8 @@ observai/
 │   ├── opik/            # Opik provider adapter
 │   ├── langfuse/        # Langfuse provider adapter
 │   └── phoenix/         # Phoenix provider adapter
+├── integrations/        # Integrations with LLM libraries
+│   └── fluxllm/         # FluxLLM observability hook (separate module)
 ├── mlops/               # ML operations interfaces (experiments, model registry)
 └── sdk/                 # Provider-specific SDKs
     ├── langfuse/        # Langfuse Go SDK
@@ -361,6 +363,51 @@ For provider-specific features, you can use the underlying SDKs directly:
 import "github.com/grokify/observai/sdk/langfuse"
 import "github.com/grokify/observai/sdk/phoenix"
 ```
+
+## FluxLLM Integration
+
+ObservAI provides an integration with [FluxLLM](https://github.com/grokify/fluxllm), a multi-LLM abstraction layer. This allows you to automatically instrument all LLM calls made through FluxLLM with any ObservAI provider.
+
+```bash
+go get github.com/grokify/observai/integrations/fluxllm
+```
+
+```go
+package main
+
+import (
+    "github.com/grokify/fluxllm"
+    fluxllmhook "github.com/grokify/observai/integrations/fluxllm"
+    "github.com/grokify/observai/llmops"
+    _ "github.com/grokify/observai/llmops/opik"
+)
+
+func main() {
+    // Initialize an ObservAI provider
+    provider, _ := llmops.Open("opik",
+        llmops.WithAPIKey("your-api-key"),
+        llmops.WithProjectName("my-project"),
+    )
+    defer provider.Close()
+
+    // Create the observability hook
+    hook := fluxllmhook.NewHook(provider)
+
+    // Attach to your FluxLLM client
+    client := fluxllm.NewClient(
+        fluxllm.WithObservabilityHook(hook),
+    )
+
+    // All LLM calls through this client are now automatically traced
+}
+```
+
+The hook automatically captures:
+- Model and provider information
+- Input messages and output responses
+- Token usage (prompt, completion, total)
+- Streaming responses
+- Errors
 
 ## Requirements
 

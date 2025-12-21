@@ -119,11 +119,11 @@ observai/
 ├── llmops/               # LLM observability
 │   ├── llmops.go         # Core interfaces
 │   ├── trace.go          # Trace/Span interfaces
-│   ├── types.go          # Data types
-│   ├── options.go        # Functional options
 │   ├── opik/             # Opik adapter
 │   ├── langfuse/         # Langfuse adapter
 │   └── phoenix/          # Phoenix adapter
+├── integrations/         # LLM library integrations
+│   └── fluxllm/          # FluxLLM hook
 ├── mlops/                # ML operations (future)
 └── sdk/                  # Provider SDKs
 ```
@@ -345,6 +345,30 @@ provider, _ := llmops.Open("phoenix", llmops.WithEndpoint("..."))
 
 ---
 
+# FluxLLM Integration
+
+Automatically instrument LLM calls via FluxLLM:
+
+```go
+import (
+    "github.com/grokify/fluxllm"
+    fluxllmhook "github.com/grokify/observai/integrations/fluxllm"
+)
+
+// Create hook with any ObservAI provider
+hook := fluxllmhook.NewHook(provider)
+
+// Attach to FluxLLM client
+client := fluxllm.NewClient(
+    fluxllm.WithObservabilityHook(hook),
+)
+// All LLM calls are now automatically traced!
+```
+
+Captures: model, provider, input/output, tokens, streaming, errors
+
+---
+
 # Configuration Options
 
 ## Client Options
@@ -416,12 +440,12 @@ if llmops.IsNotImplemented(err) {
 ## Current (v0.1.0)
 - LLM observability with 3 providers
 - Full tracing, evaluation, datasets
+- FluxLLM integration for automatic instrumentation
 
 ## Planned
 - MLOps interfaces (experiments, model registry)
 - Additional providers (Lunary, MLflow, W&B)
 - OTLP export support
-- Streaming response handling
 - Async batch processing
 
 ---
