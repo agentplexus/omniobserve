@@ -16,8 +16,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/grokify/observai/llmops"
-	sdk "github.com/grokify/observai/sdk/langfuse"
+	"github.com/grokify/metaobserve/llmops"
+	sdk "github.com/grokify/metaobserve/sdk/langfuse"
 )
 
 const ProviderName = "langfuse"

@@ -37,10 +37,10 @@ github.com/googleapis/gax-go/v2 v2.16.0 h1:iHbQmKLLZrexmb0OSsNGTeSTS0HO4YvFOG8g5
 github.com/googleapis/gax-go/v2 v2.16.0/go.mod h1:o1vfQjjNZn4+dPnRdl/4ZD7S9414Y4xA+a/6Icj6l14=
 github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=
 github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
-github.com/grokify/fluxllm v0.7.1 h1:oFnY1xKqVY8DPrdoACzcTTDCtqxP/lxYFTuOXmHi2ag=
-github.com/grokify/fluxllm v0.7.1/go.mod h1:7RvBhako2nC64a/VDHuB1VHXeTdTsTx2p2PbNQxofmQ=
 github.com/grokify/go-comet-ml-opik v0.2.0 h1:SGGJZTYyj/dDxrhGfyLiSlJLIXEq4TBQayQQfakonyY=
 github.com/grokify/go-comet-ml-opik v0.2.0/go.mod h1:Itu+CJ+pvaXemog3HAUwMRNFkeNEMNywYalRSnYMc/c=
+github.com/grokify/metallm v0.8.0 h1:uQ1ruaJ/csQmC9J7uU9m3Dj2UcAf7uVCDLyVSW2Hf5I=
+github.com/grokify/metallm v0.8.0/go.mod h1:zGIAmFVUQ+PYnAt1Th1QD3+ZMkDz0cz2tPCdPqc/JAo=
 github.com/grokify/mogo v0.72.5 h1:1nq2bCcGovhiNxvSk9AGrjBQP9N7XHCTQRsw3lMTEMU=
 github.com/grokify/mogo v0.72.5/go.mod h1:vHAL2gTwcw1a4C+XOIu2fySerZFE860iCPKYVR5b/ms=
 github.com/grokify/sogo v0.13.0 h1:uTsSYb8ESdl+BC0hxbaexmZLTe2t1xKZ+Mzfskaa3Z4=

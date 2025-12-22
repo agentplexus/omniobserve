@@ -1,9 +1,9 @@
-package fluxllm
+package metallm
 
 import (
 	"context"
 
-	"github.com/grokify/observai/llmops"
+	"github.com/grokify/metaobserve/llmops"
 )
 
 // contextKey is a private type used for storing spans in context.

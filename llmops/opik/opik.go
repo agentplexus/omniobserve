@@ -14,7 +14,8 @@ import (
 	"time"
 
 	opik "github.com/grokify/go-comet-ml-opik"
-	"github.com/grokify/observai/llmops"
+
+	"github.com/grokify/metaobserve/llmops"
 )
 
 const ProviderName = "opik"

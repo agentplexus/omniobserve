@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/grokify/observai/llmops"
-	sdk "github.com/grokify/observai/sdk/langfuse"
+	"github.com/grokify/metaobserve/llmops"
+	sdk "github.com/grokify/metaobserve/sdk/langfuse"
 )
 
 // spanCreator is an interface for types that can create child spans and generations.

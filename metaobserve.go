@@ -1,4 +1,4 @@
-// Package observai provides a unified interface for LLM and ML observability platforms.
+// Package metaobserve provides a unified interface for LLM and ML observability platforms.
 //
 // This library abstracts common functionality across providers like:
 //   - Comet Opik
@@ -73,8 +73,8 @@
 //
 // For provider-specific features, you can use the underlying SDKs directly:
 //
-//	import "github.com/grokify/observai/sdk/langfuse"
-//	import "github.com/grokify/observai/sdk/phoenix"
+//	import "github.com/grokify/metaobserve/sdk/langfuse"
+//	import "github.com/grokify/metaobserve/sdk/phoenix"
 //
 // Or use the existing Opik SDK:
 //
@@ -82,8 +82,8 @@
 package observai
 
 import (
-	"github.com/grokify/observai/llmops"
-	"github.com/grokify/observai/mlops"
+	"github.com/grokify/metaobserve/llmops"
+	"github.com/grokify/metaobserve/mlops"
 )
 
 // Version is the library version.

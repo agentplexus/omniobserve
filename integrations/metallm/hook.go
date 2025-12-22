@@ -1,34 +1,35 @@
-// Package fluxllm provides an ObservabilityHook implementation for FluxLLM
+// Package metallm provides an ObservabilityHook implementation for MetaLLM
 // that integrates with ObservAI's llmops providers (Opik, Langfuse, Phoenix).
-package fluxllm
+package metallm
 
 import (
 	"context"
 
-	"github.com/grokify/fluxllm"
-	"github.com/grokify/fluxllm/provider"
-	"github.com/grokify/observai/llmops"
+	"github.com/grokify/metallm"
+	"github.com/grokify/metallm/provider"
+
+	"github.com/grokify/metaobserve/llmops"
 )
 
-// Hook implements fluxllm.ObservabilityHook using an llmops.Provider.
+// Hook implements metallm.ObservabilityHook using an llmops.Provider.
 // It automatically creates spans for each LLM call with model, provider,
 // input/output, and token usage information.
 type Hook struct {
 	provider llmops.Provider
 }
 
-// NewHook creates a new FluxLLM observability hook.
+// NewHook creates a new MetaLLM observability hook.
 // The provider should be initialized before passing to this function.
 func NewHook(provider llmops.Provider) *Hook {
 	return &Hook{provider: provider}
 }
 
 // Ensure Hook implements the interface at compile time
-var _ fluxllm.ObservabilityHook = (*Hook)(nil)
+var _ metallm.ObservabilityHook = (*Hook)(nil)
 
 // BeforeRequest is called before each LLM call.
 // It starts a new span and returns a context with the span attached.
-func (h *Hook) BeforeRequest(ctx context.Context, info fluxllm.LLMCallInfo, req *provider.ChatCompletionRequest) context.Context {
+func (h *Hook) BeforeRequest(ctx context.Context, info metallm.LLMCallInfo, req *provider.ChatCompletionRequest) context.Context {
 	// Start a span for this LLM call
 	ctx, span, err := h.provider.StartSpan(ctx, "llm-completion",
 		llmops.WithSpanType(llmops.SpanTypeLLM),
@@ -47,7 +48,7 @@ func (h *Hook) BeforeRequest(ctx context.Context, info fluxllm.LLMCallInfo, req 
 
 // AfterResponse is called after each LLM call completes.
 // It records the response output, token usage, and ends the span.
-func (h *Hook) AfterResponse(ctx context.Context, info fluxllm.LLMCallInfo, req *provider.ChatCompletionRequest, resp *provider.ChatCompletionResponse, err error) {
+func (h *Hook) AfterResponse(ctx context.Context, info metallm.LLMCallInfo, req *provider.ChatCompletionRequest, resp *provider.ChatCompletionResponse, err error) {
 	span := spanFromContext(ctx)
 	if span == nil {
 		return
@@ -77,7 +78,7 @@ func (h *Hook) AfterResponse(ctx context.Context, info fluxllm.LLMCallInfo, req 
 
 // WrapStream wraps a stream for observability.
 // The wrapped stream will buffer content and record it when the stream ends.
-func (h *Hook) WrapStream(ctx context.Context, info fluxllm.LLMCallInfo, req *provider.ChatCompletionRequest, stream provider.ChatCompletionStream) provider.ChatCompletionStream {
+func (h *Hook) WrapStream(ctx context.Context, info metallm.LLMCallInfo, req *provider.ChatCompletionRequest, stream provider.ChatCompletionStream) provider.ChatCompletionStream {
 	span := spanFromContext(ctx)
 	if span == nil {
 		return stream

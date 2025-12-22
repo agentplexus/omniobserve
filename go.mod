@@ -1,11 +1,11 @@
-module github.com/grokify/observai
+module github.com/grokify/metaobserve
 
 go 1.24.5
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/grokify/fluxllm v0.7.1
 	github.com/grokify/go-comet-ml-opik v0.2.0
+	github.com/grokify/metallm v0.8.0
 )
 
 require (
