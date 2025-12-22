@@ -1,5 +1,5 @@
 // Package metallm provides an ObservabilityHook implementation for MetaLLM
-// that integrates with ObservAI's llmops providers (Opik, Langfuse, Phoenix).
+// that integrates with MetaObserve's llmops providers (Opik, Langfuse, Phoenix).
 package metallm
 
 import (

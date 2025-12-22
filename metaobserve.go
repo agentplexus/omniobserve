@@ -13,12 +13,12 @@
 // Import the provider you want to use:
 //
 //	import (
-//		"github.com/grokify/observai/llmops"
-//		_ "github.com/grokify/observai/llmops/opik"    // Register Opik
+//		"github.com/grokify/metaobserve/llmops"
+//		_ "github.com/grokify/metaobserve/llmops/opik"    // Register Opik
 //		// or
-//		_ "github.com/grokify/observai/llmops/langfuse" // Register Langfuse
+//		_ "github.com/grokify/metaobserve/llmops/langfuse" // Register Langfuse
 //		// or
-//		_ "github.com/grokify/observai/llmops/phoenix"  // Register Phoenix
+//		_ "github.com/grokify/metaobserve/llmops/phoenix"  // Register Phoenix
 //	)
 //
 // Then open a provider:
@@ -79,7 +79,7 @@
 // Or use the existing Opik SDK:
 //
 //	import "github.com/grokify/go-comet-ml-opik"
-package observai
+package metaobserve
 
 import (
 	"github.com/grokify/metaobserve/llmops"

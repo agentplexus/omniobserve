@@ -2,7 +2,7 @@
 //
 // Import this package to register the Phoenix provider:
 //
-//	import _ "github.com/grokify/observai/llmops/phoenix"
+//	import _ "github.com/grokify/metaobserve/llmops/phoenix"
 //
 // Then open it:
 //

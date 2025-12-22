@@ -2,7 +2,7 @@
 //
 // Import this package to register the Opik provider:
 //
-//	import _ "github.com/grokify/observai/llmops/opik"
+//	import _ "github.com/grokify/metaobserve/llmops/opik"
 //
 // Then open it:
 //

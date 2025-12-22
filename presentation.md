@@ -48,7 +48,7 @@ style: |
 
 <!-- _paginate: false -->
 
-# ObservAI
+# MetaObserve
 
 ## Unified LLM & ML Observability for Go
 
@@ -70,7 +70,7 @@ A vendor-agnostic abstraction layer for AI application observability
 
 # The Solution
 
-## ObservAI
+## MetaObserve
 
 **Instrument once, observe anywhere**
 
@@ -114,8 +114,8 @@ All providers support core tracing and evaluation capabilities.
 # Architecture Overview
 
 ```
-observai/
-├── observai.go           # Main package, re-exports
+metaobserve/
+├── metaobserve.go        # Main package, re-exports
 ├── llmops/               # LLM observability
 │   ├── llmops.go         # Core interfaces
 │   ├── trace.go          # Trace/Span interfaces
@@ -191,8 +191,8 @@ const (
 
 ```go
 import (
-    "github.com/grokify/observai/llmops"
-    _ "github.com/grokify/observai/llmops/opik"  // Register provider
+    "github.com/grokify/metaobserve/llmops"
+    _ "github.com/grokify/metaobserve/llmops/opik"  // Register provider
 )
 
 func main() {
@@ -329,15 +329,15 @@ rendered := prompt.Render(map[string]any{
 // Just change the import and provider name!
 
 // Opik
-import _ "github.com/grokify/observai/llmops/opik"
+import _ "github.com/grokify/metaobserve/llmops/opik"
 provider, _ := llmops.Open("opik", llmops.WithAPIKey("..."))
 
 // Langfuse
-import _ "github.com/grokify/observai/llmops/langfuse"
+import _ "github.com/grokify/metaobserve/llmops/langfuse"
 provider, _ := llmops.Open("langfuse", llmops.WithAPIKey("..."))
 
 // Phoenix
-import _ "github.com/grokify/observai/llmops/phoenix"
+import _ "github.com/grokify/metaobserve/llmops/phoenix"
 provider, _ := llmops.Open("phoenix", llmops.WithEndpoint("..."))
 ```
 
@@ -352,10 +352,10 @@ Automatically instrument LLM calls via FluxLLM:
 ```go
 import (
     "github.com/grokify/fluxllm"
-    fluxllmhook "github.com/grokify/observai/integrations/fluxllm"
+    fluxllmhook "github.com/grokify/metaobserve/integrations/fluxllm"
 )
 
-// Create hook with any ObservAI provider
+// Create hook with any MetaObserve provider
 hook := fluxllmhook.NewHook(provider)
 
 // Attach to FluxLLM client
@@ -455,28 +455,28 @@ if llmops.IsNotImplemented(err) {
 ## Install
 
 ```bash
-go get github.com/grokify/observai
+go get github.com/grokify/metaobserve
 ```
 
 ## Import
 
 ```go
 import (
-    "github.com/grokify/observai/llmops"
-    _ "github.com/grokify/observai/llmops/opik"
+    "github.com/grokify/metaobserve/llmops"
+    _ "github.com/grokify/metaobserve/llmops/opik"
 )
 ```
 
 ## Documentation
 
-- GitHub: `github.com/grokify/observai`
-- Go Docs: `pkg.go.dev/github.com/grokify/observai`
+- GitHub: `github.com/grokify/metaobserve`
+- Go Docs: `pkg.go.dev/github.com/grokify/metaobserve`
 
 ---
 
 # Summary
 
-## ObservAI provides:
+## MetaObserve provides:
 
 1. **Unified API** for LLM observability
 2. **Provider flexibility** without vendor lock-in
@@ -494,7 +494,7 @@ import (
 
 ## Questions?
 
-GitHub: `github.com/grokify/observai`
+GitHub: `github.com/grokify/metaobserve`
 
 ```go
 provider, _ := llmops.Open("your-choice", ...)

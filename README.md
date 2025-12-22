@@ -1,4 +1,4 @@
-# ObservAI
+# MetaObserve
 
 [![Build Status][build-status-svg]][build-status-url]
 [![Lint Status][lint-status-svg]][lint-status-url]
@@ -6,7 +6,7 @@
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![License][license-svg]][license-url]
 
-A unified Go library for LLM and ML observability. ObservAI provides a vendor-agnostic abstraction layer that enables you to instrument your AI applications once and seamlessly switch between different observability backends without code changes.
+A unified Go library for LLM and ML observability. MetaObserve provides a vendor-agnostic abstraction layer that enables you to instrument your AI applications once and seamlessly switch between different observability backends without code changes.
 
 ## Features
 
@@ -22,7 +22,7 @@ A unified Go library for LLM and ML observability. ObservAI provides a vendor-ag
 ## Installation
 
 ```bash
-go get github.com/grokify/observai
+go get github.com/grokify/metaobserve
 ```
 
 ## Quick Start
@@ -34,8 +34,8 @@ import (
     "context"
     "log"
 
-    "github.com/grokify/observai/llmops"
-    _ "github.com/grokify/observai/llmops/opik"  // Register Opik provider
+    "github.com/grokify/metaobserve/llmops"
+    _ "github.com/grokify/metaobserve/llmops/opik"  // Register Opik provider
 )
 
 func main() {
@@ -118,8 +118,8 @@ func main() {
 ## Architecture
 
 ```
-observai/
-├── observai.go          # Main package with re-exports
+metaobserve/
+├── metaobserve.go       # Main package with re-exports
 ├── llmops/              # LLM observability interfaces
 │   ├── llmops.go        # Core interfaces (Provider, Tracer, Evaluator, etc.)
 │   ├── trace.go         # Trace and Span interfaces
@@ -207,18 +207,18 @@ const (
 
 ```go
 // Opik
-import _ "github.com/grokify/observai/llmops/opik"
+import _ "github.com/grokify/metaobserve/llmops/opik"
 provider, _ := llmops.Open("opik", llmops.WithAPIKey("..."))
 
 // Langfuse
-import _ "github.com/grokify/observai/llmops/langfuse"
+import _ "github.com/grokify/metaobserve/llmops/langfuse"
 provider, _ := llmops.Open("langfuse",
     llmops.WithAPIKey("sk-lf-..."),
     llmops.WithEndpoint("https://cloud.langfuse.com"),
 )
 
 // Phoenix
-import _ "github.com/grokify/observai/llmops/phoenix"
+import _ "github.com/grokify/metaobserve/llmops/phoenix"
 provider, _ := llmops.Open("phoenix",
     llmops.WithEndpoint("http://localhost:6006"),
 )
@@ -360,16 +360,16 @@ if llmops.IsRateLimited(err) {
 For provider-specific features, you can use the underlying SDKs directly:
 
 ```go
-import "github.com/grokify/observai/sdk/langfuse"
-import "github.com/grokify/observai/sdk/phoenix"
+import "github.com/grokify/metaobserve/sdk/langfuse"
+import "github.com/grokify/metaobserve/sdk/phoenix"
 ```
 
 ## FluxLLM Integration
 
-ObservAI provides an integration with [FluxLLM](https://github.com/grokify/fluxllm), a multi-LLM abstraction layer. This allows you to automatically instrument all LLM calls made through FluxLLM with any ObservAI provider.
+MetaObserve provides an integration with [FluxLLM](https://github.com/grokify/fluxllm), a multi-LLM abstraction layer. This allows you to automatically instrument all LLM calls made through FluxLLM with any MetaObserve provider.
 
 ```bash
-go get github.com/grokify/observai/integrations/fluxllm
+go get github.com/grokify/metaobserve/integrations/fluxllm
 ```
 
 ```go
@@ -377,13 +377,13 @@ package main
 
 import (
     "github.com/grokify/fluxllm"
-    fluxllmhook "github.com/grokify/observai/integrations/fluxllm"
-    "github.com/grokify/observai/llmops"
-    _ "github.com/grokify/observai/llmops/opik"
+    fluxllmhook "github.com/grokify/metaobserve/integrations/fluxllm"
+    "github.com/grokify/metaobserve/llmops"
+    _ "github.com/grokify/metaobserve/llmops/opik"
 )
 
 func main() {
-    // Initialize an ObservAI provider
+    // Initialize a MetaObserve provider
     provider, _ := llmops.Open("opik",
         llmops.WithAPIKey("your-api-key"),
         llmops.WithProjectName("my-project"),
@@ -421,15 +421,15 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 
 See [LICENSE](LICENSE) for details.
 
- [build-status-svg]: https://github.com/grokify/observai/actions/workflows/ci.yaml/badge.svg?branch=main
- [build-status-url]: https://github.com/grokify/observai/actions/workflows/ci.yaml
- [lint-status-svg]: https://github.com/grokify/observai/actions/workflows/lint.yaml/badge.svg?branch=main
- [lint-status-url]: https://github.com/grokify/observai/actions/workflows/lint.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/observai
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/observai
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/observai
- [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/observai
+ [build-status-svg]: https://github.com/grokify/metaobserve/actions/workflows/ci.yaml/badge.svg?branch=main
+ [build-status-url]: https://github.com/grokify/metaobserve/actions/workflows/ci.yaml
+ [lint-status-svg]: https://github.com/grokify/metaobserve/actions/workflows/lint.yaml/badge.svg?branch=main
+ [lint-status-url]: https://github.com/grokify/metaobserve/actions/workflows/lint.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/metaobserve
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/metaobserve
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/metaobserve
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/metaobserve
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/grokify/observai/blob/master/LICENSE
- [used-by-svg]: https://sourcegraph.com/github.com/grokify/observai/-/badge.svg
- [used-by-url]: https://sourcegraph.com/github.com/grokify/observai?badge
+ [license-url]: https://github.com/grokify/metaobserve/blob/master/LICENSE
+ [used-by-svg]: https://sourcegraph.com/github.com/grokify/metaobserve/-/badge.svg
+ [used-by-url]: https://sourcegraph.com/github.com/grokify/metaobserve?badge

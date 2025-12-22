@@ -2,7 +2,7 @@
 //
 // Import this package to register the Langfuse provider:
 //
-//	import _ "github.com/grokify/observai/llmops/langfuse"
+//	import _ "github.com/grokify/metaobserve/llmops/langfuse"
 //
 // Then open it:
 //
