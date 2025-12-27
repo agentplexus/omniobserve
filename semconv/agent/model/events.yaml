@@ -1,0 +1,278 @@
+groups:
+  # =============================================================================
+  # Workflow Events
+  # =============================================================================
+  - id: event.gen_ai.agent.workflow.started
+    type: event
+    stability: development
+    name: gen_ai.agent.workflow.started
+    brief: Emitted when a workflow begins execution.
+    attributes:
+      - ref: gen_ai.agent.workflow.id
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.name
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.initiator
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.parent_id
+        requirement_level:
+          conditionally_required: When this is a nested workflow.
+
+  - id: event.gen_ai.agent.workflow.completed
+    type: event
+    stability: development
+    name: gen_ai.agent.workflow.completed
+    brief: Emitted when a workflow completes successfully.
+    attributes:
+      - ref: gen_ai.agent.workflow.id
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.name
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.duration
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.task.count
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.task.completed_count
+        requirement_level: recommended
+      - ref: gen_ai.usage.total_tokens
+        requirement_level: recommended
+      - ref: gen_ai.usage.cost
+        requirement_level: opt_in
+
+  - id: event.gen_ai.agent.workflow.failed
+    type: event
+    stability: development
+    name: gen_ai.agent.workflow.failed
+    brief: Emitted when a workflow fails.
+    attributes:
+      - ref: gen_ai.agent.workflow.id
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.name
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.duration
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.task.failed_count
+        requirement_level: recommended
+      - ref: error.type
+        requirement_level: recommended
+      - ref: error.message
+        requirement_level: recommended
+
+  # =============================================================================
+  # Task Events
+  # =============================================================================
+  - id: event.gen_ai.agent.task.started
+    type: event
+    stability: development
+    name: gen_ai.agent.task.started
+    brief: Emitted when a task begins execution.
+    attributes:
+      - ref: gen_ai.agent.task.id
+        requirement_level: required
+      - ref: gen_ai.agent.task.name
+        requirement_level: required
+      - ref: gen_ai.agent.task.type
+        requirement_level: recommended
+      - ref: gen_ai.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.id
+        requirement_level:
+          conditionally_required: When the task is part of a workflow.
+
+  - id: event.gen_ai.agent.task.completed
+    type: event
+    stability: development
+    name: gen_ai.agent.task.completed
+    brief: Emitted when a task completes successfully.
+    attributes:
+      - ref: gen_ai.agent.task.id
+        requirement_level: required
+      - ref: gen_ai.agent.task.name
+        requirement_level: required
+      - ref: gen_ai.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.task.duration
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.llm.call_count
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.tool_call.count
+        requirement_level: recommended
+      - ref: gen_ai.usage.total_tokens
+        requirement_level: recommended
+      - ref: gen_ai.usage.cost
+        requirement_level: opt_in
+
+  - id: event.gen_ai.agent.task.failed
+    type: event
+    stability: development
+    name: gen_ai.agent.task.failed
+    brief: Emitted when a task fails.
+    attributes:
+      - ref: gen_ai.agent.task.id
+        requirement_level: required
+      - ref: gen_ai.agent.task.name
+        requirement_level: required
+      - ref: gen_ai.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.task.duration
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.error.type
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.error.message
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.retry_count
+        requirement_level: recommended
+
+  # =============================================================================
+  # Handoff Events
+  # =============================================================================
+  - id: event.gen_ai.agent.handoff.initiated
+    type: event
+    stability: development
+    name: gen_ai.agent.handoff.initiated
+    brief: Emitted when a handoff is initiated between agents.
+    attributes:
+      - ref: gen_ai.agent.handoff.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.type
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.from.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.to.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.id
+        requirement_level:
+          conditionally_required: When the handoff is part of a workflow.
+      - ref: gen_ai.agent.handoff.payload.size
+        requirement_level: recommended
+
+  - id: event.gen_ai.agent.handoff.accepted
+    type: event
+    stability: development
+    name: gen_ai.agent.handoff.accepted
+    brief: Emitted when a handoff is accepted by the target agent.
+    attributes:
+      - ref: gen_ai.agent.handoff.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.to.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.latency
+        requirement_level: recommended
+
+  - id: event.gen_ai.agent.handoff.completed
+    type: event
+    stability: development
+    name: gen_ai.agent.handoff.completed
+    brief: Emitted when a handoff completes successfully.
+    attributes:
+      - ref: gen_ai.agent.handoff.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.from.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.to.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.latency
+        requirement_level: recommended
+
+  - id: event.gen_ai.agent.handoff.failed
+    type: event
+    stability: development
+    name: gen_ai.agent.handoff.failed
+    brief: Emitted when a handoff fails.
+    attributes:
+      - ref: gen_ai.agent.handoff.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.from.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.to.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.error.message
+        requirement_level: recommended
+
+  # =============================================================================
+  # Tool Call Events
+  # =============================================================================
+  - id: event.gen_ai.agent.tool_call.invoked
+    type: event
+    stability: development
+    name: gen_ai.agent.tool_call.invoked
+    brief: Emitted when a tool call is initiated.
+    attributes:
+      - ref: gen_ai.agent.tool_call.id
+        requirement_level: required
+      - ref: gen_ai.agent.tool_call.name
+        requirement_level: required
+      - ref: gen_ai.agent.tool_call.type
+        requirement_level: recommended
+      - ref: gen_ai.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.task.id
+        requirement_level:
+          conditionally_required: When the tool call is part of a task.
+      - ref: gen_ai.agent.tool_call.request.size
+        requirement_level: recommended
+
+  - id: event.gen_ai.agent.tool_call.completed
+    type: event
+    stability: development
+    name: gen_ai.agent.tool_call.completed
+    brief: Emitted when a tool call completes successfully.
+    attributes:
+      - ref: gen_ai.agent.tool_call.id
+        requirement_level: required
+      - ref: gen_ai.agent.tool_call.name
+        requirement_level: required
+      - ref: gen_ai.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.tool_call.duration
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.response.size
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.http.status_code
+        requirement_level:
+          conditionally_required: When the tool uses HTTP.
+
+  - id: event.gen_ai.agent.tool_call.failed
+    type: event
+    stability: development
+    name: gen_ai.agent.tool_call.failed
+    brief: Emitted when a tool call fails.
+    attributes:
+      - ref: gen_ai.agent.tool_call.id
+        requirement_level: required
+      - ref: gen_ai.agent.tool_call.name
+        requirement_level: required
+      - ref: gen_ai.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.tool_call.duration
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.error.type
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.error.message
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.retry_count
+        requirement_level: recommended
+
+  # =============================================================================
+  # Retry Events
+  # =============================================================================
+  - id: event.gen_ai.agent.retry.attempted
+    type: event
+    stability: development
+    name: gen_ai.agent.retry.attempted
+    brief: Emitted when a retry is attempted for a failed operation.
+    attributes:
+      - ref: gen_ai.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.task.id
+        requirement_level:
+          conditionally_required: When retrying a task.
+      - ref: gen_ai.agent.tool_call.id
+        requirement_level:
+          conditionally_required: When retrying a tool call.
+      - ref: gen_ai.agent.task.retry_count
+        requirement_level: recommended
+        brief: Current retry attempt number.
+      - ref: gen_ai.agent.task.error.type
+        requirement_level: recommended
+        brief: Error type that triggered the retry.

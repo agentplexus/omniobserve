@@ -1,0 +1,202 @@
+groups:
+  # =============================================================================
+  # Workflow Span
+  # =============================================================================
+  - id: span.gen_ai.agent.workflow
+    type: span
+    stability: development
+    span_kind: internal
+    brief: >
+      Represents an end-to-end workflow/session that may involve multiple
+      agents and tasks.
+    note: |
+      Workflow spans are the top-level spans for multi-agent operations.
+      They contain task spans as children and track aggregate metrics
+      like total token usage and cost.
+
+      Example span name: `workflow {gen_ai.agent.workflow.name}`
+    attributes:
+      - ref: gen_ai.agent.workflow.id
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.name
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.status
+        requirement_level: required
+      - ref: gen_ai.agent.workflow.parent_id
+        requirement_level:
+          conditionally_required: When this is a nested workflow.
+      - ref: gen_ai.agent.workflow.initiator
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.task.count
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.task.completed_count
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.task.failed_count
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.duration
+        requirement_level: recommended
+      - ref: gen_ai.usage.total_tokens
+        requirement_level: recommended
+        brief: Total tokens used across all tasks in the workflow.
+      - ref: gen_ai.usage.cost
+        requirement_level: opt_in
+        brief: Total cost in USD for the workflow.
+
+  # =============================================================================
+  # Task Span
+  # =============================================================================
+  - id: span.gen_ai.agent.task
+    type: span
+    stability: development
+    span_kind: internal
+    brief: >
+      Represents an individual unit of work performed by an agent.
+    note: |
+      Task spans are children of workflow spans and may contain
+      LLM call spans (gen_ai inference spans) and tool call spans
+      as children.
+
+      Example span name: `task {gen_ai.agent.task.name}`
+    attributes:
+      - ref: gen_ai.agent.task.id
+        requirement_level: required
+      - ref: gen_ai.agent.task.name
+        requirement_level: required
+      - ref: gen_ai.agent.task.type
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.status
+        requirement_level: required
+      - ref: gen_ai.agent.id
+        requirement_level: required
+        brief: ID of the agent performing the task.
+      - ref: gen_ai.agent.type
+        requirement_level: recommended
+        brief: Type of the agent performing the task.
+      - ref: gen_ai.agent.workflow.id
+        requirement_level:
+          conditionally_required: When the task is part of a workflow.
+      - ref: gen_ai.agent.task.parent_id
+        requirement_level:
+          conditionally_required: When this is a nested task.
+      - ref: gen_ai.agent.task.retry_count
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.duration
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.llm.call_count
+        requirement_level: recommended
+      - ref: gen_ai.agent.task.tool_call.count
+        requirement_level: recommended
+      - ref: gen_ai.usage.input_tokens
+        requirement_level: recommended
+      - ref: gen_ai.usage.output_tokens
+        requirement_level: recommended
+      - ref: gen_ai.usage.total_tokens
+        requirement_level: recommended
+      - ref: gen_ai.usage.cost
+        requirement_level: opt_in
+      - ref: gen_ai.agent.task.error.type
+        requirement_level:
+          conditionally_required: When the task has failed.
+      - ref: gen_ai.agent.task.error.message
+        requirement_level:
+          conditionally_required: When the task has failed.
+
+  # =============================================================================
+  # Handoff Span
+  # =============================================================================
+  - id: span.gen_ai.agent.handoff
+    type: span
+    stability: development
+    span_kind: internal
+    brief: >
+      Represents communication and work transfer between agents.
+    note: |
+      Handoff spans track agent-to-agent communication, including
+      delegation of work, requests for information, and responses.
+
+      Example span name: `handoff {gen_ai.agent.handoff.from.agent.id} -> {gen_ai.agent.handoff.to.agent.id}`
+    attributes:
+      - ref: gen_ai.agent.handoff.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.type
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.status
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.from.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.from.agent.type
+        requirement_level: recommended
+      - ref: gen_ai.agent.handoff.to.agent.id
+        requirement_level: required
+      - ref: gen_ai.agent.handoff.to.agent.type
+        requirement_level: recommended
+      - ref: gen_ai.agent.workflow.id
+        requirement_level:
+          conditionally_required: When the handoff is part of a workflow.
+      - ref: gen_ai.agent.handoff.from.task.id
+        requirement_level: recommended
+      - ref: gen_ai.agent.handoff.to.task.id
+        requirement_level: recommended
+      - ref: gen_ai.agent.handoff.payload.size
+        requirement_level: recommended
+      - ref: gen_ai.agent.handoff.latency
+        requirement_level: recommended
+      - ref: gen_ai.agent.handoff.error.message
+        requirement_level:
+          conditionally_required: When the handoff has failed.
+
+  # =============================================================================
+  # Tool Call Span
+  # =============================================================================
+  - id: span.gen_ai.agent.tool_call
+    type: span
+    stability: development
+    span_kind: client
+    brief: >
+      Represents an invocation of an external tool/function by an agent.
+    note: |
+      Tool call spans track the execution of external tools, APIs,
+      or functions. They are typically children of task spans.
+
+      This is distinct from gen_ai.tool.* which describes tool
+      definitions/schemas rather than invocations.
+
+      Example span name: `tool_call {gen_ai.agent.tool_call.name}`
+    attributes:
+      - ref: gen_ai.agent.tool_call.id
+        requirement_level: required
+      - ref: gen_ai.agent.tool_call.name
+        requirement_level: required
+      - ref: gen_ai.agent.tool_call.type
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.status
+        requirement_level: required
+      - ref: gen_ai.agent.id
+        requirement_level: required
+        brief: ID of the agent making the tool call.
+      - ref: gen_ai.agent.task.id
+        requirement_level:
+          conditionally_required: When the tool call is part of a task.
+      - ref: gen_ai.agent.tool_call.duration
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.request.size
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.response.size
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.retry_count
+        requirement_level: recommended
+      - ref: gen_ai.agent.tool_call.http.method
+        requirement_level:
+          conditionally_required: When the tool uses HTTP.
+      - ref: gen_ai.agent.tool_call.http.url
+        requirement_level:
+          conditionally_required: When the tool uses HTTP.
+      - ref: gen_ai.agent.tool_call.http.status_code
+        requirement_level:
+          conditionally_required: When the tool uses HTTP.
+      - ref: gen_ai.agent.tool_call.error.type
+        requirement_level:
+          conditionally_required: When the tool call has failed.
+      - ref: gen_ai.agent.tool_call.error.message
+        requirement_level:
+          conditionally_required: When the tool call has failed.

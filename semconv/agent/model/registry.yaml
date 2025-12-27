@@ -1,0 +1,559 @@
+groups:
+  # =============================================================================
+  # Agent Attributes (gen_ai.agent.*)
+  # Extends OpenTelemetry GenAI Agent conventions
+  # =============================================================================
+  - id: registry.gen_ai.agent
+    type: attribute_group
+    display_name: Agentic AI Attributes
+    brief: >
+      Semantic conventions for multi-agent AI systems, extending OpenTelemetry
+      GenAI conventions with workflow, task, handoff, and tool call concepts.
+    attributes:
+      # Core Agent Attributes (aligned with OTel)
+      - id: gen_ai.agent.id
+        type: string
+        stability: development
+        brief: Unique identifier of the agent instance.
+        examples: ["synthesis-agent-1", "verification-agent-2"]
+
+      - id: gen_ai.agent.name
+        type: string
+        stability: development
+        brief: Human-readable name of the agent.
+        examples: ["Synthesis Agent", "Research Agent"]
+
+      - id: gen_ai.agent.type
+        type: string
+        stability: development
+        brief: Categorizes the agent's role or function.
+        examples: ["synthesis", "verification", "research", "orchestration"]
+
+      - id: gen_ai.agent.version
+        type: string
+        stability: development
+        brief: Version of the agent implementation.
+        examples: ["1.0.0", "2.1.3"]
+
+  # =============================================================================
+  # Workflow Attributes (gen_ai.agent.workflow.*)
+  # =============================================================================
+  - id: registry.gen_ai.agent.workflow
+    type: attribute_group
+    display_name: Workflow Attributes
+    brief: >
+      Attributes for tracking end-to-end workflows/sessions that may involve
+      multiple agents and tasks.
+    attributes:
+      - id: gen_ai.agent.workflow.id
+        type: string
+        stability: development
+        brief: Unique identifier of the workflow/session.
+        examples: ["wf-550e8400-e29b-41d4-a716-446655440000"]
+
+      - id: gen_ai.agent.workflow.name
+        type: string
+        stability: development
+        brief: Name or type of the workflow.
+        examples: ["statistics-extraction", "document-analysis"]
+
+      - id: gen_ai.agent.workflow.status
+        type:
+          members:
+            - id: pending
+              value: "pending"
+              brief: Workflow not yet started.
+              stability: development
+            - id: running
+              value: "running"
+              brief: Workflow currently executing.
+              stability: development
+            - id: completed
+              value: "completed"
+              brief: Workflow finished successfully.
+              stability: development
+            - id: failed
+              value: "failed"
+              brief: Workflow finished with error.
+              stability: development
+            - id: cancelled
+              value: "cancelled"
+              brief: Workflow was cancelled.
+              stability: development
+        stability: development
+        brief: Current status of the workflow.
+
+      - id: gen_ai.agent.workflow.parent_id
+        type: string
+        stability: development
+        brief: Parent workflow ID for nested workflows.
+        examples: ["wf-parent-123"]
+
+      - id: gen_ai.agent.workflow.initiator
+        type: string
+        stability: development
+        brief: Identifies what initiated the workflow.
+        examples: ["user:123", "api_key:abc", "system:scheduler"]
+
+      - id: gen_ai.agent.workflow.task.count
+        type: int
+        stability: development
+        brief: Total number of tasks in the workflow.
+        examples: [5, 10]
+
+      - id: gen_ai.agent.workflow.task.completed_count
+        type: int
+        stability: development
+        brief: Number of completed tasks in the workflow.
+        examples: [3, 8]
+
+      - id: gen_ai.agent.workflow.task.failed_count
+        type: int
+        stability: development
+        brief: Number of failed tasks in the workflow.
+        examples: [0, 1]
+
+      - id: gen_ai.agent.workflow.duration
+        type: int
+        stability: development
+        brief: Total duration of the workflow in milliseconds.
+        examples: [45000, 120000]
+
+  # =============================================================================
+  # Task Attributes (gen_ai.agent.task.*)
+  # =============================================================================
+  - id: registry.gen_ai.agent.task
+    type: attribute_group
+    display_name: Task Attributes
+    brief: >
+      Attributes for tracking individual units of work performed by an agent.
+    attributes:
+      - id: gen_ai.agent.task.id
+        type: string
+        stability: development
+        brief: Unique identifier of the task.
+        examples: ["task-123", "task-abc-456"]
+
+      - id: gen_ai.agent.task.name
+        type: string
+        stability: development
+        brief: Human-readable name of the task.
+        examples: ["extract_gdp_statistics", "verify_sources"]
+
+      - id: gen_ai.agent.task.type
+        type: string
+        stability: development
+        brief: Categorizes the type of task.
+        examples: ["extraction", "verification", "synthesis", "research"]
+
+      - id: gen_ai.agent.task.status
+        type:
+          members:
+            - id: pending
+              value: "pending"
+              brief: Task not yet started.
+              stability: development
+            - id: running
+              value: "running"
+              brief: Task currently executing.
+              stability: development
+            - id: completed
+              value: "completed"
+              brief: Task finished successfully.
+              stability: development
+            - id: failed
+              value: "failed"
+              brief: Task finished with error.
+              stability: development
+            - id: cancelled
+              value: "cancelled"
+              brief: Task was cancelled.
+              stability: development
+        stability: development
+        brief: Current status of the task.
+
+      - id: gen_ai.agent.task.parent_id
+        type: string
+        stability: development
+        brief: Parent task ID for nested tasks.
+        examples: ["task-parent-456"]
+
+      - id: gen_ai.agent.task.retry_count
+        type: int
+        stability: development
+        brief: Number of retry attempts for the task.
+        examples: [0, 2, 3]
+
+      - id: gen_ai.agent.task.duration
+        type: int
+        stability: development
+        brief: Duration of the task in milliseconds.
+        examples: [1500, 5000]
+
+      - id: gen_ai.agent.task.llm.call_count
+        type: int
+        stability: development
+        brief: Number of LLM calls made during the task.
+        examples: [1, 3, 5]
+
+      - id: gen_ai.agent.task.tool_call.count
+        type: int
+        stability: development
+        brief: Number of tool calls made during the task.
+        examples: [0, 2, 10]
+
+      - id: gen_ai.agent.task.error.type
+        type:
+          members:
+            - id: timeout
+              value: "timeout"
+              brief: Operation timed out.
+              stability: development
+            - id: rate_limit
+              value: "rate_limit"
+              brief: Rate limit exceeded.
+              stability: development
+            - id: validation
+              value: "validation"
+              brief: Input validation failed.
+              stability: development
+            - id: internal
+              value: "internal"
+              brief: Internal error.
+              stability: development
+            - id: network
+              value: "network"
+              brief: Network error.
+              stability: development
+            - id: auth
+              value: "auth"
+              brief: Authentication/authorization error.
+              stability: development
+        stability: development
+        brief: Categorizes the error if the task failed.
+
+      - id: gen_ai.agent.task.error.message
+        type: string
+        stability: development
+        brief: Error message if the task failed.
+        examples: ["API timeout after 30s", "Rate limit exceeded"]
+
+  # =============================================================================
+  # Handoff Attributes (gen_ai.agent.handoff.*)
+  # =============================================================================
+  - id: registry.gen_ai.agent.handoff
+    type: attribute_group
+    display_name: Handoff Attributes
+    brief: >
+      Attributes for tracking communication and work transfer between agents.
+    attributes:
+      - id: gen_ai.agent.handoff.id
+        type: string
+        stability: development
+        brief: Unique identifier of the handoff.
+        examples: ["ho-789", "handoff-abc-123"]
+
+      - id: gen_ai.agent.handoff.type
+        type:
+          members:
+            - id: request
+              value: "request"
+              brief: Request for action or information.
+              stability: development
+            - id: response
+              value: "response"
+              brief: Response to a previous request.
+              stability: development
+            - id: broadcast
+              value: "broadcast"
+              brief: Broadcast to multiple agents.
+              stability: development
+            - id: delegate
+              value: "delegate"
+              brief: Delegation of responsibility.
+              stability: development
+        stability: development
+        brief: Categorizes the type of handoff.
+
+      - id: gen_ai.agent.handoff.status
+        type:
+          members:
+            - id: pending
+              value: "pending"
+              brief: Handoff initiated, awaiting acceptance.
+              stability: development
+            - id: accepted
+              value: "accepted"
+              brief: Handoff accepted by target agent.
+              stability: development
+            - id: rejected
+              value: "rejected"
+              brief: Handoff rejected by target agent.
+              stability: development
+            - id: completed
+              value: "completed"
+              brief: Handoff completed successfully.
+              stability: development
+            - id: failed
+              value: "failed"
+              brief: Handoff failed.
+              stability: development
+        stability: development
+        brief: Current status of the handoff.
+
+      - id: gen_ai.agent.handoff.from.agent.id
+        type: string
+        stability: development
+        brief: ID of the agent initiating the handoff.
+        examples: ["research-agent-1"]
+
+      - id: gen_ai.agent.handoff.from.agent.type
+        type: string
+        stability: development
+        brief: Type of the source agent.
+        examples: ["research", "synthesis"]
+
+      - id: gen_ai.agent.handoff.to.agent.id
+        type: string
+        stability: development
+        brief: ID of the agent receiving the handoff.
+        examples: ["synthesis-agent-1"]
+
+      - id: gen_ai.agent.handoff.to.agent.type
+        type: string
+        stability: development
+        brief: Type of the target agent.
+        examples: ["synthesis", "verification"]
+
+      - id: gen_ai.agent.handoff.from.task.id
+        type: string
+        stability: development
+        brief: Task ID in the source agent.
+        examples: ["task-123"]
+
+      - id: gen_ai.agent.handoff.to.task.id
+        type: string
+        stability: development
+        brief: Task ID in the target agent.
+        examples: ["task-456"]
+
+      - id: gen_ai.agent.handoff.payload.size
+        type: int
+        stability: development
+        brief: Size of the handoff payload in bytes.
+        examples: [1024, 4096]
+
+      - id: gen_ai.agent.handoff.latency
+        type: int
+        stability: development
+        brief: Time from initiation to acceptance in milliseconds.
+        examples: [50, 200]
+
+      - id: gen_ai.agent.handoff.error.message
+        type: string
+        stability: development
+        brief: Error message if the handoff failed.
+        examples: ["Agent unavailable", "Timeout waiting for acceptance"]
+
+  # =============================================================================
+  # Tool Call Attributes (gen_ai.agent.tool_call.*)
+  # Distinct from OTel's gen_ai.tool.* which describes tool definitions
+  # =============================================================================
+  - id: registry.gen_ai.agent.tool_call
+    type: attribute_group
+    display_name: Tool Call Attributes
+    brief: >
+      Attributes for tracking invocations of external tools/functions by agents.
+      Distinct from gen_ai.tool.* which describes tool definitions/schemas.
+    attributes:
+      - id: gen_ai.agent.tool_call.id
+        type: string
+        stability: development
+        brief: Unique identifier of the tool invocation.
+        examples: ["tc-abc123", "tool-call-789"]
+
+      - id: gen_ai.agent.tool_call.name
+        type: string
+        stability: development
+        brief: Name of the tool being invoked.
+        examples: ["web_search", "database_query", "api_call"]
+
+      - id: gen_ai.agent.tool_call.type
+        type: string
+        stability: development
+        brief: Categorizes the type of tool.
+        examples: ["search", "database", "api", "file", "compute"]
+
+      - id: gen_ai.agent.tool_call.status
+        type:
+          members:
+            - id: running
+              value: "running"
+              brief: Tool call currently executing.
+              stability: development
+            - id: completed
+              value: "completed"
+              brief: Tool call finished successfully.
+              stability: development
+            - id: failed
+              value: "failed"
+              brief: Tool call failed.
+              stability: development
+        stability: development
+        brief: Status of the tool invocation.
+
+      - id: gen_ai.agent.tool_call.duration
+        type: int
+        stability: development
+        brief: Duration of the tool invocation in milliseconds.
+        examples: [100, 500, 2000]
+
+      - id: gen_ai.agent.tool_call.request.size
+        type: int
+        stability: development
+        brief: Size of the request payload in bytes.
+        examples: [256, 1024]
+
+      - id: gen_ai.agent.tool_call.response.size
+        type: int
+        stability: development
+        brief: Size of the response payload in bytes.
+        examples: [512, 4096]
+
+      - id: gen_ai.agent.tool_call.retry_count
+        type: int
+        stability: development
+        brief: Number of retry attempts for the tool call.
+        examples: [0, 1, 3]
+
+      - id: gen_ai.agent.tool_call.error.type
+        type:
+          members:
+            - id: timeout
+              value: "timeout"
+              brief: Tool call timed out.
+              stability: development
+            - id: rate_limit
+              value: "rate_limit"
+              brief: Rate limit exceeded.
+              stability: development
+            - id: validation
+              value: "validation"
+              brief: Input validation failed.
+              stability: development
+            - id: internal
+              value: "internal"
+              brief: Internal error.
+              stability: development
+            - id: network
+              value: "network"
+              brief: Network error.
+              stability: development
+            - id: auth
+              value: "auth"
+              brief: Authentication/authorization error.
+              stability: development
+        stability: development
+        brief: Categorizes the error if the tool call failed.
+
+      - id: gen_ai.agent.tool_call.error.message
+        type: string
+        stability: development
+        brief: Error message if the tool call failed.
+        examples: ["Connection refused", "API key invalid"]
+
+      - id: gen_ai.agent.tool_call.http.method
+        type: string
+        stability: development
+        brief: HTTP method used (for HTTP-based tools).
+        examples: ["GET", "POST", "PUT"]
+
+      - id: gen_ai.agent.tool_call.http.url
+        type: string
+        stability: development
+        brief: URL called (for HTTP-based tools).
+        examples: ["https://api.example.com/search"]
+
+      - id: gen_ai.agent.tool_call.http.status_code
+        type: int
+        stability: development
+        brief: HTTP status code returned (for HTTP-based tools).
+        examples: [200, 400, 500]
+
+  # =============================================================================
+  # Event Attributes (gen_ai.agent.event.*)
+  # =============================================================================
+  - id: registry.gen_ai.agent.event
+    type: attribute_group
+    display_name: Event Attributes
+    brief: >
+      Attributes for generic events in agentic AI systems.
+    attributes:
+      - id: gen_ai.agent.event.id
+        type: string
+        stability: development
+        brief: Unique identifier of the event.
+        examples: ["evt-xyz-789"]
+
+      - id: gen_ai.agent.event.name
+        type: string
+        stability: development
+        brief: Name or type of the event.
+        examples:
+          - "gen_ai.agent.task.started"
+          - "gen_ai.agent.handoff.completed"
+          - "statistic.extracted"
+
+      - id: gen_ai.agent.event.category
+        type:
+          members:
+            - id: agent
+              value: "agent"
+              brief: Agent lifecycle events.
+              stability: development
+            - id: workflow
+              value: "workflow"
+              brief: Workflow-level events.
+              stability: development
+            - id: tool
+              value: "tool"
+              brief: Tool-related events.
+              stability: development
+            - id: domain
+              value: "domain"
+              brief: Domain-specific events.
+              stability: development
+            - id: system
+              value: "system"
+              brief: System-level events.
+              stability: development
+        stability: development
+        brief: Categorizes the event.
+
+      - id: gen_ai.agent.event.source
+        type: string
+        stability: development
+        brief: Identifies the source of the event.
+        examples: ["synthesis-agent", "orchestrator", "tool-executor"]
+
+      - id: gen_ai.agent.event.severity
+        type:
+          members:
+            - id: debug
+              value: "debug"
+              brief: Debug-level information.
+              stability: development
+            - id: info
+              value: "info"
+              brief: Informational event.
+              stability: development
+            - id: warn
+              value: "warn"
+              brief: Warning event.
+              stability: development
+            - id: error
+              value: "error"
+              brief: Error event.
+              stability: development
+        stability: development
+        brief: Severity level of the event.
