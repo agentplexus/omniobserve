@@ -2,35 +2,6 @@
 marp: true
 theme: agentplexus
 paginate: true
-style: |
-  section {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  h1 {
-    color: #1a73e8;
-  }
-  h2 {
-    color: #333;
-  }
-  code {
-    background-color: #f5f5f5;
-  }
-  pre {
-    background-color: #1e1e1e;
-    color: #d4d4d4;
-  }
-  .columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  table {
-    font-size: 0.85em;
-  }
-  .highlight {
-    color: #1a73e8;
-    font-weight: bold;
-  }
 ---
 
 # OpenTelemetry Semantic Conventions for Agentic AI
