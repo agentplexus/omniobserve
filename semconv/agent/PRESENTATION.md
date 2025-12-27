@@ -1,8 +1,7 @@
 ---
 marp: true
-theme: default
+theme: agentplexus
 paginate: true
-backgroundColor: #fff
 style: |
   section {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

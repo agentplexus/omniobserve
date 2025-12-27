@@ -1,4 +1,4 @@
-# MetaObserve
+# OmniObserve
 
 [![Build Status][build-status-svg]][build-status-url]
 [![Lint Status][lint-status-svg]][lint-status-url]
@@ -6,7 +6,7 @@
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![License][license-svg]][license-url]
 
-A unified Go library for LLM and ML observability. MetaObserve provides a vendor-agnostic abstraction layer that enables you to instrument your AI applications once and seamlessly switch between different observability backends without code changes.
+A unified Go library for LLM and ML observability. OmniObserve provides a vendor-agnostic abstraction layer that enables you to instrument your AI applications once and seamlessly switch between different observability backends without code changes.
 
 ## Features
 
@@ -22,7 +22,7 @@ A unified Go library for LLM and ML observability. MetaObserve provides a vendor
 ## Installation
 
 ```bash
-go get github.com/grokify/metaobserve
+go get github.com/agentplexus/omniobserve
 ```
 
 ## Quick Start
@@ -34,8 +34,8 @@ import (
     "context"
     "log"
 
-    "github.com/grokify/metaobserve/llmops"
-    _ "github.com/grokify/metaobserve/llmops/opik"  // Register Opik provider
+    "github.com/agentplexus/omniobserve/llmops"
+    _ "github.com/agentplexus/omniobserve/llmops/opik"  // Register Opik provider
 )
 
 func main() {
@@ -118,8 +118,8 @@ func main() {
 ## Architecture
 
 ```
-metaobserve/
-├── metaobserve.go       # Main package with re-exports
+omniobserve/
+├── omniobserve.go       # Main package with re-exports
 ├── llmops/              # LLM observability interfaces
 │   ├── llmops.go        # Core interfaces (Provider, Tracer, Evaluator, etc.)
 │   ├── trace.go         # Trace and Span interfaces
@@ -131,7 +131,7 @@ metaobserve/
 │   ├── langfuse/        # Langfuse provider adapter
 │   └── phoenix/         # Phoenix provider adapter
 ├── integrations/        # Integrations with LLM libraries
-│   └── fluxllm/         # FluxLLM observability hook (separate module)
+│   └── omnillm/         # OmniLLM observability hook (separate module)
 ├── mlops/               # ML operations interfaces (experiments, model registry)
 └── sdk/                 # Provider-specific SDKs
     ├── langfuse/        # Langfuse Go SDK
@@ -207,18 +207,18 @@ const (
 
 ```go
 // Opik
-import _ "github.com/grokify/metaobserve/llmops/opik"
+import _ "github.com/agentplexus/omniobserve/llmops/opik"
 provider, _ := llmops.Open("opik", llmops.WithAPIKey("..."))
 
 // Langfuse
-import _ "github.com/grokify/metaobserve/llmops/langfuse"
+import _ "github.com/agentplexus/omniobserve/llmops/langfuse"
 provider, _ := llmops.Open("langfuse",
     llmops.WithAPIKey("sk-lf-..."),
     llmops.WithEndpoint("https://cloud.langfuse.com"),
 )
 
 // Phoenix
-import _ "github.com/grokify/metaobserve/llmops/phoenix"
+import _ "github.com/agentplexus/omniobserve/llmops/phoenix"
 provider, _ := llmops.Open("phoenix",
     llmops.WithEndpoint("http://localhost:6006"),
 )
@@ -360,30 +360,30 @@ if llmops.IsRateLimited(err) {
 For provider-specific features, you can use the underlying SDKs directly:
 
 ```go
-import "github.com/grokify/metaobserve/sdk/langfuse"
-import "github.com/grokify/metaobserve/sdk/phoenix"
+import "github.com/agentplexus/omniobserve/sdk/langfuse"
+import "github.com/agentplexus/omniobserve/sdk/phoenix"
 ```
 
-## FluxLLM Integration
+## OmniLLM Integration
 
-MetaObserve provides an integration with [FluxLLM](https://github.com/grokify/fluxllm), a multi-LLM abstraction layer. This allows you to automatically instrument all LLM calls made through FluxLLM with any MetaObserve provider.
+OmniObserve provides an integration with [OmniLLM](https://github.com/agentplexus/omnillm), a multi-LLM abstraction layer. This allows you to automatically instrument all LLM calls made through OmniLLM with any OmniObserve provider.
 
 ```bash
-go get github.com/grokify/metaobserve/integrations/fluxllm
+go get github.com/agentplexus/omniobserve/integrations/omnillm
 ```
 
 ```go
 package main
 
 import (
-    "github.com/grokify/fluxllm"
-    fluxllmhook "github.com/grokify/metaobserve/integrations/fluxllm"
-    "github.com/grokify/metaobserve/llmops"
-    _ "github.com/grokify/metaobserve/llmops/opik"
+    "github.com/agentplexus/omnillm"
+    omnillmhook "github.com/agentplexus/omniobserve/integrations/omnillm"
+    "github.com/agentplexus/omniobserve/llmops"
+    _ "github.com/agentplexus/omniobserve/llmops/opik"
 )
 
 func main() {
-    // Initialize a MetaObserve provider
+    // Initialize a OmniObserve provider
     provider, _ := llmops.Open("opik",
         llmops.WithAPIKey("your-api-key"),
         llmops.WithProjectName("my-project"),
@@ -391,11 +391,11 @@ func main() {
     defer provider.Close()
 
     // Create the observability hook
-    hook := fluxllmhook.NewHook(provider)
+    hook := omnillmhook.NewHook(provider)
 
-    // Attach to your FluxLLM client
-    client := fluxllm.NewClient(
-        fluxllm.WithObservabilityHook(hook),
+    // Attach to your OmniLLM client
+    client := omnillm.NewClient(
+        omnillm.WithObservabilityHook(hook),
     )
 
     // All LLM calls through this client are now automatically traced
@@ -421,15 +421,15 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 
 See [LICENSE](LICENSE) for details.
 
- [build-status-svg]: https://github.com/grokify/metaobserve/actions/workflows/ci.yaml/badge.svg?branch=main
- [build-status-url]: https://github.com/grokify/metaobserve/actions/workflows/ci.yaml
- [lint-status-svg]: https://github.com/grokify/metaobserve/actions/workflows/lint.yaml/badge.svg?branch=main
- [lint-status-url]: https://github.com/grokify/metaobserve/actions/workflows/lint.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/metaobserve
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/metaobserve
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/metaobserve
- [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/metaobserve
+ [build-status-svg]: https://github.com/agentplexus/omniobserve/actions/workflows/ci.yaml/badge.svg?branch=main
+ [build-status-url]: https://github.com/agentplexus/omniobserve/actions/workflows/ci.yaml
+ [lint-status-svg]: https://github.com/agentplexus/omniobserve/actions/workflows/lint.yaml/badge.svg?branch=main
+ [lint-status-url]: https://github.com/agentplexus/omniobserve/actions/workflows/lint.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/agentplexus/omniobserve
+ [goreport-url]: https://goreportcard.com/report/github.com/agentplexus/omniobserve
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/agentplexus/omniobserve
+ [docs-godoc-url]: https://pkg.go.dev/github.com/agentplexus/omniobserve
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/grokify/metaobserve/blob/master/LICENSE
- [used-by-svg]: https://sourcegraph.com/github.com/grokify/metaobserve/-/badge.svg
- [used-by-url]: https://sourcegraph.com/github.com/grokify/metaobserve?badge
+ [license-url]: https://github.com/agentplexus/omniobserve/blob/master/LICENSE
+ [used-by-svg]: https://sourcegraph.com/github.com/agentplexus/omniobserve/-/badge.svg
+ [used-by-url]: https://sourcegraph.com/github.com/agentplexus/omniobserve?badge

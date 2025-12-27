@@ -48,7 +48,7 @@ style: |
 
 <!-- _paginate: false -->
 
-# MetaObserve
+# OmniObserve
 
 ## Unified LLM & ML Observability for Go
 
@@ -70,7 +70,7 @@ A vendor-agnostic abstraction layer for AI application observability
 
 # The Solution
 
-## MetaObserve
+## OmniObserve
 
 **Instrument once, observe anywhere**
 
@@ -114,8 +114,8 @@ All providers support core tracing and evaluation capabilities.
 # Architecture Overview
 
 ```
-metaobserve/
-├── metaobserve.go        # Main package, re-exports
+omniobserve/
+├── omniobserve.go        # Main package, re-exports
 ├── llmops/               # LLM observability
 │   ├── llmops.go         # Core interfaces
 │   ├── trace.go          # Trace/Span interfaces
@@ -123,7 +123,7 @@ metaobserve/
 │   ├── langfuse/         # Langfuse adapter
 │   └── phoenix/          # Phoenix adapter
 ├── integrations/         # LLM library integrations
-│   └── fluxllm/          # FluxLLM hook
+│   └── omnillm/          # OmniLLM hook
 ├── mlops/                # ML operations (future)
 └── sdk/                  # Provider SDKs
 ```
@@ -191,8 +191,8 @@ const (
 
 ```go
 import (
-    "github.com/grokify/metaobserve/llmops"
-    _ "github.com/grokify/metaobserve/llmops/opik"  // Register provider
+    "github.com/agentplexus/omniobserve/llmops"
+    _ "github.com/agentplexus/omniobserve/llmops/opik"  // Register provider
 )
 
 func main() {
@@ -329,15 +329,15 @@ rendered := prompt.Render(map[string]any{
 // Just change the import and provider name!
 
 // Opik
-import _ "github.com/grokify/metaobserve/llmops/opik"
+import _ "github.com/agentplexus/omniobserve/llmops/opik"
 provider, _ := llmops.Open("opik", llmops.WithAPIKey("..."))
 
 // Langfuse
-import _ "github.com/grokify/metaobserve/llmops/langfuse"
+import _ "github.com/agentplexus/omniobserve/llmops/langfuse"
 provider, _ := llmops.Open("langfuse", llmops.WithAPIKey("..."))
 
 // Phoenix
-import _ "github.com/grokify/metaobserve/llmops/phoenix"
+import _ "github.com/agentplexus/omniobserve/llmops/phoenix"
 provider, _ := llmops.Open("phoenix", llmops.WithEndpoint("..."))
 ```
 
@@ -345,22 +345,22 @@ provider, _ := llmops.Open("phoenix", llmops.WithEndpoint("..."))
 
 ---
 
-# FluxLLM Integration
+# OmniLLM Integration
 
-Automatically instrument LLM calls via FluxLLM:
+Automatically instrument LLM calls via OmniLLM:
 
 ```go
 import (
-    "github.com/grokify/fluxllm"
-    fluxllmhook "github.com/grokify/metaobserve/integrations/fluxllm"
+    "github.com/agentplexus/omnillm"
+    omnillmhook "github.com/agentplexus/omniobserve/integrations/omnillm"
 )
 
-// Create hook with any MetaObserve provider
-hook := fluxllmhook.NewHook(provider)
+// Create hook with any OmniObserve provider
+hook := omnillmhook.NewHook(provider)
 
-// Attach to FluxLLM client
-client := fluxllm.NewClient(
-    fluxllm.WithObservabilityHook(hook),
+// Attach to OmniLLM client
+client := omnillm.NewClient(
+    omnillm.WithObservabilityHook(hook),
 )
 // All LLM calls are now automatically traced!
 ```
@@ -440,7 +440,7 @@ if llmops.IsNotImplemented(err) {
 ## Current (v0.1.0)
 - LLM observability with 3 providers
 - Full tracing, evaluation, datasets
-- FluxLLM integration for automatic instrumentation
+- OmniLLM integration for automatic instrumentation
 
 ## Planned
 - MLOps interfaces (experiments, model registry)
@@ -455,28 +455,28 @@ if llmops.IsNotImplemented(err) {
 ## Install
 
 ```bash
-go get github.com/grokify/metaobserve
+go get github.com/agentplexus/omniobserve
 ```
 
 ## Import
 
 ```go
 import (
-    "github.com/grokify/metaobserve/llmops"
-    _ "github.com/grokify/metaobserve/llmops/opik"
+    "github.com/agentplexus/omniobserve/llmops"
+    _ "github.com/agentplexus/omniobserve/llmops/opik"
 )
 ```
 
 ## Documentation
 
-- GitHub: `github.com/grokify/metaobserve`
-- Go Docs: `pkg.go.dev/github.com/grokify/metaobserve`
+- GitHub: `github.com/agentplexus/omniobserve`
+- Go Docs: `pkg.go.dev/github.com/agentplexus/omniobserve`
 
 ---
 
 # Summary
 
-## MetaObserve provides:
+## OmniObserve provides:
 
 1. **Unified API** for LLM observability
 2. **Provider flexibility** without vendor lock-in
@@ -494,7 +494,7 @@ import (
 
 ## Questions?
 
-GitHub: `github.com/grokify/metaobserve`
+GitHub: `github.com/agentplexus/omniobserve`
 
 ```go
 provider, _ := llmops.Open("your-choice", ...)
