@@ -2,7 +2,7 @@
 //
 // Import this package to register the Phoenix provider:
 //
-//	import _ "github.com/grokify/metaobserve/llmops/phoenix"
+//	import _ "github.com/agentplexus/omniobserve/llmops/phoenix"
 //
 // Then open it:
 //
@@ -13,8 +13,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/grokify/metaobserve/llmops"
-	sdk "github.com/grokify/metaobserve/sdk/phoenix"
+	"github.com/agentplexus/omniobserve/llmops"
+	sdk "github.com/agentplexus/omniobserve/sdk/phoenix"
 )
 
 const ProviderName = "phoenix"

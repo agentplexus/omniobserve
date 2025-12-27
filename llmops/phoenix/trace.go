@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/grokify/metaobserve/llmops"
-	sdk "github.com/grokify/metaobserve/sdk/phoenix"
+	"github.com/agentplexus/omniobserve/llmops"
+	sdk "github.com/agentplexus/omniobserve/sdk/phoenix"
 )
 
 // traceAdapter adapts sdk.Trace to llmops.Trace.

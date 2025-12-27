@@ -1,9 +1,9 @@
-package metallm
+package omnillm
 
 import (
 	"context"
 
-	"github.com/grokify/metaobserve/llmops"
+	"github.com/agentplexus/omniobserve/llmops"
 )
 
 // contextKey is a private type used for storing spans in context.

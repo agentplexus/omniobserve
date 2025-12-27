@@ -1,13 +1,13 @@
-package metallm
+package omnillm
 
 import (
 	"io"
 	"strings"
 
-	"github.com/grokify/metallm"
-	"github.com/grokify/metallm/provider"
+	"github.com/agentplexus/omnillm"
+	"github.com/agentplexus/omnillm/provider"
 
-	"github.com/grokify/metaobserve/llmops"
+	"github.com/agentplexus/omniobserve/llmops"
 )
 
 // observedStream wraps a provider.ChatCompletionStream to capture
@@ -15,7 +15,7 @@ import (
 type observedStream struct {
 	stream        provider.ChatCompletionStream
 	span          llmops.Span
-	info          metallm.LLMCallInfo
+	info          omnillm.LLMCallInfo
 	contentBuffer strings.Builder
 	ended         bool
 }

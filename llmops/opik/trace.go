@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	opik "github.com/grokify/go-comet-ml-opik"
+	opik "github.com/agentplexus/go-comet-ml-opik"
 
-	"github.com/grokify/metaobserve/llmops"
+	"github.com/agentplexus/omniobserve/llmops"
 )
 
 // traceAdapter adapts opik.Trace to llmops.Trace.
