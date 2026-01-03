@@ -14,11 +14,11 @@
 //
 //	import (
 //		"github.com/agentplexus/omniobserve/llmops"
-//		_ "github.com/agentplexus/omniobserve/llmops/opik"    // Register Opik
+//		_ "github.com/agentplexus/go-opik/llmops"             // Register Opik
 //		// or
 //		_ "github.com/agentplexus/omniobserve/llmops/langfuse" // Register Langfuse
 //		// or
-//		_ "github.com/agentplexus/omniobserve/llmops/phoenix"  // Register Phoenix
+//		_ "github.com/agentplexus/go-phoenix/llmops"           // Register Phoenix
 //	)
 //
 // Then open a provider:
@@ -120,12 +120,9 @@
 //
 // For provider-specific features, you can use the underlying SDKs directly:
 //
+//	import "github.com/agentplexus/go-opik"    // Opik SDK
+//	import "github.com/agentplexus/go-phoenix" // Phoenix SDK
 //	import "github.com/agentplexus/omniobserve/sdk/langfuse"
-//	import "github.com/agentplexus/omniobserve/sdk/phoenix"
-//
-// Or use the existing Opik SDK:
-//
-//	import "github.com/agentplexus/go-comet-ml-opik"
 package omniobserve
 
 import (
