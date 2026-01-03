@@ -15,6 +15,7 @@ import (
 type observedStream struct {
 	stream        provider.ChatCompletionStream
 	span          llmops.Span
+	trace         llmops.Trace // trace we created (may be nil)
 	info          omnillm.LLMCallInfo
 	contentBuffer strings.Builder
 	ended         bool
@@ -51,22 +52,31 @@ func (s *observedStream) Close() error {
 	return s.stream.Close()
 }
 
-// finalizeSpan ends the span with the buffered content.
+// finalizeSpan ends the span and trace with the buffered content.
 func (s *observedStream) finalizeSpan(err error) {
 	if s.ended {
 		return
 	}
 	s.ended = true
 
+	output := s.contentBuffer.String()
+
+	// End span first
 	if err != nil {
 		_ = s.span.End(llmops.WithEndError(err))
-		return
+	} else {
+		// Set the buffered output
+		if len(output) > 0 {
+			_ = s.span.SetOutput(output)
+		}
+		_ = s.span.End()
 	}
 
-	// Set the buffered output
-	if s.contentBuffer.Len() > 0 {
-		_ = s.span.SetOutput(s.contentBuffer.String())
+	// End trace if we created one
+	if s.trace != nil {
+		if len(output) > 0 {
+			_ = s.trace.SetOutput(output)
+		}
+		_ = s.trace.End()
 	}
-
-	_ = s.span.End()
 }
