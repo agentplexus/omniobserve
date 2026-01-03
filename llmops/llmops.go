@@ -16,6 +16,7 @@ type Provider interface {
 	PromptManager
 	DatasetManager
 	ProjectManager
+	AnnotationManager
 	io.Closer
 
 	// Name returns the provider name (e.g., "opik", "langfuse", "phoenix")
@@ -52,7 +53,14 @@ type PromptManager interface {
 	// CreatePrompt creates a new prompt template.
 	CreatePrompt(ctx context.Context, name string, template string, opts ...PromptOption) (*Prompt, error)
 
-	// GetPrompt retrieves a prompt by name, optionally at a specific version.
+	// GetPrompt retrieves a prompt by name, optionally at a specific version or tag.
+	// The version parameter can be:
+	//   - Empty/omitted: returns the latest version
+	//   - A tag name (e.g., "production", "staging"): returns the version with that tag
+	//   - A version ID: returns that specific version (if provider supports)
+	//
+	// Tag-based versioning allows deployment patterns like:
+	//   prompt, _ := provider.GetPrompt(ctx, "my-prompt", "production")
 	GetPrompt(ctx context.Context, name string, version ...string) (*Prompt, error)
 
 	// ListPrompts lists available prompts.
@@ -67,11 +75,17 @@ type DatasetManager interface {
 	// GetDataset retrieves a dataset by name.
 	GetDataset(ctx context.Context, name string) (*Dataset, error)
 
+	// GetDatasetByID retrieves a dataset by ID.
+	GetDatasetByID(ctx context.Context, id string) (*Dataset, error)
+
 	// AddDatasetItems adds items to a dataset.
 	AddDatasetItems(ctx context.Context, datasetName string, items []DatasetItem) error
 
 	// ListDatasets lists available datasets.
 	ListDatasets(ctx context.Context, opts ...ListOption) ([]*Dataset, error)
+
+	// DeleteDataset deletes a dataset by ID.
+	DeleteDataset(ctx context.Context, datasetID string) error
 }
 
 // ProjectManager handles project and workspace management.
@@ -87,6 +101,23 @@ type ProjectManager interface {
 
 	// SetProject sets the current project for subsequent operations.
 	SetProject(ctx context.Context, name string) error
+}
+
+// AnnotationManager handles annotations on spans and traces.
+type AnnotationManager interface {
+	// CreateAnnotation creates an annotation on a span or trace.
+	// Either SpanID or TraceID must be set in the annotation.
+	CreateAnnotation(ctx context.Context, annotation Annotation) error
+
+	// ListAnnotations lists annotations for spans or traces.
+	// Provide either spanIDs or traceIDs (not both).
+	ListAnnotations(ctx context.Context, opts ListAnnotationsOptions) ([]*Annotation, error)
+}
+
+// ListAnnotationsOptions configures annotation listing.
+type ListAnnotationsOptions struct {
+	SpanIDs  []string // List annotations for these span IDs
+	TraceIDs []string // List annotations for these trace IDs
 }
 
 // CapabilityChecker allows querying provider capabilities.
@@ -107,6 +138,7 @@ const (
 	CapabilityPrompts      Capability = "prompts"
 	CapabilityDatasets     Capability = "datasets"
 	CapabilityExperiments  Capability = "experiments"
+	CapabilityAnnotations  Capability = "annotations"
 	CapabilityStreaming    Capability = "streaming"
 	CapabilityDistributed  Capability = "distributed_tracing"
 	CapabilityCostTracking Capability = "cost_tracking"

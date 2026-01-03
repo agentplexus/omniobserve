@@ -322,3 +322,23 @@ func (p *Provider) ListProjects(ctx context.Context, opts ...llmops.ListOption) 
 func (p *Provider) SetProject(ctx context.Context, name string) error {
 	return llmops.WrapNotImplemented(ProviderName, "SetProject")
 }
+
+// GetDatasetByID is not supported in Langfuse.
+func (p *Provider) GetDatasetByID(ctx context.Context, id string) (*llmops.Dataset, error) {
+	return nil, llmops.WrapNotImplemented(ProviderName, "GetDatasetByID")
+}
+
+// DeleteDataset is not supported in Langfuse.
+func (p *Provider) DeleteDataset(ctx context.Context, datasetID string) error {
+	return llmops.WrapNotImplemented(ProviderName, "DeleteDataset")
+}
+
+// CreateAnnotation is not directly supported in Langfuse.
+func (p *Provider) CreateAnnotation(ctx context.Context, annotation llmops.Annotation) error {
+	return llmops.WrapNotImplemented(ProviderName, "CreateAnnotation")
+}
+
+// ListAnnotations is not supported in Langfuse.
+func (p *Provider) ListAnnotations(ctx context.Context, opts llmops.ListAnnotationsOptions) ([]*llmops.Annotation, error) {
+	return nil, llmops.WrapNotImplemented(ProviderName, "ListAnnotations")
+}

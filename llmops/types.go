@@ -53,15 +53,17 @@ type FeedbackScoreOpts struct {
 
 // Prompt represents a prompt template.
 type Prompt struct {
-	ID          string         `json:"id"`
-	Name        string         `json:"name"`
-	Template    string         `json:"template"`
-	Description string         `json:"description,omitempty"`
-	Version     string         `json:"version,omitempty"`
-	Tags        []string       `json:"tags,omitempty"`
-	Metadata    map[string]any `json:"metadata,omitempty"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
+	ID            string         `json:"id"`
+	Name          string         `json:"name"`
+	Template      string         `json:"template"`
+	Description   string         `json:"description,omitempty"`
+	Version       string         `json:"version,omitempty"`
+	Tags          []string       `json:"tags,omitempty"`
+	Metadata      map[string]any `json:"metadata,omitempty"`
+	ModelName     string         `json:"model_name,omitempty"`     // LLM model name
+	ModelProvider string         `json:"model_provider,omitempty"` // LLM provider
+	CreatedAt     time.Time      `json:"created_at"`
+	UpdatedAt     time.Time      `json:"updated_at"`
 }
 
 // Render renders the prompt template with the given variables.
@@ -160,6 +162,30 @@ type Project struct {
 	CreatedAt   time.Time      `json:"created_at"`
 	UpdatedAt   time.Time      `json:"updated_at"`
 }
+
+// Annotation represents an annotation on a span or trace.
+type Annotation struct {
+	ID          string         `json:"id,omitempty"`
+	SpanID      string         `json:"span_id,omitempty"`  // Set for span annotations
+	TraceID     string         `json:"trace_id,omitempty"` // Set for trace annotations
+	Name        string         `json:"name"`               // Annotation name/type
+	Score       float64        `json:"score,omitempty"`    // Numeric score (0-1)
+	Label       string         `json:"label,omitempty"`    // Categorical label
+	Explanation string         `json:"explanation,omitempty"`
+	Source      AnnotatorKind  `json:"source,omitempty"` // Who created: human, llm, code
+	Metadata    map[string]any `json:"metadata,omitempty"`
+	CreatedAt   time.Time      `json:"created_at,omitempty"`
+	UpdatedAt   time.Time      `json:"updated_at,omitempty"`
+}
+
+// AnnotatorKind indicates who created the annotation.
+type AnnotatorKind string
+
+const (
+	AnnotatorKindHuman AnnotatorKind = "human"
+	AnnotatorKindLLM   AnnotatorKind = "llm"
+	AnnotatorKindCode  AnnotatorKind = "code"
+)
 
 // StreamChunk represents a chunk from streaming LLM output.
 type StreamChunk struct {

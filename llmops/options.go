@@ -262,9 +262,11 @@ type PromptOption func(*PromptOptions)
 
 // PromptOptions holds prompt configuration.
 type PromptOptions struct {
-	Description string
-	Tags        []string
-	Metadata    map[string]any
+	Description   string
+	Tags          []string
+	Metadata      map[string]any
+	ModelName     string // LLM model name (e.g., "gpt-4", "claude-3")
+	ModelProvider string // LLM provider (e.g., "openai", "anthropic")
 }
 
 // WithPromptDescription sets the prompt description.
@@ -278,6 +280,20 @@ func WithPromptDescription(desc string) PromptOption {
 func WithPromptTags(tags ...string) PromptOption {
 	return func(o *PromptOptions) {
 		o.Tags = tags
+	}
+}
+
+// WithPromptModel sets the LLM model for the prompt.
+func WithPromptModel(model string) PromptOption {
+	return func(o *PromptOptions) {
+		o.ModelName = model
+	}
+}
+
+// WithPromptProvider sets the LLM provider for the prompt.
+func WithPromptProvider(provider string) PromptOption {
+	return func(o *PromptOptions) {
+		o.ModelProvider = provider
 	}
 }
 
