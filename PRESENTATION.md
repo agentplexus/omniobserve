@@ -119,13 +119,14 @@ omniobserve/
 ├── llmops/               # LLM observability
 │   ├── llmops.go         # Core interfaces
 │   ├── trace.go          # Trace/Span interfaces
-│   ├── opik/             # Opik adapter
-│   ├── langfuse/         # Langfuse adapter
-│   └── phoenix/          # Phoenix adapter
+│   └── langfuse/         # Langfuse adapter
 ├── integrations/         # LLM library integrations
 │   └── omnillm/          # OmniLLM hook
 ├── mlops/                # ML operations (future)
 └── sdk/                  # Provider SDKs
+
+# Provider adapters in standalone SDKs:
+# go-opik/llmops, go-phoenix/llmops
 ```
 
 ---
@@ -134,11 +135,12 @@ omniobserve/
 
 ```go
 type Provider interface {
-    Tracer           // Trace/span operations
-    Evaluator        // Evaluation and feedback
-    PromptManager    // Prompt template management
-    DatasetManager   // Test dataset management
-    ProjectManager   // Project/workspace management
+    Tracer            // Trace/span operations
+    Evaluator         // Evaluation and feedback
+    PromptManager     // Prompt template management
+    DatasetManager    // Test dataset management
+    ProjectManager    // Project/workspace management
+    AnnotationManager // Span/trace annotations
     io.Closer
 
     Name() string
@@ -192,7 +194,7 @@ const (
 ```go
 import (
     "github.com/agentplexus/omniobserve/llmops"
-    _ "github.com/agentplexus/omniobserve/llmops/opik"  // Register provider
+    _ "github.com/agentplexus/go-opik/llmops"  // Register provider
 )
 
 func main() {
@@ -329,7 +331,7 @@ rendered := prompt.Render(map[string]any{
 // Just change the import and provider name!
 
 // Opik
-import _ "github.com/agentplexus/omniobserve/llmops/opik"
+import _ "github.com/agentplexus/go-opik/llmops"
 provider, _ := llmops.Open("opik", llmops.WithAPIKey("..."))
 
 // Langfuse
@@ -337,7 +339,7 @@ import _ "github.com/agentplexus/omniobserve/llmops/langfuse"
 provider, _ := llmops.Open("langfuse", llmops.WithAPIKey("..."))
 
 // Phoenix
-import _ "github.com/agentplexus/omniobserve/llmops/phoenix"
+import _ "github.com/agentplexus/go-phoenix/llmops"
 provider, _ := llmops.Open("phoenix", llmops.WithEndpoint("..."))
 ```
 
@@ -456,6 +458,7 @@ if llmops.IsNotImplemented(err) {
 
 ```bash
 go get github.com/agentplexus/omniobserve
+go get github.com/agentplexus/go-opik  # For Opik provider
 ```
 
 ## Import
@@ -463,7 +466,7 @@ go get github.com/agentplexus/omniobserve
 ```go
 import (
     "github.com/agentplexus/omniobserve/llmops"
-    _ "github.com/agentplexus/omniobserve/llmops/opik"
+    _ "github.com/agentplexus/go-opik/llmops"
 )
 ```
 

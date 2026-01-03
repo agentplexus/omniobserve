@@ -35,7 +35,7 @@ import (
     "log"
 
     "github.com/agentplexus/omniobserve/llmops"
-    _ "github.com/agentplexus/omniobserve/llmops/opik"  // Register Opik provider
+    _ "github.com/agentplexus/go-opik/llmops"  // Register Opik provider
 )
 
 func main() {
@@ -97,9 +97,9 @@ func main() {
 
 | Provider | Package | Description |
 |----------|---------|-------------|
-| **Opik** | `llmops/opik` | Comet Opik - Open-source, full-featured |
-| **Langfuse** | `llmops/langfuse` | Cloud & self-hosted, batch ingestion |
-| **Phoenix** | `llmops/phoenix` | Arize Phoenix - OpenTelemetry-based |
+| **Opik** | `go-opik/llmops` | Comet Opik - Open-source, full-featured |
+| **Langfuse** | `omniobserve/llmops/langfuse` | Cloud & self-hosted, batch ingestion |
+| **Phoenix** | `go-phoenix/llmops` | Arize Phoenix - OpenTelemetry-based |
 
 ### Provider Capabilities
 
@@ -127,15 +127,19 @@ omniobserve/
 │   ├── options.go       # Functional options
 │   ├── provider.go      # Provider registration system
 │   ├── errors.go        # Error definitions
-│   ├── opik/            # Opik provider adapter
-│   ├── langfuse/        # Langfuse provider adapter
-│   └── phoenix/         # Phoenix provider adapter
+│   ├── metrics/         # Evaluation metrics (hallucination, relevance, etc.)
+│   └── langfuse/        # Langfuse provider adapter
 ├── integrations/        # Integrations with LLM libraries
 │   └── omnillm/         # OmniLLM observability hook (separate module)
+├── examples/            # Usage examples
+│   └── evaluation/      # Metrics evaluation example
 ├── mlops/               # ML operations interfaces (experiments, model registry)
 └── sdk/                 # Provider-specific SDKs
-    ├── langfuse/        # Langfuse Go SDK
-    └── phoenix/         # Phoenix Go SDK
+    └── langfuse/        # Langfuse Go SDK
+
+# Provider adapters in standalone SDKs:
+# github.com/agentplexus/go-opik/llmops      # Opik provider
+# github.com/agentplexus/go-phoenix/llmops   # Phoenix provider
 ```
 
 ## Core Interfaces
@@ -146,11 +150,12 @@ The main interface that all observability backends implement:
 
 ```go
 type Provider interface {
-    Tracer           // Trace/span operations
-    Evaluator        // Evaluation and feedback
-    PromptManager    // Prompt template management
-    DatasetManager   // Test dataset management
-    ProjectManager   // Project/workspace management
+    Tracer            // Trace/span operations
+    Evaluator         // Evaluation and feedback
+    PromptManager     // Prompt template management
+    DatasetManager    // Test dataset management
+    ProjectManager    // Project/workspace management
+    AnnotationManager // Span/trace annotations
     io.Closer
 
     Name() string
@@ -207,7 +212,7 @@ const (
 
 ```go
 // Opik
-import _ "github.com/agentplexus/omniobserve/llmops/opik"
+import _ "github.com/agentplexus/go-opik/llmops"
 provider, _ := llmops.Open("opik", llmops.WithAPIKey("..."))
 
 // Langfuse
@@ -218,7 +223,7 @@ provider, _ := llmops.Open("langfuse",
 )
 
 // Phoenix
-import _ "github.com/agentplexus/omniobserve/llmops/phoenix"
+import _ "github.com/agentplexus/go-phoenix/llmops"
 provider, _ := llmops.Open("phoenix",
     llmops.WithEndpoint("http://localhost:6006"),
 )
@@ -360,8 +365,9 @@ if llmops.IsRateLimited(err) {
 For provider-specific features, you can use the underlying SDKs directly:
 
 ```go
-import "github.com/agentplexus/omniobserve/sdk/langfuse"
-import "github.com/agentplexus/omniobserve/sdk/phoenix"
+import "github.com/agentplexus/omniobserve/sdk/langfuse"  // Langfuse SDK
+import "github.com/agentplexus/go-opik"                   // Opik SDK
+import "github.com/agentplexus/go-phoenix"                // Phoenix SDK
 ```
 
 ## OmniLLM Integration
@@ -379,7 +385,7 @@ import (
     "github.com/agentplexus/omnillm"
     omnillmhook "github.com/agentplexus/omniobserve/integrations/omnillm"
     "github.com/agentplexus/omniobserve/llmops"
-    _ "github.com/agentplexus/omniobserve/llmops/opik"
+    _ "github.com/agentplexus/go-opik/llmops"
 )
 
 func main() {
@@ -403,11 +409,14 @@ func main() {
 ```
 
 The hook automatically captures:
+
 - Model and provider information
 - Input messages and output responses
 - Token usage (prompt, completion, total)
 - Streaming responses
 - Errors
+
+The hook also automatically creates traces when none exists in context, ensuring all LLM calls are properly traced.
 
 ## Requirements
 
