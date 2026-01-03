@@ -24,7 +24,8 @@ import (
 )
 
 func main() {
-	fmt.Println("=== Code-Based Metrics (no LLM required) ===\n")
+	fmt.Println("=== Code-Based Metrics (no LLM required) ===")
+	fmt.Println()
 
 	// Exact Match Metric
 	exactMatch := metrics.NewExactMatchMetric()
@@ -93,7 +94,9 @@ func main() {
 		return
 	}
 
-	fmt.Println("\n=== LLM-Based Metrics ===\n")
+	fmt.Println()
+	fmt.Println("=== LLM-Based Metrics ===")
+	fmt.Println()
 
 	// Create LLM client for metrics
 	llmClient, err := omnillm.NewClient(omnillm.ClientConfig{
