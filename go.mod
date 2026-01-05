@@ -4,7 +4,7 @@ go 1.24.11
 
 require (
 	entgo.io/ent v0.14.5
-	github.com/agentplexus/omnillm v0.9.0
+	github.com/agentplexus/omnillm v0.10.0
 	github.com/google/uuid v1.6.0
 	github.com/lib/pq v1.10.9
 	go.opentelemetry.io/otel v1.39.0
