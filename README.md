@@ -23,7 +23,7 @@
  [loc-svg]: https://tokei.rs/b1/github/plexusone/omniobserve
  [repo-url]: https://github.com/plexusone/omniobserve
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/plexusone/omniobserve/blob/master/LICENSE
+ [license-url]: https://github.com/plexusone/omniobserve/blob/main/LICENSE
 
 A unified Go library for observability. OmniObserve provides vendor-agnostic abstraction layers that enable you to instrument your applications once and seamlessly switch between different observability backends without code changes.
 
