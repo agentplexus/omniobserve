@@ -7,6 +7,33 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.9.0",
+      "date": "2026-05-04",
+      "highlights": [
+        { "description": "TypeScript SDK with core types and semantic conventions for cross-language observability" },
+        { "description": "User journey semantic conventions for product analytics and UX observability" }
+      ],
+      "added": [
+        { "description": "`typescript/` package with `@omniobserve/core` TypeScript SDK mirroring Go types", "commit": "9e5aa46" },
+        { "description": "`semconv/journey/` package with OpenTelemetry semantic conventions for user journeys", "commit": "a12c942" },
+        { "description": "PlexusOne unified navigation and MkDocs theme", "commit": "16cfd3b" }
+      ],
+      "documentation": [
+        { "description": "README.md shields updated", "commit": "2c8b272" },
+        { "description": "MkDocs index.md cleanup", "commit": "0ca5e0c" }
+      ],
+      "build": [
+        { "description": "Update copyright years in LICENSE", "commit": "fd45ba5" }
+      ],
+      "dependencies": [
+        { "description": "Upgraded `github.com/plexusone/omnillm` to v0.15.3", "commit": "c648884" },
+        { "description": "Upgraded `github.com/grokify/mogo` to v0.74.4", "commit": "a21c9f8" },
+        { "description": "Upgraded OpenTelemetry exporters to v1.43.0", "commit": "4c0ab88" },
+        { "description": "Upgraded `entgo.io/ent` to v0.14.6", "commit": "2854651" },
+        { "description": "Upgraded `github.com/lib/pq` to v1.12.3", "commit": "fc6548e" }
+      ]
+    },
+    {
       "version": "v0.8.0",
       "date": "2026-03-14",
       "highlights": [
