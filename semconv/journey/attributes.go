@@ -620,10 +620,10 @@ const (
 // =============================================================================
 
 const (
-	SnapshotTypeScreenshot  = "screenshot"
-	SnapshotTypeDOM         = "dom"
-	SnapshotTypeState       = "state"
-	SnapshotTypeVideoFrame  = "video_frame"
+	SnapshotTypeScreenshot = "screenshot"
+	SnapshotTypeDOM        = "dom"
+	SnapshotTypeState      = "state"
+	SnapshotTypeVideoFrame = "video_frame"
 )
 
 // =============================================================================
