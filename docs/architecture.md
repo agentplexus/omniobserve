@@ -7,6 +7,7 @@ OmniObserve follows a modular architecture with clear separation between interfa
 ```
 omniobserve/
 ├── omniobserve.go       # Main package with re-exports
+├── omniobserve/         # Unified entry point with HTTP middleware
 ├── llmops/              # LLM observability interfaces
 │   ├── llmops.go        # Core interfaces (Provider, Tracer, Evaluator, etc.)
 │   ├── trace.go         # Trace and Span interfaces
@@ -17,17 +18,44 @@ omniobserve/
 │   ├── metrics/         # Evaluation metrics (hallucination, relevance, etc.)
 │   ├── langfuse/        # Langfuse provider adapter
 │   └── slog/            # slog provider adapter
-├── integrations/        # Integrations with LLM libraries
+├── observops/           # App observability interfaces
+│   ├── observops.go     # Core interfaces (Provider, Meter, Tracer)
+│   ├── options.go       # Functional options
+│   ├── otlp/            # OTLP provider (vendor-agnostic)
+│   ├── datadog/         # Datadog provider
+│   ├── newrelic/        # New Relic provider
+│   └── dynatrace/       # Dynatrace provider
+├── agentops/            # Agent operations monitoring
+│   ├── ent/             # Ent ORM schemas
+│   ├── middleware/      # HTTP middleware
+│   └── postgres/        # PostgreSQL storage
+├── semconv/             # OpenTelemetry semantic conventions
+│   ├── agent/           # Agentic AI conventions (gen_ai.agent.*)
+│   └── journey/         # User journey conventions (session.*, page.*, ui.*)
+├── specs/               # Observability specifications
+│   ├── classes/         # Class-based SLO management
+│   ├── red/             # RED metrics (Rate, Errors, Duration)
+│   ├── use/             # USE metrics (Utilization, Saturation, Errors)
+│   ├── golden/          # 4 Golden Signals mapping
+│   ├── openslo/         # OpenSLO SLI/SLO definitions
+│   ├── otel/            # OTel semantic conventions
+│   ├── recorder/        # Integration with observops.Provider
+│   └── schema/          # JSON Schema generation
+├── sloghandler/         # slog.Handler implementations
+│   ├── dual.go          # Local + remote handler
+│   ├── fanout.go        # Multi-handler fanout
+│   └── trace.go         # Trace context injection
+├── integrations/        # Integrations with external libraries
 │   ├── omnillm/         # OmniLLM observability hook
-│   └── sevaluation/     # Structured evaluation integration
+│   ├── sevaluation/     # Structured evaluation integration
+│   └── observability/   # HTTP client/server middleware helpers
+├── mlops/               # ML operations interfaces (experiments, model registry)
 ├── examples/            # Usage examples
 │   └── evaluation/      # Metrics evaluation example
-├── mlops/               # ML operations interfaces (experiments, model registry)
-├── agentops/            # Agent operations monitoring
-├── observops/           # Unified observability operations
-├── semconv/             # Semantic conventions for agentic AI
-└── sdk/                 # Provider-specific SDKs
-    └── langfuse/        # Langfuse Go SDK
+├── sdk/                 # Provider-specific SDKs
+│   └── langfuse/        # Langfuse Go SDK
+└── typescript/          # TypeScript SDK
+    └── packages/core/   # @omniobserve/core - mirrors Go types and semconv
 ```
 
 ## Provider Adapters

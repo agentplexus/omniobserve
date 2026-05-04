@@ -52,8 +52,15 @@ A unified Go library for observability. OmniObserve provides vendor-agnostic abs
 - 📝 **slog Integration**: Trace-correlated logging with automatic context injection
 - ⚡ **Minimal Overhead**: No-op mode for disabled observability
 
-### Common
+### Semantic Conventions
 
+- 🏷️ **Agent Conventions**: OpenTelemetry semantic conventions for agentic AI (`gen_ai.agent.*`)
+- 🛤️ **Journey Conventions**: User journey tracking for product analytics (`session.*`, `page.*`, `ui.*`)
+- 📐 **Observability Specs**: RED/USE metrics, class-based SLOs, and OpenSLO integration
+
+### Cross-Language Support
+
+- 🟦 **TypeScript SDK**: `@omniobserve/core` package mirrors Go types and semantic conventions
 - 🔀 **Context Propagation**: Automatic trace/span context propagation via `context.Context`
 - ⚙️ **Functional Options**: Clean, extensible configuration using the options pattern
 
@@ -204,6 +211,7 @@ func main() {
 ```
 omniobserve/
 ├── omniobserve.go       # Main package with re-exports
+├── omniobserve/         # Unified entry point with HTTP middleware
 ├── llmops/              # LLM observability interfaces
 │   ├── llmops.go        # Core interfaces (Provider, Tracer, Evaluator, etc.)
 │   ├── trace.go         # Trace and Span interfaces
@@ -212,7 +220,8 @@ omniobserve/
 │   ├── provider.go      # Provider registration system
 │   ├── errors.go        # Error definitions
 │   ├── metrics/         # Evaluation metrics (hallucination, relevance, etc.)
-│   └── langfuse/        # Langfuse provider adapter
+│   ├── langfuse/        # Langfuse provider adapter
+│   └── slog/            # slog provider adapter for local development
 ├── observops/           # App observability interfaces
 │   ├── observops.go     # Core interfaces (Provider, Meter, Tracer)
 │   ├── options.go       # Functional options
@@ -220,17 +229,37 @@ omniobserve/
 │   ├── datadog/         # Datadog provider
 │   ├── newrelic/        # New Relic provider
 │   └── dynatrace/       # Dynatrace provider
+├── agentops/            # Agent operations monitoring
+│   ├── ent/             # Ent ORM schemas
+│   ├── middleware/      # HTTP middleware
+│   └── postgres/        # PostgreSQL storage
+├── semconv/             # OpenTelemetry semantic conventions
+│   ├── agent/           # Agentic AI conventions (gen_ai.agent.*)
+│   └── journey/         # User journey conventions (session.*, page.*, ui.*)
+├── specs/               # Observability specifications
+│   ├── classes/         # Class-based SLO management
+│   ├── red/             # RED metrics (Rate, Errors, Duration)
+│   ├── use/             # USE metrics (Utilization, Saturation, Errors)
+│   ├── golden/          # 4 Golden Signals mapping
+│   ├── openslo/         # OpenSLO SLI/SLO definitions
+│   ├── otel/            # OTel semantic conventions
+│   ├── recorder/        # Integration with observops.Provider
+│   └── schema/          # JSON Schema generation
 ├── sloghandler/         # slog.Handler implementations
 │   ├── dual.go          # Local + remote handler
 │   ├── fanout.go        # Multi-handler fanout
 │   └── trace.go         # Trace context injection
-├── integrations/        # Integrations with LLM libraries
-│   └── omnillm/         # OmniLLM observability hook (separate module)
+├── integrations/        # Integrations with external libraries
+│   ├── omnillm/         # OmniLLM observability hook (separate module)
+│   ├── sevaluation/     # Structured evaluation integration
+│   └── observability/   # HTTP client/server middleware helpers
 ├── examples/            # Usage examples
 │   └── evaluation/      # Metrics evaluation example
 ├── mlops/               # ML operations interfaces (experiments, model registry)
-└── sdk/                 # Provider-specific SDKs
-    └── langfuse/        # Langfuse Go SDK
+├── sdk/                 # Provider-specific SDKs
+│   └── langfuse/        # Langfuse Go SDK
+└── typescript/          # TypeScript SDK
+    └── packages/core/   # @omniobserve/core - mirrors Go types and semconv
 
 # LLM provider adapters in standalone SDKs:
 # github.com/agentplexus/go-opik/llmops      # Opik provider
