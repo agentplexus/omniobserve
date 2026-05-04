@@ -1,0 +1,65 @@
+{
+  "name": "@omniobserve/core",
+  "version": "0.1.0",
+  "description": "TypeScript interfaces for OmniObserve observability - mirrors Go implementation",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./semconv/agent": {
+      "types": "./dist/semconv/agent.d.ts",
+      "import": "./dist/semconv/agent.js"
+    },
+    "./semconv/journey": {
+      "types": "./dist/semconv/journey.d.ts",
+      "import": "./dist/semconv/journey.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "observability",
+    "telemetry",
+    "opentelemetry",
+    "otel",
+    "llmops",
+    "agentops",
+    "productgraph"
+  ],
+  "author": "Plexus One",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plexusone/omniobserve.git",
+    "directory": "typescript/packages/core"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@opentelemetry/api": "^1.9.0"
+  },
+  "peerDependenciesMeta": {
+    "@opentelemetry/api": {
+      "optional": true
+    }
+  }
+}
