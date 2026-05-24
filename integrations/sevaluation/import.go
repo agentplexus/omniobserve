@@ -15,10 +15,6 @@ type ImportOptions struct {
 	// Default: ""
 	Document string
 
-	// DefaultWeight sets the weight for imported categories.
-	// Default: 1.0
-	DefaultWeight float64
-
 	// PassCriteria sets the criteria for the report.
 	// Default: evaluation.DefaultPassCriteria()
 	PassCriteria evaluation.PassCriteria
@@ -27,15 +23,14 @@ type ImportOptions struct {
 // DefaultImportOptions returns the default import configuration.
 func DefaultImportOptions() ImportOptions {
 	return ImportOptions{
-		ReviewType:    "llm_evaluation",
-		Document:      "",
-		DefaultWeight: 1.0,
-		PassCriteria:  evaluation.DefaultPassCriteria(),
+		ReviewType:   "llm_evaluation",
+		Document:     "",
+		PassCriteria: evaluation.DefaultPassCriteria(),
 	}
 }
 
 // ImportEvalResult converts an llmops EvalResult into an EvaluationReport.
-// Each MetricScore becomes a CategoryScore in the report.
+// Each MetricScore becomes a CategoryResult in the report.
 func ImportEvalResult(result *llmops.EvalResult, opts ...ImportOptions) *evaluation.EvaluationReport {
 	opt := DefaultImportOptions()
 	if len(opts) > 0 {
@@ -46,15 +41,14 @@ func ImportEvalResult(result *llmops.EvalResult, opts ...ImportOptions) *evaluat
 	report.PassCriteria = opt.PassCriteria
 
 	for _, score := range result.Scores {
-		cat := evaluation.CategoryScore{
-			Category:      score.Name,
-			Weight:        opt.DefaultWeight,
-			Score:         denormalizeScore(score.Score),
-			MaxScore:      10.0,
-			Justification: score.Reason,
+		numericScore := denormalizeScore(score.Score)
+		cat := evaluation.CategoryResult{
+			Category:     score.Name,
+			Score:        numericScoreToScoreValue(numericScore),
+			NumericScore: &numericScore,
+			Reasoning:    score.Reason,
 		}
-		cat.ComputeStatus()
-		report.AddCategory(cat)
+		report.AddCategoryResult(cat)
 
 		// If score has an error, add it as a finding
 		if score.Error != "" {
@@ -77,17 +71,27 @@ func ImportMetricScores(scores []llmops.MetricScore, opts ...ImportOptions) *eva
 	return ImportEvalResult(result, opts...)
 }
 
-// MetricScoreToCategory converts a single MetricScore to a CategoryScore.
-func MetricScoreToCategory(score llmops.MetricScore, weight float64) evaluation.CategoryScore {
-	cat := evaluation.CategoryScore{
-		Category:      score.Name,
-		Weight:        weight,
-		Score:         denormalizeScore(score.Score),
-		MaxScore:      10.0,
-		Justification: score.Reason,
+// MetricScoreToCategory converts a single MetricScore to a CategoryResult.
+func MetricScoreToCategory(score llmops.MetricScore) evaluation.CategoryResult {
+	numericScore := denormalizeScore(score.Score)
+	return evaluation.CategoryResult{
+		Category:     score.Name,
+		Score:        numericScoreToScoreValue(numericScore),
+		NumericScore: &numericScore,
+		Reasoning:    score.Reason,
 	}
-	cat.ComputeStatus()
-	return cat
+}
+
+// numericScoreToScoreValue converts a numeric score (0-10) to a categorical ScoreValue.
+// Score >= 7.0 -> pass, 5.0-7.0 -> partial, < 5.0 -> fail
+func numericScoreToScoreValue(score float64) evaluation.ScoreValue {
+	if score >= 7.0 {
+		return evaluation.ScorePass
+	}
+	if score >= 5.0 {
+		return evaluation.ScorePartial
+	}
+	return evaluation.ScoreFail
 }
 
 // denormalizeScore converts a 0-1 score to 0-10 range.

@@ -71,13 +71,21 @@ func exportReport(ctx context.Context, provider llmops.Provider, target exportTa
 	// Export category scores as feedback scores
 	if opt.IncludeCategories {
 		for _, cat := range report.Categories {
+			// Use NumericScore if available, otherwise convert categorical score
+			var numericValue float64
+			if cat.NumericScore != nil {
+				numericValue = *cat.NumericScore
+			} else {
+				numericValue = scoreValueToNumeric(cat.Score)
+			}
+
 			scoreOpts := llmops.FeedbackScoreOpts{
 				TraceID:  target.traceID,
 				SpanID:   target.spanID,
 				Name:     opt.ScorePrefix + cat.Category,
-				Score:    NormalizeScore(cat.Score),
+				Score:    NormalizeScore(numericValue),
 				Category: report.ReviewType,
-				Reason:   cat.Justification,
+				Reason:   cat.Reasoning,
 				Source:   opt.Source,
 			}
 			if err := provider.AddFeedbackScore(ctx, scoreOpts); err != nil {
@@ -113,11 +121,14 @@ func exportReport(ctx context.Context, provider llmops.Provider, target exportTa
 
 	// Export overall evaluation score and decision
 	if opt.IncludeOverall {
+		// Compute overall score from categories
+		overallScore := computeOverallScore(report)
+
 		scoreOpts := llmops.FeedbackScoreOpts{
 			TraceID:  target.traceID,
 			SpanID:   target.spanID,
 			Name:     opt.ScorePrefix + "overall_score",
-			Score:    NormalizeScore(report.WeightedScore),
+			Score:    NormalizeScore(overallScore),
 			Category: "evaluation",
 			Reason:   report.Summary,
 			Source:   opt.Source,
@@ -136,7 +147,7 @@ func exportReport(ctx context.Context, provider llmops.Provider, target exportTa
 			Source:      llmops.AnnotatorKindLLM,
 			Metadata: map[string]any{
 				"status":         string(report.Decision.Status),
-				"weighted_score": report.WeightedScore,
+				"passed":         report.Decision.Passed,
 				"critical_count": report.Decision.FindingCounts.Critical,
 				"high_count":     report.Decision.FindingCounts.High,
 				"medium_count":   report.Decision.FindingCounts.Medium,
@@ -174,4 +185,35 @@ func formatFinding(f evaluation.Finding) string {
 		f.Title,
 		f.Recommendation,
 	)
+}
+
+// scoreValueToNumeric converts a categorical ScoreValue to a numeric score (0-10).
+// pass -> 10.0, partial -> 5.0, fail -> 0.0
+func scoreValueToNumeric(score evaluation.ScoreValue) float64 {
+	switch score {
+	case evaluation.ScorePass:
+		return 10.0
+	case evaluation.ScorePartial:
+		return 5.0
+	default:
+		return 0.0
+	}
+}
+
+// computeOverallScore computes an overall numeric score from category results.
+// Returns the average of all category numeric scores.
+func computeOverallScore(report *evaluation.EvaluationReport) float64 {
+	if len(report.Categories) == 0 {
+		return 0.0
+	}
+
+	var total float64
+	for _, cat := range report.Categories {
+		if cat.NumericScore != nil {
+			total += *cat.NumericScore
+		} else {
+			total += scoreValueToNumeric(cat.Score)
+		}
+	}
+	return total / float64(len(report.Categories))
 }

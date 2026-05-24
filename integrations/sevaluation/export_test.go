@@ -99,9 +99,17 @@ func TestImportEvalResult(t *testing.T) {
 		t.Errorf("Expected category 'relevance', got %s", report.Categories[0].Category)
 	}
 
-	// 0.8 normalized -> 8.0 denormalized
-	if report.Categories[0].Score != 8.0 {
-		t.Errorf("Expected score 8.0, got %f", report.Categories[0].Score)
+	// 0.8 normalized -> 8.0 denormalized, stored in NumericScore
+	if report.Categories[0].NumericScore == nil {
+		t.Fatal("Expected NumericScore to be set")
+	}
+	if *report.Categories[0].NumericScore != 8.0 {
+		t.Errorf("Expected NumericScore 8.0, got %f", *report.Categories[0].NumericScore)
+	}
+
+	// Categorical score should be pass (>= 7.0)
+	if report.Categories[0].Score != evaluation.ScorePass {
+		t.Errorf("Expected Score pass, got %s", report.Categories[0].Score)
 	}
 }
 
@@ -130,19 +138,21 @@ func TestMetricScoreToCategory(t *testing.T) {
 		Reason: "Good accuracy",
 	}
 
-	cat := MetricScoreToCategory(score, 0.5)
+	cat := MetricScoreToCategory(score)
 
 	if cat.Category != "accuracy" {
 		t.Errorf("Expected category 'accuracy', got %s", cat.Category)
 	}
-	if cat.Weight != 0.5 {
-		t.Errorf("Expected weight 0.5, got %f", cat.Weight)
+	// 0.75 normalized -> 7.5 denormalized
+	if cat.NumericScore == nil {
+		t.Fatal("Expected NumericScore to be set")
 	}
-	if cat.Score != 7.5 {
-		t.Errorf("Expected score 7.5, got %f", cat.Score)
+	if *cat.NumericScore != 7.5 {
+		t.Errorf("Expected NumericScore 7.5, got %f", *cat.NumericScore)
 	}
-	if cat.Status != evaluation.ScoreStatusPass {
-		t.Errorf("Expected status pass, got %s", cat.Status)
+	// 7.5 >= 7.0 -> pass
+	if cat.Score != evaluation.ScorePass {
+		t.Errorf("Expected Score pass, got %s", cat.Score)
 	}
 }
 
