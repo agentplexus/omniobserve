@@ -4,14 +4,14 @@ go 1.26.0
 
 require (
 	entgo.io/ent v0.14.6
-	github.com/OpenSLO/go-sdk v0.9.1
+	github.com/OpenSLO/go-sdk v0.9.2
 	github.com/google/uuid v1.6.0
 	github.com/grokify/mogo v0.74.5
 	github.com/grokify/slogo v0.3.0
 	github.com/invopop/jsonschema v0.13.0
 	github.com/lib/pq v1.12.3
 	github.com/plexusone/omnillm v0.15.3
-	github.com/plexusone/structured-evaluation v0.3.0
+	github.com/plexusone/structured-evaluation v0.3.1
 	go.opentelemetry.io/otel v1.43.0
 	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc v1.43.0
 	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp v1.43.0
@@ -76,7 +76,7 @@ require (
 	github.com/mattn/go-isatty v0.0.22 // indirect
 	github.com/mattn/go-runewidth v0.0.23 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
-	github.com/nobl9/govy v0.24.0 // indirect
+	github.com/nobl9/govy v0.26.0 // indirect
 	github.com/olekukonko/cat v0.0.0-20250911104152-50322a0618f6 // indirect
 	github.com/olekukonko/errors v1.3.0 // indirect
 	github.com/olekukonko/ll v0.1.8 // indirect
