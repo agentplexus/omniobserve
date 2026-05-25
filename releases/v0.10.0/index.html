@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://plexusone.github.io/omniobserve/features/prompts/">
+        <link rel="canonical" href="https://plexusone.github.io/omniobserve/releases/v0.10.0/">
       
       
-        <link rel="prev" href="../datasets/">
+        <link rel="prev" href="../changelog/">
       
       
-        <link rel="next" href="../../integrations/omnillm/">
+        <link rel="next" href="../v0.9.0/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Prompts - OmniObserve</title>
+        <title>v0.10.0 - OmniObserve</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#prompts" class="md-skip">
+        <a href="#release-notes-v0100" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Prompts
+              v0.10.0
             
           </span>
         </div>
@@ -740,8 +740,6 @@
       
   
   
-    
-  
   
   
     
@@ -754,11 +752,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -774,7 +774,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -788,7 +788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tracing/" class="md-nav__link">
+      <a href="../../features/tracing/" class="md-nav__link">
         
   
   
@@ -811,7 +811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../metrics/" class="md-nav__link">
+      <a href="../../features/metrics/" class="md-nav__link">
         
   
   
@@ -834,7 +834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../datasets/" class="md-nav__link">
+      <a href="../../features/datasets/" class="md-nav__link">
         
   
   
@@ -854,32 +854,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Prompts
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../features/prompts/" class="md-nav__link">
         
   
   
@@ -890,80 +868,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#creating-prompts" class="md-nav__link">
-    <span class="md-ellipsis">
-      Creating Prompts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#retrieving-prompts" class="md-nav__link">
-    <span class="md-ellipsis">
-      Retrieving Prompts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rendering-prompts" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rendering Prompts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#listing-prompts" class="md-nav__link">
-    <span class="md-ellipsis">
-      Listing Prompts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prompt-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prompt Structure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#provider-support" class="md-nav__link">
-    <span class="md-ellipsis">
-      Provider Support
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1197,8 +1101,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -1209,13 +1115,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
@@ -1231,7 +1135,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             Releases
@@ -1245,7 +1149,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/changelog/" class="md-nav__link">
+      <a href="../changelog/" class="md-nav__link">
         
   
   
@@ -1265,10 +1169,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../releases/v0.10.0/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    v0.10.0
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1279,6 +1205,86 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Highlights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breaking Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breaking Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sevaluation-package-api-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      sevaluation Package API Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Guide
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1291,7 +1297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.9.0/" class="md-nav__link">
+      <a href="../v0.9.0/" class="md-nav__link">
         
   
   
@@ -1314,7 +1320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.8.0/" class="md-nav__link">
+      <a href="../v0.8.0/" class="md-nav__link">
         
   
   
@@ -1337,7 +1343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.7.0/" class="md-nav__link">
+      <a href="../v0.7.0/" class="md-nav__link">
         
   
   
@@ -1360,7 +1366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.6.0/" class="md-nav__link">
+      <a href="../v0.6.0/" class="md-nav__link">
         
   
   
@@ -1383,7 +1389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.5.0/" class="md-nav__link">
+      <a href="../v0.5.0/" class="md-nav__link">
         
   
   
@@ -1433,54 +1439,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#creating-prompts" class="md-nav__link">
+  <a href="#highlights" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating Prompts
+      Highlights
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#retrieving-prompts" class="md-nav__link">
+  <a href="#breaking-changes" class="md-nav__link">
     <span class="md-ellipsis">
-      Retrieving Prompts
+      Breaking Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breaking Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sevaluation-package-api-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      sevaluation Package API Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Guide
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#rendering-prompts" class="md-nav__link">
+  <a href="#changed" class="md-nav__link">
     <span class="md-ellipsis">
-      Rendering Prompts
+      Changed
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#listing-prompts" class="md-nav__link">
+  <a href="#dependencies" class="md-nav__link">
     <span class="md-ellipsis">
-      Listing Prompts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prompt-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prompt Structure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#provider-support" class="md-nav__link">
-    <span class="md-ellipsis">
-      Provider Support
+      Dependencies
     </span>
   </a>
   
@@ -1505,90 +1517,92 @@
   
 
 
-<h1 id="prompts">Prompts<a class="headerlink" href="#prompts" title="Permanent link">&para;</a></h1>
-<p>OmniObserve supports prompt template management with versioning (provider-dependent).</p>
-<h2 id="creating-prompts">Creating Prompts<a class="headerlink" href="#creating-prompts" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">CreatePrompt</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;chat-template&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="s">`You are a helpful assistant.</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s">User: {{.query}}</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="s">Assistant:`</span><span class="p">,</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nx">llmops</span><span class="p">.</span><span class="nx">WithPromptDescription</span><span class="p">(</span><span class="s">&quot;Main chat template&quot;</span><span class="p">),</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nx">llmops</span><span class="p">.</span><span class="nx">WithPromptModel</span><span class="p">(</span><span class="s">&quot;gpt-4&quot;</span><span class="p">),</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nx">llmops</span><span class="p">.</span><span class="nx">WithPromptProvider</span><span class="p">(</span><span class="s">&quot;openai&quot;</span><span class="p">),</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
-</code></pre></div>
-<h2 id="retrieving-prompts">Retrieving Prompts<a class="headerlink" href="#retrieving-prompts" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Get latest version</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">GetPrompt</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;chat-template&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">// Get specific version</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">GetPrompt</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;chat-template&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;v2&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="rendering-prompts">Rendering Prompts<a class="headerlink" href="#rendering-prompts" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">GetPrompt</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;chat-template&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">rendered</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">prompt</span><span class="p">.</span><span class="nx">Render</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="s">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;What is the meaning of life?&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">})</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">// Result:</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1">// You are a helpful assistant.</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1">//</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">// User: What is the meaning of life?</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1">// Assistant:</span>
-</code></pre></div>
-<h2 id="listing-prompts">Listing Prompts<a class="headerlink" href="#listing-prompts" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">prompts</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">ListPrompts</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">prompts</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s (v%s): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Version</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Description</span><span class="p">)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
-</code></pre></div>
-<h2 id="prompt-structure">Prompt Structure<a class="headerlink" href="#prompt-structure" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Prompt</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">          </span><span class="kt">string</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">Name</span><span class="w">        </span><span class="kt">string</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nx">Template</span><span class="w">    </span><span class="kt">string</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nx">Version</span><span class="w">     </span><span class="kt">string</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nx">Model</span><span class="w">       </span><span class="kt">string</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nx">Provider</span><span class="w">    </span><span class="kt">string</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nx">CreatedAt</span><span class="w">   </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nx">UpdatedAt</span><span class="w">   </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
-</code></pre></div>
-<h2 id="provider-support">Provider Support<a class="headerlink" href="#provider-support" title="Permanent link">&para;</a></h2>
+<h1 id="release-notes-v0100">Release Notes v0.10.0<a class="headerlink" href="#release-notes-v0100" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date:</strong> May 2026</p>
+<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Breaking</strong>: <code>integrations/sevaluation</code> package updated for structured-evaluation v0.5.0 categorical scoring API</li>
+</ul>
+<h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
+<h3 id="sevaluation-package-api-changes">sevaluation Package API Changes<a class="headerlink" href="#sevaluation-package-api-changes" title="Permanent link">&para;</a></h3>
+<p>The <code>integrations/sevaluation</code> package has been updated to work with structured-evaluation v0.5.0, which introduced categorical scoring (pass/partial/fail) instead of purely numeric scores.</p>
+<p><strong>Import changes:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Provider</th>
-<th style="text-align: center;">Prompts</th>
+<th>Before (v0.9.0)</th>
+<th>After (v0.10.0)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Opik</td>
-<td style="text-align: center;">:white_check_mark: Full</td>
+<td><code>CategoryScore</code></td>
+<td><code>CategoryResult</code></td>
 </tr>
 <tr>
-<td>Langfuse</td>
-<td style="text-align: center;">Partial</td>
+<td><code>cat.Score</code> (float64)</td>
+<td><code>cat.Score</code> (ScoreValue) + <code>cat.NumericScore</code> (*float64)</td>
 </tr>
 <tr>
-<td>Phoenix</td>
-<td style="text-align: center;">:x:</td>
+<td><code>cat.Justification</code></td>
+<td><code>cat.Reasoning</code></td>
 </tr>
 <tr>
-<td>slog</td>
-<td style="text-align: center;">:x:</td>
+<td><code>AddCategory()</code></td>
+<td><code>AddCategoryResult()</code></td>
+</tr>
+<tr>
+<td><code>report.WeightedScore</code></td>
+<td>Computed from categories</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Prompt management features vary by provider. Opik has the most complete implementation.</p>
-</div>
+<p><strong>Function signature changes:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Before</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">func</span><span class="w"> </span><span class="nx">MetricScoreToCategory</span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="nx">llmops</span><span class="p">.</span><span class="nx">MetricScore</span><span class="p">,</span><span class="w"> </span><span class="nx">weight</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="nx">evaluation</span><span class="p">.</span><span class="nx">CategoryScore</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// After</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kd">func</span><span class="w"> </span><span class="nx">MetricScoreToCategory</span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="nx">llmops</span><span class="p">.</span><span class="nx">MetricScore</span><span class="p">)</span><span class="w"> </span><span class="nx">evaluation</span><span class="p">.</span><span class="nx">CategoryResult</span>
+</code></pre></div>
+<p><strong>Score conversion:</strong></p>
+<p>The package now converts between numeric and categorical scores:</p>
+<ul>
+<li>Score &gt;= 7.0 → <code>ScorePass</code></li>
+<li>Score &gt;= 5.0 → <code>ScorePartial</code></li>
+<li>Score &lt; 5.0 → <code>ScoreFail</code></li>
+</ul>
+<p><strong>Export behavior:</strong></p>
+<p>When exporting to observability platforms, the package:</p>
+<ul>
+<li>Uses <code>NumericScore</code> when available for feedback scores</li>
+<li>Falls back to categorical-to-numeric conversion (pass=10, partial=5, fail=0)</li>
+<li>Computes overall score as average of category numeric scores</li>
+</ul>
+<h2 id="migration-guide">Migration Guide<a class="headerlink" href="#migration-guide" title="Permanent link">&para;</a></h2>
+<p>If you use the sevaluation integration, update your code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Before</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">cat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sevaluation</span><span class="p">.</span><span class="nx">MetricScoreToCategory</span><span class="p">(</span><span class="nx">score</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">Score</span><span class="p">)</span><span class="w">        </span><span class="c1">// float64</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">Justification</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">// After</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nx">cat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sevaluation</span><span class="p">.</span><span class="nx">MetricScoreToCategory</span><span class="p">(</span><span class="nx">score</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">Score</span><span class="p">)</span><span class="w">         </span><span class="c1">// evaluation.ScoreValue (pass/partial/fail)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">cat</span><span class="p">.</span><span class="nx">NumericScore</span><span class="p">)</span><span class="w"> </span><span class="c1">// float64 (optional)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">Reasoning</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>BREAKING:</strong> <code>integrations/sevaluation</code> updated for structured-evaluation v0.5.0 API (<a href="https://github.com/plexusone/omniobserve/commit/7293774"><code>7293774</code></a>)</li>
+</ul>
+<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>github.com/plexusone/omnillm</code> v0.15.4 (was v0.15.3) (<a href="https://github.com/plexusone/omniobserve/commit/3305fb3"><code>3305fb3</code></a>)</li>
+<li><code>github.com/plexusone/omni-anthropic</code> v0.2.1 (was v0.2.0)</li>
+<li><code>github.com/plexusone/omni-aws</code> v0.8.1 (was v0.8.0)</li>
+<li><code>github.com/plexusone/omni-google</code> v0.4.1 (was v0.4.0)</li>
+<li><code>github.com/plexusone/omni-openai</code> v0.2.2 (was v0.2.1)</li>
+</ul>
 
 
 
