@@ -11,7 +11,6 @@ require (
 	github.com/invopop/jsonschema v0.13.0
 	github.com/lib/pq v1.12.3
 	github.com/plexusone/omnillm v0.15.4
-	github.com/plexusone/structured-evaluation v0.5.0
 	go.opentelemetry.io/otel v1.44.0
 	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc v1.43.0
 	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp v1.43.0
