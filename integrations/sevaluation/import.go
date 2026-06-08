@@ -2,7 +2,7 @@ package sevaluation
 
 import (
 	"github.com/plexusone/omniobserve/llmops"
-	"github.com/plexusone/structured-evaluation/evaluation"
+	"github.com/plexusone/structured-evaluation/rubric"
 )
 
 // ImportOptions configures the import behavior.
@@ -16,8 +16,8 @@ type ImportOptions struct {
 	Document string
 
 	// PassCriteria sets the criteria for the report.
-	// Default: evaluation.DefaultPassCriteria()
-	PassCriteria evaluation.PassCriteria
+	// Default: rubric.DefaultPassCriteria()
+	PassCriteria rubric.PassCriteria
 }
 
 // DefaultImportOptions returns the default import configuration.
@@ -25,24 +25,24 @@ func DefaultImportOptions() ImportOptions {
 	return ImportOptions{
 		ReviewType:   "llm_evaluation",
 		Document:     "",
-		PassCriteria: evaluation.DefaultPassCriteria(),
+		PassCriteria: rubric.DefaultPassCriteria(),
 	}
 }
 
-// ImportEvalResult converts an llmops EvalResult into an EvaluationReport.
+// ImportEvalResult converts an llmops EvalResult into a Rubric report.
 // Each MetricScore becomes a CategoryResult in the report.
-func ImportEvalResult(result *llmops.EvalResult, opts ...ImportOptions) *evaluation.EvaluationReport {
+func ImportEvalResult(result *llmops.EvalResult, opts ...ImportOptions) *rubric.Rubric {
 	opt := DefaultImportOptions()
 	if len(opts) > 0 {
 		opt = opts[0]
 	}
 
-	report := evaluation.NewEvaluationReport(opt.ReviewType, opt.Document)
+	report := rubric.NewRubric(opt.ReviewType, opt.Document)
 	report.PassCriteria = opt.PassCriteria
 
 	for _, score := range result.Scores {
 		numericScore := denormalizeScore(score.Score)
-		cat := evaluation.CategoryResult{
+		cat := rubric.CategoryResult{
 			Category:     score.Name,
 			Score:        numericScoreToScoreValue(numericScore),
 			NumericScore: &numericScore,
@@ -52,8 +52,8 @@ func ImportEvalResult(result *llmops.EvalResult, opts ...ImportOptions) *evaluat
 
 		// If score has an error, add it as a finding
 		if score.Error != "" {
-			report.AddFinding(evaluation.Finding{
-				Severity:       evaluation.SeverityMedium,
+			report.AddFinding(rubric.Finding{
+				Severity:       rubric.SeverityMedium,
 				Category:       score.Name,
 				Title:          "Evaluation error",
 				Description:    score.Error,
@@ -65,16 +65,16 @@ func ImportEvalResult(result *llmops.EvalResult, opts ...ImportOptions) *evaluat
 	return report
 }
 
-// ImportMetricScores converts a slice of MetricScores into an EvaluationReport.
-func ImportMetricScores(scores []llmops.MetricScore, opts ...ImportOptions) *evaluation.EvaluationReport {
+// ImportMetricScores converts a slice of MetricScores into a Rubric report.
+func ImportMetricScores(scores []llmops.MetricScore, opts ...ImportOptions) *rubric.Rubric {
 	result := &llmops.EvalResult{Scores: scores}
 	return ImportEvalResult(result, opts...)
 }
 
 // MetricScoreToCategory converts a single MetricScore to a CategoryResult.
-func MetricScoreToCategory(score llmops.MetricScore) evaluation.CategoryResult {
+func MetricScoreToCategory(score llmops.MetricScore) rubric.CategoryResult {
 	numericScore := denormalizeScore(score.Score)
-	return evaluation.CategoryResult{
+	return rubric.CategoryResult{
 		Category:     score.Name,
 		Score:        numericScoreToScoreValue(numericScore),
 		NumericScore: &numericScore,
@@ -84,14 +84,14 @@ func MetricScoreToCategory(score llmops.MetricScore) evaluation.CategoryResult {
 
 // numericScoreToScoreValue converts a numeric score (0-10) to a categorical ScoreValue.
 // Score >= 7.0 -> pass, 5.0-7.0 -> partial, < 5.0 -> fail
-func numericScoreToScoreValue(score float64) evaluation.ScoreValue {
+func numericScoreToScoreValue(score float64) rubric.ScoreValue {
 	if score >= 7.0 {
-		return evaluation.ScorePass
+		return rubric.ScorePass
 	}
 	if score >= 5.0 {
-		return evaluation.ScorePartial
+		return rubric.ScorePartial
 	}
-	return evaluation.ScoreFail
+	return rubric.ScoreFail
 }
 
 // denormalizeScore converts a 0-1 score to 0-10 range.
@@ -99,19 +99,19 @@ func denormalizeScore(score float64) float64 {
 	return score * 10.0
 }
 
-// AnnotationToFinding converts an llmops Annotation to an evaluation Finding.
-func AnnotationToFinding(ann llmops.Annotation) evaluation.Finding {
-	severity := evaluation.SeverityInfo
+// AnnotationToFinding converts an llmops Annotation to a rubric Finding.
+func AnnotationToFinding(ann llmops.Annotation) rubric.Finding {
+	severity := rubric.SeverityInfo
 	if ann.Label != "" {
 		switch ann.Label {
 		case "critical", "CRITICAL":
-			severity = evaluation.SeverityCritical
+			severity = rubric.SeverityCritical
 		case "high", "HIGH":
-			severity = evaluation.SeverityHigh
+			severity = rubric.SeverityHigh
 		case "medium", "MEDIUM":
-			severity = evaluation.SeverityMedium
+			severity = rubric.SeverityMedium
 		case "low", "LOW":
-			severity = evaluation.SeverityLow
+			severity = rubric.SeverityLow
 		}
 	}
 
@@ -122,7 +122,7 @@ func AnnotationToFinding(ann llmops.Annotation) evaluation.Finding {
 		}
 	}
 
-	return evaluation.Finding{
+	return rubric.Finding{
 		Severity:    severity,
 		Category:    category,
 		Title:       ann.Name,

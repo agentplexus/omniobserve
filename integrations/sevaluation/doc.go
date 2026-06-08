@@ -2,16 +2,16 @@
 // and omniobserve llmops providers (Opik, Phoenix, Langfuse).
 //
 // This package enables:
-//   - Exporting EvaluationReport scores and findings to observability platforms
-//   - Converting platform evaluation results into EvaluationReport format
+//   - Exporting Rubric scores and findings to observability platforms
+//   - Converting platform evaluation results into Rubric format
 //   - Correlating evaluations with LLM traces for debugging
 //
 // # Exporting to Providers
 //
-// Use Export to send an EvaluationReport to any llmops provider:
+// Use Export to send a Rubric to any llmops provider:
 //
 //	provider, _ := llmops.Open("opik", llmops.WithAPIKey("..."))
-//	report := evaluation.NewEvaluationReport("prd", "document.md")
+//	report := rubric.NewRubric("prd", "document.md")
 //	// ... populate report ...
 //
 //	err := sevaluation.Export(ctx, provider, traceID, report)

@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/plexusone/omniobserve/llmops"
-	"github.com/plexusone/structured-evaluation/evaluation"
+	"github.com/plexusone/structured-evaluation/rubric"
 )
 
 func TestNormalizeScore(t *testing.T) {
@@ -46,8 +46,8 @@ func TestDenormalizeScore(t *testing.T) {
 }
 
 func TestFormatFinding(t *testing.T) {
-	f := evaluation.Finding{
-		Severity:       evaluation.SeverityHigh,
+	f := rubric.Finding{
+		Severity:       rubric.SeverityHigh,
 		Category:       "security",
 		Title:          "SQL Injection Risk",
 		Recommendation: "Use parameterized queries",
@@ -108,7 +108,7 @@ func TestImportEvalResult(t *testing.T) {
 	}
 
 	// Categorical score should be pass (>= 7.0)
-	if report.Categories[0].Score != evaluation.ScorePass {
+	if report.Categories[0].Score != rubric.ScorePass {
 		t.Errorf("Expected Score pass, got %s", report.Categories[0].Score)
 	}
 }
@@ -151,7 +151,7 @@ func TestMetricScoreToCategory(t *testing.T) {
 		t.Errorf("Expected NumericScore 7.5, got %f", *cat.NumericScore)
 	}
 	// 7.5 >= 7.0 -> pass
-	if cat.Score != evaluation.ScorePass {
+	if cat.Score != rubric.ScorePass {
 		t.Errorf("Expected Score pass, got %s", cat.Score)
 	}
 }
@@ -168,7 +168,7 @@ func TestAnnotationToFinding(t *testing.T) {
 
 	f := AnnotationToFinding(ann)
 
-	if f.Severity != evaluation.SeverityHigh {
+	if f.Severity != rubric.SeverityHigh {
 		t.Errorf("Expected severity high, got %s", f.Severity)
 	}
 	if f.Category != "security" {
@@ -182,18 +182,18 @@ func TestAnnotationToFinding(t *testing.T) {
 func TestAnnotationToFinding_SeverityMapping(t *testing.T) {
 	tests := []struct {
 		label    string
-		expected evaluation.Severity
+		expected rubric.Severity
 	}{
-		{"critical", evaluation.SeverityCritical},
-		{"CRITICAL", evaluation.SeverityCritical},
-		{"high", evaluation.SeverityHigh},
-		{"HIGH", evaluation.SeverityHigh},
-		{"medium", evaluation.SeverityMedium},
-		{"MEDIUM", evaluation.SeverityMedium},
-		{"low", evaluation.SeverityLow},
-		{"LOW", evaluation.SeverityLow},
-		{"unknown", evaluation.SeverityInfo},
-		{"", evaluation.SeverityInfo},
+		{"critical", rubric.SeverityCritical},
+		{"CRITICAL", rubric.SeverityCritical},
+		{"high", rubric.SeverityHigh},
+		{"HIGH", rubric.SeverityHigh},
+		{"medium", rubric.SeverityMedium},
+		{"MEDIUM", rubric.SeverityMedium},
+		{"low", rubric.SeverityLow},
+		{"LOW", rubric.SeverityLow},
+		{"unknown", rubric.SeverityInfo},
+		{"", rubric.SeverityInfo},
 	}
 
 	for _, tt := range tests {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/plexusone/omniobserve/llmops"
-	"github.com/plexusone/structured-evaluation/evaluation"
+	"github.com/plexusone/structured-evaluation/rubric"
 )
 
 // ExportOptions configures the export behavior.
@@ -50,17 +50,17 @@ type exportTarget struct {
 
 // Export sends an EvaluationReport to an llmops provider, attaching to a trace.
 // It exports category scores as feedback scores and findings as annotations.
-func Export(ctx context.Context, provider llmops.Provider, traceID string, report *evaluation.EvaluationReport, opts ...ExportOptions) error {
+func Export(ctx context.Context, provider llmops.Provider, traceID string, report *rubric.Rubric, opts ...ExportOptions) error {
 	return exportReport(ctx, provider, exportTarget{traceID: traceID}, report, opts...)
 }
 
 // ExportToSpan exports an EvaluationReport to a specific span instead of a trace.
-func ExportToSpan(ctx context.Context, provider llmops.Provider, spanID string, report *evaluation.EvaluationReport, opts ...ExportOptions) error {
+func ExportToSpan(ctx context.Context, provider llmops.Provider, spanID string, report *rubric.Rubric, opts ...ExportOptions) error {
 	return exportReport(ctx, provider, exportTarget{spanID: spanID}, report, opts...)
 }
 
 // exportReport is the internal implementation for exporting to either trace or span.
-func exportReport(ctx context.Context, provider llmops.Provider, target exportTarget, report *evaluation.EvaluationReport, opts ...ExportOptions) error {
+func exportReport(ctx context.Context, provider llmops.Provider, target exportTarget, report *rubric.Rubric, opts ...ExportOptions) error {
 	opt := DefaultExportOptions()
 	if len(opts) > 0 {
 		opt = opts[0]
@@ -178,7 +178,7 @@ func DenormalizeScore(score float64) float64 {
 }
 
 // formatFinding creates a human-readable finding description.
-func formatFinding(f evaluation.Finding) string {
+func formatFinding(f rubric.Finding) string {
 	return fmt.Sprintf("[%s] %s: %s - %s",
 		f.Severity,
 		f.Category,
@@ -189,11 +189,11 @@ func formatFinding(f evaluation.Finding) string {
 
 // scoreValueToNumeric converts a categorical ScoreValue to a numeric score (0-10).
 // pass -> 10.0, partial -> 5.0, fail -> 0.0
-func scoreValueToNumeric(score evaluation.ScoreValue) float64 {
+func scoreValueToNumeric(score rubric.ScoreValue) float64 {
 	switch score {
-	case evaluation.ScorePass:
+	case rubric.ScorePass:
 		return 10.0
-	case evaluation.ScorePartial:
+	case rubric.ScorePartial:
 		return 5.0
 	default:
 		return 0.0
@@ -202,7 +202,7 @@ func scoreValueToNumeric(score evaluation.ScoreValue) float64 {
 
 // computeOverallScore computes an overall numeric score from category results.
 // Returns the average of all category numeric scores.
-func computeOverallScore(report *evaluation.EvaluationReport) float64 {
+func computeOverallScore(report *rubric.Rubric) float64 {
 	if len(report.Categories) == 0 {
 		return 0.0
 	}
