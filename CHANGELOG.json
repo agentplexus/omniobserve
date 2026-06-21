@@ -7,6 +7,22 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.11.0",
+      "date": "2026-06-20",
+      "highlights": [
+        { "description": "sevaluation package migrated from evaluation to rubric package following structured-evaluation v0.7.0" }
+      ],
+      "changed": [
+        { "description": "`integrations/sevaluation` migrated from `evaluation.EvaluationReport` to `rubric.Rubric`: all functions now accept/return `*rubric.Rubric` instead of `*evaluation.EvaluationReport`, related types (`CategoryResult`, `Finding`, `ScoreValue`, etc.) now use `rubric` package prefix", "breaking": true, "commit": "0a6946a" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/structured-evaluation` v0.7.0 (was v0.5.0)", "commit": "a31acb3" },
+        { "description": "`github.com/invopop/jsonschema` v0.14.0", "commit": "a31acb3" },
+        { "description": "`github.com/grokify/mogo` v0.74.6 (was v0.74.5)", "commit": "3be4501" },
+        { "description": "OpenTelemetry packages v1.44.0 (was v1.43.0): `go.opentelemetry.io/otel`, `otel/trace`, `otel/metric`, `otel/sdk/metric`, `otel/exporters/otlp/otlptrace/otlptracegrpc`, `otel/exporters/otlp/otlptrace/otlptracehttp`, `otel/exporters/otlp/otlpmetric/otlpmetrichttp`", "commit": "1f38a1e" }
+      ]
+    },
+    {
       "version": "v0.10.0",
       "date": "2026-05-24",
       "highlights": [
