@@ -82,6 +82,44 @@ func WithDebug() ClientOption {
 	}
 }
 
+// The options below configure the Setup bootstrap (setup.go).
+
+// WithMetrics enables or disables the metrics signal (enabled by default).
+func WithMetrics(enabled bool) ClientOption {
+	return func(c *Config) { c.EnableMetrics = enabled }
+}
+
+// WithTraces enables or disables the traces signal (enabled by default).
+func WithTraces(enabled bool) ClientOption {
+	return func(c *Config) { c.EnableTraces = enabled }
+}
+
+// WithLogs enables or disables the logs signal (enabled by default).
+func WithLogs(enabled bool) ClientOption {
+	return func(c *Config) { c.EnableLogs = enabled }
+}
+
+// WithPrometheus adds a Prometheus pull exporter; the handler is exposed as
+// Telemetry.MetricsHandler.
+func WithPrometheus() ClientOption {
+	return func(c *Config) { c.EnablePrometheus = true }
+}
+
+// WithStdout mirrors telemetry to stdout for local debugging.
+func WithStdout() ClientOption {
+	return func(c *Config) { c.EnableStdout = true }
+}
+
+// WithOTLPOverHTTP uses OTLP over HTTP instead of gRPC for push export.
+func WithOTLPOverHTTP() ClientOption {
+	return func(c *Config) { c.OverHTTP = true }
+}
+
+// WithTraceSampleRatio sets the head sampling ratio for traces (0..1).
+func WithTraceSampleRatio(ratio float64) ClientOption {
+	return func(c *Config) { c.TraceSampleRatio = ratio }
+}
+
 // ApplyOptions applies the given options to a config.
 func ApplyOptions(opts ...ClientOption) *Config {
 	cfg := &Config{

@@ -7,6 +7,25 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.12.0",
+      "date": "2026-07-20",
+      "highlights": [
+        { "description": "observops.Setup: a one-call bootstrap that wires metrics, traces, and logs and returns native OpenTelemetry handles, plus a Prometheus /metrics handler and HTTP middleware" }
+      ],
+      "added": [
+        { "description": "`observops.Setup(ctx, opts...)` returns a `*Telemetry` with native `trace.Tracer`, `metric.Meter`, an slog.Logger, a Prometheus MetricsHandler, HTTP Middleware/Transport, and Shutdown; consumers instrument with vanilla OpenTelemetry", "commit": "5a987e3" },
+        { "description": "Composable export targets: Prometheus pull (`WithPrometheus`), OTLP push over gRPC or HTTP (`WithEndpoint`, `WithOTLPOverHTTP`), and stdout (`WithStdout`)", "commit": "5a987e3" },
+        { "description": "Real OpenTelemetry logs via the otelslog bridge, fanned out to the console and installed as slog.Default()", "commit": "5a987e3" },
+        { "description": "Setup options: `WithMetrics`, `WithTraces`, `WithLogs`, `WithPrometheus`, `WithStdout`, `WithOTLPOverHTTP`, `WithTraceSampleRatio` (all signals enabled by default)", "commit": "5a987e3" },
+        { "description": "Tests covering the Setup bootstrap, including a real Prometheus scrape and HTTP middleware/transport round-trip", "commit": "ed56f79" }
+      ],
+      "dependencies": [
+        { "description": "OpenTelemetry logs stack: `go.opentelemetry.io/otel/sdk/log` v0.20.0, `otel/log` v0.20.0, `otel/exporters/otlp/otlplog/{otlploggrpc,otlploghttp}` v0.20.0", "commit": "5a987e3" },
+        { "description": "`go.opentelemetry.io/otel/exporters/prometheus` v0.66.0 and stdout exporters (`stdouttrace`/`stdoutmetric` v1.44.0, `stdoutlog` v0.20.0)", "commit": "5a987e3" },
+        { "description": "`go.opentelemetry.io/contrib/bridges/otelslog` v0.19.0 and `contrib/instrumentation/net/http/otelhttp` v0.69.0", "commit": "5a987e3" }
+      ]
+    },
+    {
       "version": "v0.11.0",
       "date": "2026-06-20",
       "highlights": [

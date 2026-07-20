@@ -1,66 +1,62 @@
-// Package observops provides a unified interface for general service observability platforms.
-// It abstracts common functionality across providers using OpenTelemetry as the core
-// instrumentation layer.
+// Package observops provides general service observability (metrics, traces, and logs)
+// built on OpenTelemetry. It offers two entry points:
 //
-// This package complements the llmops package (which handles LLM-specific observability)
-// by providing general service observability for:
-//   - Metrics (counters, gauges, histograms)
-//   - Traces (distributed tracing with spans)
-//   - Logs (structured logging correlated with traces)
+//   - Setup (recommended): a one-call bootstrap that wires every signal and its exporters
+//     and returns native OpenTelemetry handles. Consumers instrument with the standard OTel
+//     API and keep full ecosystem interop (otelhttp, gRPC interceptors, database
+//     instrumentation, and so on). The boilerplate — exporters, resource detection,
+//     propagation, batch processors, the slog bridge, and graceful shutdown — lives here.
 //
-// Supported backends include:
-//   - OTLP (OpenTelemetry Protocol) - vendor-agnostic
-//   - New Relic
-//   - Datadog
-//   - Prometheus (metrics only)
-//   - Jaeger (traces only)
+//   - The driver registry (Open): a vendor-neutral abstraction whose own Provider/Meter/
+//     Tracer/Span/Logger interfaces sit in front of OpenTelemetry. Useful when you want to
+//     switch vendors through a single Open("otlp"|"datadog"|"newrelic"|"dynatrace") call and
+//     are content with an OTel subset. Most services should prefer Setup.
 //
-// # Quick Start
+// This package complements the llmops package (which handles LLM-specific observability).
 //
-// Import the provider you want to use:
+// # Quick Start (Setup)
+//
+//	tel, err := observops.Setup(ctx,
+//		observops.WithServiceName("my-service"),
+//		observops.WithServiceVersion("1.2.3"),
+//		observops.WithPrometheus(),                 // pull: expose tel.MetricsHandler
+//		observops.WithEndpoint("localhost:4317"),   // push: OTLP gRPC collector
+//		observops.WithInsecure(),
+//	)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	defer tel.Shutdown(context.Background())
+//
+//	// Native OpenTelemetry handles:
+//	ctx, span := tel.Tracer.Start(ctx, "ProcessRequest")
+//	defer span.End()
+//
+//	reqs, _ := tel.Meter.Int64Counter("requests.total")
+//	reqs.Add(ctx, 1)
+//
+//	tel.Logger.Info("request processed", "user_id", "123")
+//
+//	// Serve Prometheus metrics and instrument HTTP in one line each:
+//	mux.Handle("/metrics", tel.MetricsHandler)
+//	handler = tel.Middleware("api")(handler)
+//
+// Metrics, traces, and logs are enabled by default; disable any with WithMetrics,
+// WithTraces, or WithLogs. Export targets compose: Prometheus pull (WithPrometheus), OTLP
+// push over gRPC or HTTP (WithEndpoint, WithOTLPOverHTTP), and stdout (WithStdout).
+//
+// # Vendor-neutral driver registry (Open)
 //
 //	import (
 //		"github.com/plexusone/omniobserve/observops"
-//		_ "github.com/plexusone/omniobserve/observops/otlp"     // OTLP exporter
-//		// or
-//		_ "github.com/plexusone/omniobserve/observops/newrelic" // New Relic
-//		// or
-//		_ "github.com/plexusone/omniobserve/observops/datadog"  // Datadog
+//		_ "github.com/plexusone/omniobserve/observops/otlp"
 //	)
-//
-// Then open a provider:
 //
 //	provider, err := observops.Open("otlp",
 //		observops.WithEndpoint("localhost:4317"),
 //		observops.WithServiceName("my-service"),
 //	)
-//	if err != nil {
-//		log.Fatal(err)
-//	}
 //	defer provider.Shutdown(context.Background())
-//
-// Use metrics:
-//
-//	counter, _ := provider.Meter().Counter("requests_total",
-//		observops.WithDescription("Total number of requests"),
-//	)
-//	counter.Add(ctx, 1, observops.WithAttributes(
-//		observops.Attribute("method", "GET"),
-//		observops.Attribute("path", "/api/users"),
-//	))
-//
-// Use tracing:
-//
-//	ctx, span := provider.Tracer().Start(ctx, "ProcessRequest")
-//	defer span.End()
-//	span.SetAttributes(observops.Attribute("user.id", "123"))
-//
-// Use structured logging:
-//
-//	provider.Logger().Info(ctx, "Request processed",
-//		observops.LogAttribute("user_id", "123"),
-//		observops.LogAttribute("duration_ms", 45),
-//	)
 package observops
 
 import (
@@ -315,4 +311,22 @@ type Config struct {
 
 	// Debug enables debug logging.
 	Debug bool
+
+	// The fields below configure the Setup bootstrap (see setup.go). They are ignored by
+	// the vendor-neutral driver providers (otlp/datadog/newrelic/dynatrace).
+
+	// EnableMetrics enables the metrics signal (default true in Setup).
+	EnableMetrics bool
+	// EnableTraces enables the traces signal (default true in Setup).
+	EnableTraces bool
+	// EnableLogs enables the logs signal (default true in Setup).
+	EnableLogs bool
+	// EnablePrometheus adds a Prometheus pull exporter and exposes a /metrics handler.
+	EnablePrometheus bool
+	// EnableStdout mirrors telemetry to stdout (for local debugging).
+	EnableStdout bool
+	// OverHTTP uses OTLP over HTTP instead of gRPC for push export.
+	OverHTTP bool
+	// TraceSampleRatio is the head sampling ratio for traces (0..1, default 1.0).
+	TraceSampleRatio float64
 }

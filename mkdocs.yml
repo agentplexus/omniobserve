@@ -56,6 +56,7 @@ nav:
       - Phoenix: providers/phoenix.md
       - slog: providers/slog.md
   - App Observability (observops):
+      - Setup (recommended): providers/setup.md
       - OTLP: providers/otlp.md
       - Datadog: providers/datadog.md
       - New Relic: providers/newrelic.md
@@ -75,6 +76,7 @@ nav:
   - API Reference: https://pkg.go.dev/github.com/plexusone/omniobserve
   - Releases:
       - Changelog: releases/changelog.md
+      - v0.12.0: releases/v0.12.0.md
       - v0.11.0: releases/v0.11.0.md
       - v0.10.0: releases/v0.10.0.md
       - v0.9.0: releases/v0.9.0.md
