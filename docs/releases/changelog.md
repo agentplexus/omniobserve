@@ -4,6 +4,23 @@ All notable changes to OmniObserve are documented here.
 
 This changelog follows [Semantic Versioning](https://semver.org/) and is generated from [CHANGELOG.json](https://github.com/plexusone/omniobserve/blob/main/CHANGELOG.json) using [schangelog](https://github.com/grokify/structured-changelog).
 
+## [v0.12.0](v0.12.0.md) - 2026-07
+
+### Highlights
+
+- `observops.Setup`: a one-call bootstrap that wires metrics, traces, and logs and returns native OpenTelemetry handles, plus a Prometheus `/metrics` handler and HTTP middleware
+
+### Added
+
+- `observops.Setup(ctx, opts...)` returning a `*Telemetry` with native `trace.Tracer`, `metric.Meter`, an slog.Logger, a Prometheus MetricsHandler, HTTP Middleware/Transport, and Shutdown
+- Composable export targets: Prometheus pull, OTLP push (gRPC or HTTP), and stdout
+- Real OpenTelemetry logs via the `otelslog` bridge, fanned out to the console
+- Setup options: `WithMetrics`, `WithTraces`, `WithLogs`, `WithPrometheus`, `WithStdout`, `WithOTLPOverHTTP`, `WithTraceSampleRatio`
+
+### Dependencies
+
+- OpenTelemetry logs stack (`otel/sdk/log`, `otel/log`, `otlplog/{otlploggrpc,otlploghttp}`), Prometheus and stdout exporters, `otelslog` bridge, and `otelhttp`
+
 ## [v0.8.0](v0.8.0.md) - 2026-03
 
 ### Highlights
