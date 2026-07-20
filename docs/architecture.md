@@ -18,8 +18,10 @@ omniobserve/
 │   ├── metrics/         # Evaluation metrics (hallucination, relevance, etc.)
 │   ├── langfuse/        # Langfuse provider adapter
 │   └── slog/            # slog provider adapter
-├── observops/           # App observability interfaces
-│   ├── observops.go     # Core interfaces (Provider, Meter, Tracer)
+├── observops/           # App observability
+│   ├── setup.go         # Setup: bootstrap returning native OTel handles (recommended)
+│   ├── setup_http.go    # HTTP middleware/transport + slog fanout
+│   ├── observops.go     # Vendor-neutral driver interfaces (Provider, Meter, Tracer)
 │   ├── options.go       # Functional options
 │   ├── otlp/            # OTLP provider (vendor-agnostic)
 │   ├── datadog/         # Datadog provider

@@ -4,6 +4,12 @@ site_url: https://plexusone.github.io/omniobserve
 repo_url: https://github.com/plexusone/omniobserve
 repo_name: plexusone/omniobserve
 
+# Repo-internal files that are not part of the published site: GitHub directory
+# READMEs (which collide with the section index.md) and internal design docs.
+exclude_docs: |
+  README.md
+  design/
+
 theme:
   name: material
   custom_dir: docs/overrides
