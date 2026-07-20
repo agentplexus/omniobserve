@@ -315,4 +315,22 @@ type Config struct {
 
 	// Debug enables debug logging.
 	Debug bool
+
+	// The fields below configure the Setup bootstrap (see setup.go). They are ignored by
+	// the vendor-neutral driver providers (otlp/datadog/newrelic/dynatrace).
+
+	// EnableMetrics enables the metrics signal (default true in Setup).
+	EnableMetrics bool
+	// EnableTraces enables the traces signal (default true in Setup).
+	EnableTraces bool
+	// EnableLogs enables the logs signal (default true in Setup).
+	EnableLogs bool
+	// EnablePrometheus adds a Prometheus pull exporter and exposes a /metrics handler.
+	EnablePrometheus bool
+	// EnableStdout mirrors telemetry to stdout (for local debugging).
+	EnableStdout bool
+	// OverHTTP uses OTLP over HTTP instead of gRPC for push export.
+	OverHTTP bool
+	// TraceSampleRatio is the head sampling ratio for traces (0..1, default 1.0).
+	TraceSampleRatio float64
 }
