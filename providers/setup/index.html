@@ -10,11 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://plexusone.github.io/omniobserve/releases/v0.5.0/">
+        <link rel="canonical" href="https://plexusone.github.io/omniobserve/providers/setup/">
       
       
-        <link rel="prev" href="../v0.6.0/">
+        <link rel="prev" href="../slog/">
       
+      
+        <link rel="next" href="../otlp/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>v0.5.0 - OmniObserve</title>
+        <title>Setup (recommended) - OmniObserve</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#release-notes-v050" class="md-skip">
+        <a href="#setup-recommended" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              v0.5.0
+              Setup (recommended)
             
           </span>
         </div>
@@ -492,7 +494,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -520,7 +522,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/opik/" class="md-nav__link">
+      <a href="../opik/" class="md-nav__link">
         
   
   
@@ -548,7 +550,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/langfuse/" class="md-nav__link">
+      <a href="../langfuse/" class="md-nav__link">
         
   
   
@@ -576,7 +578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/phoenix/" class="md-nav__link">
+      <a href="../phoenix/" class="md-nav__link">
         
   
   
@@ -604,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/slog/" class="md-nav__link">
+      <a href="../slog/" class="md-nav__link">
         
   
   
@@ -636,8 +638,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -648,13 +652,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -675,7 +677,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -690,10 +692,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../providers/setup/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup (recommended)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -709,6 +738,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-setup-instead-of-a-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Setup instead of a driver
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-handles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the handles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signals-and-exporters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signals and exporters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shutdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -721,7 +825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/otlp/" class="md-nav__link">
+      <a href="../otlp/" class="md-nav__link">
         
   
   
@@ -749,7 +853,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/datadog/" class="md-nav__link">
+      <a href="../datadog/" class="md-nav__link">
         
   
   
@@ -777,7 +881,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/newrelic/" class="md-nav__link">
+      <a href="../newrelic/" class="md-nav__link">
         
   
   
@@ -805,7 +909,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/dynatrace/" class="md-nav__link">
+      <a href="../dynatrace/" class="md-nav__link">
         
   
   
@@ -833,7 +937,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../providers/sloghandler/" class="md-nav__link">
+      <a href="../sloghandler/" class="md-nav__link">
         
   
   
@@ -1298,8 +1402,6 @@
       
   
   
-    
-  
   
   
     
@@ -1312,11 +1414,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
@@ -1337,7 +1441,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1355,7 +1459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../changelog/" class="md-nav__link">
+      <a href="../../releases/changelog/" class="md-nav__link">
         
   
   
@@ -1383,7 +1487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.12.0/" class="md-nav__link">
+      <a href="../../releases/v0.12.0/" class="md-nav__link">
         
   
   
@@ -1411,7 +1515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.11.0/" class="md-nav__link">
+      <a href="../../releases/v0.11.0/" class="md-nav__link">
         
   
   
@@ -1439,7 +1543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.10.0/" class="md-nav__link">
+      <a href="../../releases/v0.10.0/" class="md-nav__link">
         
   
   
@@ -1467,7 +1571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.9.0/" class="md-nav__link">
+      <a href="../../releases/v0.9.0/" class="md-nav__link">
         
   
   
@@ -1495,7 +1599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.8.0/" class="md-nav__link">
+      <a href="../../releases/v0.8.0/" class="md-nav__link">
         
   
   
@@ -1523,7 +1627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.7.0/" class="md-nav__link">
+      <a href="../../releases/v0.7.0/" class="md-nav__link">
         
   
   
@@ -1551,7 +1655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.6.0/" class="md-nav__link">
+      <a href="../../releases/v0.6.0/" class="md-nav__link">
         
   
   
@@ -1576,37 +1680,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    v0.5.0
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../releases/v0.5.0/" class="md-nav__link">
         
   
   
@@ -1622,242 +1699,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Overview
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#breaking-changes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Breaking Changes
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Breaking Changes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#opik-and-phoenix-adapters-moved-to-standalone-sdks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Opik and Phoenix Adapters Moved to Standalone SDKs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#phoenix-sdk-removed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phoenix SDK Removed
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#new-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New Features
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="New Features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#annotationmanager-interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AnnotationManager Interface
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enhanced-datasetmanager-interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Enhanced DatasetManager Interface
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prompt-modelprovider-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prompt Model/Provider Options
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#omnillm-hook-auto-create-traces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OmniLLM Hook Auto-Create Traces
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trace-context-helpers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Trace Context Helpers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evaluation-metrics-package" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Evaluation Metrics Package
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dependencies
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-guide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migration Guide
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Migration Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-opik-users" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        For Opik Users
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-phoenix-users" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        For Phoenix Users
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-langfuse-users" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        For Langfuse Users
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files-removed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Files Removed
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files-modified" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Files Modified
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1897,10 +1738,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#why-setup-instead-of-a-driver" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Overview
+        Why Setup instead of a driver
       
     </span>
   </a>
@@ -1908,132 +1749,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#breaking-changes" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Breaking Changes
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Breaking Changes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#opik-and-phoenix-adapters-moved-to-standalone-sdks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Opik and Phoenix Adapters Moved to Standalone SDKs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#phoenix-sdk-removed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phoenix SDK Removed
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#new-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New Features
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="New Features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#annotationmanager-interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AnnotationManager Interface
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enhanced-datasetmanager-interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Enhanced DatasetManager Interface
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prompt-modelprovider-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prompt Model/Provider Options
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#omnillm-hook-auto-create-traces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OmniLLM Hook Auto-Create Traces
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trace-context-helpers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Trace Context Helpers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evaluation-metrics-package" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Evaluation Metrics Package
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dependencies
+        Quick start
       
     </span>
   </a>
@@ -2041,60 +1760,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#migration-guide" class="md-nav__link">
+  <a href="#using-the-handles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migration Guide
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Migration Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-opik-users" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        For Opik Users
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-phoenix-users" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        For Phoenix Users
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-langfuse-users" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        For Langfuse Users
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files-removed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Files Removed
+        Using the handles
       
     </span>
   </a>
@@ -2102,10 +1771,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#files-modified" class="md-nav__link">
+  <a href="#signals-and-exporters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Files Modified
+        Signals and exporters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shutdown
       
     </span>
   </a>
@@ -2132,148 +1812,140 @@
   
 
 
-<h1 id="release-notes-v050">Release Notes v0.5.0<a class="headerlink" href="#release-notes-v050" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date:</strong> January 3, 2026</p>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>This release refactors the provider architecture so that LLM observability SDKs (Opik, Phoenix) own their own <code>llmops</code> adapters, rather than omniobserve importing them. This simplifies dependency management and allows each SDK to be updated independently.</p>
-<h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
-<h3 id="opik-and-phoenix-adapters-moved-to-standalone-sdks">Opik and Phoenix Adapters Moved to Standalone SDKs<a class="headerlink" href="#opik-and-phoenix-adapters-moved-to-standalone-sdks" title="Permanent link">&para;</a></h3>
-<p>The <code>llmops</code> adapters for Opik and Phoenix have been removed from omniobserve and moved to their respective SDK repositories:</p>
+<h1 id="setup-recommended">Setup (recommended)<a class="headerlink" href="#setup-recommended" title="Permanent link">&para;</a></h1>
+<p><code>observops.Setup</code> is the recommended way to add observability to a service. One call wires
+every enabled signal — metrics, traces, and logs — and returns <strong>native OpenTelemetry
+handles</strong>. You instrument with the standard OTel API and keep full ecosystem interop
+(otelhttp, gRPC interceptors, database instrumentation); <code>observops</code> owns only the wiring.</p>
+<h2 id="why-setup-instead-of-a-driver">Why Setup instead of a driver<a class="headerlink" href="#why-setup-instead-of-a-driver" title="Permanent link">&para;</a></h2>
+<p>The driver registry (<code>Open("otlp")</code>, <code>Open("datadog")</code>, …) wraps the OpenTelemetry API behind
+its own interfaces. That is a lossy subset and cuts you off from the OTel contrib ecosystem.
+<code>Setup</code> abstracts the <em>wiring</em> instead of the <em>API</em>, so you get one-line configuration <strong>and</strong>
+the full power of OpenTelemetry.</p>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omniobserve/observops&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nx">tel</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">observops</span><span class="p">.</span><span class="nx">Setup</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nx">observops</span><span class="p">.</span><span class="nx">WithServiceName</span><span class="p">(</span><span class="s">&quot;my-service&quot;</span><span class="p">),</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nx">observops</span><span class="p">.</span><span class="nx">WithServiceVersion</span><span class="p">(</span><span class="s">&quot;1.2.3&quot;</span><span class="p">),</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nx">observops</span><span class="p">.</span><span class="nx">WithPrometheus</span><span class="p">(),</span><span class="w">               </span><span class="c1">// pull: expose tel.MetricsHandler</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nx">observops</span><span class="p">.</span><span class="nx">WithEndpoint</span><span class="p">(</span><span class="s">&quot;localhost:4317&quot;</span><span class="p">),</span><span class="w"> </span><span class="c1">// push: OTLP gRPC collector</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nx">observops</span><span class="p">.</span><span class="nx">WithInsecure</span><span class="p">(),</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">defer</span><span class="w"> </span><span class="nx">tel</span><span class="p">.</span><span class="nx">Shutdown</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">())</span>
+</code></pre></div>
+<p><code>Setup</code> returns a <code>*Telemetry</code>:</p>
 <table>
 <thead>
 <tr>
-<th>Before (omniobserve v0.4.x)</th>
-<th>After (v0.5.0+)</th>
+<th>Field</th>
+<th>Type</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>import _ "github.com/plexusone/omniobserve/llmops/opik"</code></td>
-<td><code>import _ "github.com/agentplexus/go-opik/llmops"</code></td>
+<td><code>Tracer</code></td>
+<td><code>trace.Tracer</code></td>
+<td>Native OTel tracer, named after the service</td>
 </tr>
 <tr>
-<td><code>import _ "github.com/plexusone/omniobserve/llmops/phoenix"</code></td>
-<td><code>import _ "github.com/agentplexus/go-phoenix/llmops"</code></td>
+<td><code>Meter</code></td>
+<td><code>metric.Meter</code></td>
+<td>Native OTel meter (int64/float64, sync/observable)</td>
+</tr>
+<tr>
+<td><code>Logger</code></td>
+<td><code>*slog.Logger</code></td>
+<td>Fans out to the console and, when logs are enabled, to OTel; also installed as <code>slog.Default()</code></td>
+</tr>
+<tr>
+<td><code>MetricsHandler</code></td>
+<td><code>http.Handler</code></td>
+<td>Prometheus scrape handler (nil unless <code>WithPrometheus</code>)</td>
+</tr>
+<tr>
+<td><code>TracerProvider</code> / <code>MeterProvider</code> / <code>LoggerProvider</code></td>
+<td>SDK providers</td>
+<td>Escape hatch for advanced use</td>
 </tr>
 </tbody>
 </table>
-<p>The API remains identical - only the import paths change.</p>
-<h3 id="phoenix-sdk-removed">Phoenix SDK Removed<a class="headerlink" href="#phoenix-sdk-removed" title="Permanent link">&para;</a></h3>
-<p>The embedded Phoenix SDK (<code>sdk/phoenix/</code>) has been removed. Use the standalone SDK instead:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Before</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omniobserve/sdk/phoenix&quot;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// After</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/agentplexus/go-phoenix&quot;</span>
+<h2 id="using-the-handles">Using the handles<a class="headerlink" href="#using-the-handles" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Metrics — full native API, including observable instruments.</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">reqs</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tel</span><span class="p">.</span><span class="nx">Meter</span><span class="p">.</span><span class="nx">Int64Counter</span><span class="p">(</span><span class="s">&quot;requests.total&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">reqs</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">tel</span><span class="p">.</span><span class="nx">Meter</span><span class="p">.</span><span class="nx">Int64ObservableGauge</span><span class="p">(</span><span class="s">&quot;queue.depth&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nx">metric</span><span class="p">.</span><span class="nx">WithInt64Callback</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">_</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">o</span><span class="w"> </span><span class="nx">metric</span><span class="p">.</span><span class="nx">Int64Observer</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="nx">o</span><span class="p">.</span><span class="nx">Observe</span><span class="p">(</span><span class="nx">currentDepth</span><span class="p">())</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">}))</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">// Tracing.</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">span</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tel</span><span class="p">.</span><span class="nx">Tracer</span><span class="p">.</span><span class="nx">Start</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;handle-request&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">defer</span><span class="w"> </span><span class="nx">span</span><span class="p">.</span><span class="nx">End</span><span class="p">()</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c1">// Logging (exported via OTel and echoed to the console).</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nx">tel</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">InfoContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;request processed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;123&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1">// Serve metrics and instrument HTTP.</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nx">mux</span><span class="p">.</span><span class="nx">Handle</span><span class="p">(</span><span class="s">&quot;/metrics&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tel</span><span class="p">.</span><span class="nx">MetricsHandler</span><span class="p">)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nx">handler</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">tel</span><span class="p">.</span><span class="nx">Middleware</span><span class="p">(</span><span class="s">&quot;api&quot;</span><span class="p">)(</span><span class="nx">handler</span><span class="p">)</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{</span><span class="nx">Transport</span><span class="p">:</span><span class="w"> </span><span class="nx">tel</span><span class="p">.</span><span class="nx">Transport</span><span class="p">(</span><span class="kc">nil</span><span class="p">)}</span>
 </code></pre></div>
-<h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">&para;</a></h2>
-<h3 id="annotationmanager-interface">AnnotationManager Interface<a class="headerlink" href="#annotationmanager-interface" title="Permanent link">&para;</a></h3>
-<p>Added new <code>AnnotationManager</code> interface to the Provider for span/trace annotations:</p>
-<ul>
-<li><code>CreateAnnotation(ctx, annotation)</code> - Add annotations to spans or traces</li>
-<li><code>ListAnnotations(ctx, opts)</code> - Query annotations by span or trace IDs</li>
-</ul>
-<h3 id="enhanced-datasetmanager-interface">Enhanced DatasetManager Interface<a class="headerlink" href="#enhanced-datasetmanager-interface" title="Permanent link">&para;</a></h3>
-<p>Added new methods to <code>DatasetManager</code>:</p>
-<ul>
-<li><code>GetDatasetByID(ctx, id)</code> - Retrieve datasets by ID (in addition to by name)</li>
-<li><code>DeleteDataset(ctx, datasetID)</code> - Delete datasets</li>
-</ul>
-<h3 id="prompt-modelprovider-options">Prompt Model/Provider Options<a class="headerlink" href="#prompt-modelprovider-options" title="Permanent link">&para;</a></h3>
-<p>Added support for associating LLM model and provider with prompts:</p>
-<ul>
-<li><code>WithPromptModel(model)</code> - Set the LLM model name (e.g., "gpt-4")</li>
-<li><code>WithPromptProvider(provider)</code> - Set the LLM provider (e.g., "openai")</li>
-<li><code>Prompt.ModelName</code> and <code>Prompt.ModelProvider</code> fields</li>
-</ul>
-<h3 id="omnillm-hook-auto-create-traces">OmniLLM Hook Auto-Create Traces<a class="headerlink" href="#omnillm-hook-auto-create-traces" title="Permanent link">&para;</a></h3>
-<p>The OmniLLM observability hook now automatically creates a trace when none exists in context. This ensures LLM calls are always properly traced even when called outside an existing trace context.</p>
-<ul>
-<li><code>BeforeRequest</code> creates a trace if <code>TraceFromContext</code> returns false</li>
-<li><code>AfterResponse</code> ends the trace (if created by the hook)</li>
-<li>Streaming responses also properly end traces</li>
-</ul>
-<h3 id="trace-context-helpers">Trace Context Helpers<a class="headerlink" href="#trace-context-helpers" title="Permanent link">&para;</a></h3>
-<p>Added trace context tracking functions to <code>integrations/omnillm/</code>:</p>
-<ul>
-<li><code>contextWithTrace()</code> - Store a trace in context</li>
-<li><code>traceFromContext()</code> - Retrieve a trace from context</li>
-</ul>
-<p>These complement the existing span context functions.</p>
-<h3 id="evaluation-metrics-package">Evaluation Metrics Package<a class="headerlink" href="#evaluation-metrics-package" title="Permanent link">&para;</a></h3>
-<p>Added new <code>llmops/metrics</code> package with common evaluation metrics:</p>
-<p><strong>LLM-based metrics</strong> (require omnillm client):</p>
-<ul>
-<li><code>HallucinationMetric</code> - Detects unsupported claims in responses</li>
-<li><code>RelevanceMetric</code> - Evaluates document relevance to queries</li>
-<li><code>QACorrectnessMetric</code> - Checks answer correctness against references</li>
-<li><code>ToxicityMetric</code> - Detects harmful content</li>
-</ul>
-<p><strong>Code-based metrics</strong> (run locally):</p>
-<ul>
-<li><code>ExactMatchMetric</code> - Exact string comparison with options for case sensitivity and whitespace trimming</li>
-<li><code>RegexMetric</code> - Regex pattern matching</li>
-<li><code>ContainsMetric</code> - Substring presence check</li>
-</ul>
-<p>See <code>examples/evaluation/</code> for a complete usage example.</p>
-<p>Example usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omniobserve/llmops/metrics&quot;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// LLM-based metric</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">llm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">metrics</span><span class="p">.</span><span class="nx">NewLLM</span><span class="p">(</span><span class="nx">omnillmClient</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gpt-4o&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nx">hallucination</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">metrics</span><span class="p">.</span><span class="nx">NewHallucinationMetric</span><span class="p">(</span><span class="nx">llm</span><span class="p">)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">// Code-based metric</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nx">exactMatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">metrics</span><span class="p">.</span><span class="nx">NewExactMatchMetric</span><span class="p">()</span>
-</code></pre></div>
-<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
-<p>Removed dependencies:</p>
-<ul>
-<li><code>github.com/agentplexus/go-comet-ml-opik</code> - No longer needed (adapter moved to go-opik)</li>
-</ul>
-<h2 id="migration-guide">Migration Guide<a class="headerlink" href="#migration-guide" title="Permanent link">&para;</a></h2>
-<h3 id="for-opik-users">For Opik Users<a class="headerlink" href="#for-opik-users" title="Permanent link">&para;</a></h3>
-<p>Update your import:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Before</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omniobserve/llmops/opik&quot;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">// After</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kn">import</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/agentplexus/go-opik/llmops&quot;</span>
-</code></pre></div>
-<h3 id="for-phoenix-users">For Phoenix Users<a class="headerlink" href="#for-phoenix-users" title="Permanent link">&para;</a></h3>
-<p>Update your imports:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Before</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omniobserve/llmops/phoenix&quot;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omniobserve/sdk/phoenix&quot;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">// After</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kn">import</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/agentplexus/go-phoenix/llmops&quot;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/agentplexus/go-phoenix&quot;</span>
-</code></pre></div>
-<h3 id="for-langfuse-users">For Langfuse Users<a class="headerlink" href="#for-langfuse-users" title="Permanent link">&para;</a></h3>
-<p>No changes required. Langfuse adapter remains in omniobserve:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omniobserve/llmops/langfuse&quot;</span>
-</code></pre></div>
-<h2 id="files-removed">Files Removed<a class="headerlink" href="#files-removed" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>llmops/opik/opik.go</code></li>
-<li><code>llmops/opik/trace.go</code></li>
-<li><code>llmops/phoenix/phoenix.go</code></li>
-<li><code>llmops/phoenix/trace.go</code></li>
-<li><code>sdk/phoenix/client.go</code></li>
-<li><code>sdk/phoenix/context.go</code></li>
-<li><code>sdk/phoenix/errors.go</code></li>
-<li><code>sdk/phoenix/options.go</code></li>
-<li><code>sdk/phoenix/span.go</code></li>
-<li><code>sdk/phoenix/trace.go</code></li>
-<li><code>sdk/phoenix/types.go</code></li>
-</ul>
-<h2 id="files-modified">Files Modified<a class="headerlink" href="#files-modified" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>go.mod</code> - Removed go-comet-ml-opik dependency</li>
-<li><code>omniobserve.go</code> - Updated documentation with new import paths</li>
-<li><code>integrations/omnillm/context.go</code> - Added trace context helpers</li>
-</ul>
+<h2 id="signals-and-exporters">Signals and exporters<a class="headerlink" href="#signals-and-exporters" title="Permanent link">&para;</a></h2>
+<p>Metrics, traces, and logs are <strong>enabled by default</strong>. Toggle them, and compose export targets:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WithMetrics(false)</code> / <code>WithTraces(false)</code> / <code>WithLogs(false)</code></td>
+<td>Disable a signal</td>
+</tr>
+<tr>
+<td><code>WithPrometheus()</code></td>
+<td>Add a Prometheus pull exporter; exposes <code>MetricsHandler</code></td>
+</tr>
+<tr>
+<td><code>WithEndpoint("host:4317")</code></td>
+<td>Push all enabled signals to an OTLP collector</td>
+</tr>
+<tr>
+<td><code>WithOTLPOverHTTP()</code></td>
+<td>Use OTLP over HTTP (port 4318) instead of gRPC</td>
+</tr>
+<tr>
+<td><code>WithInsecure()</code></td>
+<td>Plaintext OTLP (local collectors)</td>
+</tr>
+<tr>
+<td><code>WithStdout()</code></td>
+<td>Mirror telemetry to stdout for debugging</td>
+</tr>
+<tr>
+<td><code>WithTraceSampleRatio(0.1)</code></td>
+<td>Head sampling ratio for traces</td>
+</tr>
+<tr>
+<td><code>WithHeaders(...)</code></td>
+<td>Auth headers for the collector</td>
+</tr>
+</tbody>
+</table>
+<p>Prometheus pull and OTLP push can be used together. Logs are exported through the real
+OpenTelemetry log SDK (via the <code>otelslog</code> bridge), not as span events.</p>
+<h2 id="shutdown">Shutdown<a class="headerlink" href="#shutdown" title="Permanent link">&para;</a></h2>
+<p><code>tel.Shutdown(ctx)</code> flushes and stops every provider in reverse order of initialization.
+Always defer it so buffered telemetry is exported on exit.</p>
 
 
 
