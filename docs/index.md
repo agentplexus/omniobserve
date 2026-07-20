@@ -24,10 +24,11 @@ OmniObserve provides vendor-agnostic abstraction layers for observability, enabl
 
 ### App Observability (observops)
 
-- **Vendor-Agnostic**: Single API for OTLP, Datadog, New Relic, and Dynatrace
-- **Full Telemetry**: Metrics (counters, gauges, histograms), distributed traces, and structured logs
-- **slog Integration**: Trace-correlated logging with automatic context injection
-- **Minimal Overhead**: No-op mode for disabled observability
+- **One-Call Setup**: `observops.Setup` wires metrics, traces, and logs and returns native OpenTelemetry handles — full ecosystem interop, no wrapper tax
+- **Composable Exporters**: Prometheus pull and OTLP push (gRPC or HTTP), plus stdout for debugging
+- **Full Telemetry**: Metrics, distributed traces, and real OpenTelemetry logs
+- **HTTP Instrumentation**: One-line server middleware and client transport
+- **Vendor-Agnostic Drivers**: Single interface for OTLP, Datadog, New Relic, and Dynatrace
 
 ### Common
 
@@ -64,34 +65,32 @@ span.End()
 ### App Observability (observops)
 
 ```go
-import (
-    "github.com/plexusone/omniobserve/observops"
-    _ "github.com/plexusone/omniobserve/observops/otlp"  // or datadog, newrelic
-)
+import "github.com/plexusone/omniobserve/observops"
 
-provider, _ := observops.Open("otlp",
-    observops.WithEndpoint("localhost:4317"),
+tel, _ := observops.Setup(ctx,
     observops.WithServiceName("my-service"),
+    observops.WithPrometheus(),               // pull: tel.MetricsHandler
+    observops.WithEndpoint("localhost:4317"), // OTLP push
     observops.WithInsecure(),
 )
-defer provider.Shutdown(ctx)
+defer tel.Shutdown(ctx)
 
-// Create metrics
-counter, _ := provider.Meter().Counter("requests_total")
-counter.Add(ctx, 1, observops.WithAttributes(
-    observops.Attribute("method", "GET"),
-))
+// Native OpenTelemetry handles:
+reqs, _ := tel.Meter.Int64Counter("requests.total")
+reqs.Add(ctx, 1)
 
-// Create spans
-ctx, span := provider.Tracer().Start(ctx, "handle-request")
+ctx, span := tel.Tracer.Start(ctx, "handle-request")
 defer span.End()
 
-// slog integration with trace correlation
-handler := provider.SlogHandler(
-    observops.WithSlogLocalHandler(slog.NewJSONHandler(os.Stdout, nil)),
-)
-slog.SetDefault(slog.New(handler))
+tel.Logger.InfoContext(ctx, "request processed", "user_id", "123")
+
+// Prometheus endpoint + HTTP instrumentation:
+mux.Handle("/metrics", tel.MetricsHandler)
+handler = tel.Middleware("api")(handler)
 ```
+
+See [Setup (recommended)](providers/setup.md) for the full reference, or the
+[driver providers](providers/otlp.md) for the vendor-neutral `Open` API.
 
 ## Supported Providers
 

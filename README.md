@@ -47,10 +47,12 @@ A unified Go library for observability. OmniObserve provides vendor-agnostic abs
 
 ### App Observability (observops)
 
-- 📈 **Vendor-Agnostic**: Single API for OTLP, Datadog, New Relic, and Dynatrace
-- 📊 **Full Telemetry**: Metrics (counters, gauges, histograms), distributed traces, and structured logs
-- 📝 **slog Integration**: Trace-correlated logging with automatic context injection
-- ⚡ **Minimal Overhead**: No-op mode for disabled observability
+- 🚀 **One-Call Setup**: `observops.Setup` wires metrics, traces, and logs and returns **native OpenTelemetry handles** — full ecosystem interop, no wrapper tax
+- 📊 **Full Telemetry**: Metrics, distributed traces, and real OpenTelemetry logs
+- 🔀 **Composable Exporters**: Prometheus pull **and** OTLP push (gRPC or HTTP), plus stdout for debugging
+- 🌐 **HTTP Instrumentation**: One-line server middleware and client transport
+- 📝 **slog Integration**: Structured logs exported via OpenTelemetry, fanned out to the console
+- 📈 **Vendor-Agnostic Drivers**: `Open("otlp"|"datadog"|"newrelic"|"dynatrace")` for vendor-switching behind a single interface
 
 ### Semantic Conventions
 
@@ -114,54 +116,56 @@ func main() {
 
 ### App Observability (observops)
 
+Use `Setup` for one-call bootstrap that returns native OpenTelemetry handles (recommended):
+
 ```go
 package main
 
 import (
     "context"
     "log"
-    "log/slog"
-    "os"
+    "net/http"
 
     "github.com/plexusone/omniobserve/observops"
-    _ "github.com/plexusone/omniobserve/observops/otlp"  // or datadog, newrelic, dynatrace
 )
 
 func main() {
-    provider, err := observops.Open("otlp",
-        observops.WithEndpoint("localhost:4317"),
+    ctx := context.Background()
+
+    tel, err := observops.Setup(ctx,
         observops.WithServiceName("my-service"),
+        observops.WithPrometheus(),               // pull endpoint: tel.MetricsHandler
+        observops.WithEndpoint("localhost:4317"), // OTLP push (gRPC)
         observops.WithInsecure(),
     )
     if err != nil {
         log.Fatal(err)
     }
-    defer provider.Shutdown(context.Background())
+    defer tel.Shutdown(ctx)
 
-    ctx := context.Background()
+    // Native OpenTelemetry handles — full API, full ecosystem interop:
+    reqs, _ := tel.Meter.Int64Counter("requests.total")
+    reqs.Add(ctx, 1)
 
-    // Metrics
-    counter, _ := provider.Meter().Counter("requests_total",
-        observops.WithDescription("Total HTTP requests"),
-    )
-    counter.Add(ctx, 1, observops.WithAttributes(
-        observops.Attribute("method", "GET"),
-        observops.Attribute("path", "/api/users"),
-    ))
-
-    // Tracing
-    ctx, span := provider.Tracer().Start(ctx, "handle-request")
+    ctx, span := tel.Tracer.Start(ctx, "handle-request")
     defer span.End()
 
-    // slog with trace correlation
-    handler := provider.SlogHandler(
-        observops.WithSlogLocalHandler(slog.NewJSONHandler(os.Stdout, nil)),
-    )
-    slog.SetDefault(slog.New(handler))
+    tel.Logger.InfoContext(ctx, "request processed", "user_id", "123")
 
-    slog.InfoContext(ctx, "request processed")  // includes trace_id, span_id
+    // Serve Prometheus metrics and instrument HTTP in one line each:
+    mux := http.NewServeMux()
+    mux.Handle("/metrics", tel.MetricsHandler)
+    handler := tel.Middleware("api")(mux)
+    _ = handler
 }
 ```
+
+Metrics, traces, and logs are enabled by default; disable any with `WithMetrics`, `WithTraces`,
+or `WithLogs`. Prometheus pull and OTLP push compose; `WithStdout` mirrors to stdout.
+
+Prefer the vendor-neutral driver registry when you want to switch backends behind one
+interface (`Open("otlp"|"datadog"|"newrelic"|"dynatrace")`) — see
+[observops/README](observops/README.md).
 
 ## Supported Providers
 
