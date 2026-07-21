@@ -12,7 +12,7 @@ require (
 	github.com/lib/pq v1.12.3
 	github.com/plexusone/omnillm v0.17.0
 	github.com/plexusone/structured-evaluation v0.9.0
-	github.com/prometheus/client_golang v1.23.2
+	github.com/prometheus/client_golang v1.24.0
 	go.opentelemetry.io/contrib/bridges/otelslog v0.19.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.69.0
 	go.opentelemetry.io/otel v1.44.0
