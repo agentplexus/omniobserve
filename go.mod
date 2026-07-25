@@ -12,7 +12,7 @@ require (
 	github.com/lib/pq v1.12.3
 	github.com/plexusone/omnillm v0.17.0
 	github.com/plexusone/structured-evaluation v0.9.0
-	github.com/prometheus/client_golang v1.23.2
+	github.com/prometheus/client_golang v1.24.1
 	go.opentelemetry.io/contrib/bridges/otelslog v0.19.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.69.0
 	go.opentelemetry.io/otel v1.44.0
@@ -104,7 +104,7 @@ require (
 	github.com/plexusone/omni-openrouter v0.2.0 // indirect
 	github.com/plexusone/omnillm-core v0.18.0 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
-	github.com/prometheus/common v0.70.0 // indirect
+	github.com/prometheus/common v0.70.1 // indirect
 	github.com/prometheus/otlptranslator v1.0.0 // indirect
 	github.com/prometheus/procfs v0.21.1 // indirect
 	github.com/richardlehane/mscfb v1.0.7 // indirect
