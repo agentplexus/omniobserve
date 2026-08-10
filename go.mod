@@ -13,7 +13,7 @@ require (
 	github.com/plexusone/omnillm v0.17.0
 	github.com/plexusone/structured-evaluation v0.11.0
 	github.com/prometheus/client_golang v1.24.1
-	go.opentelemetry.io/contrib/bridges/otelslog v0.19.0
+	go.opentelemetry.io/contrib/bridges/otelslog v0.20.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.70.0
 	go.opentelemetry.io/otel v1.45.0
 	go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc v0.21.0
